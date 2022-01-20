@@ -1,11 +1,6 @@
 import styled from '@emotion/styled'
 
-export const MyTitle = styled.div`
-  color: black;
-  text-align: center;
-  font-size: 2rem;
-  padding-bottom: 20px;
-`
+
 export const Wrapper = styled.div`
   width: 60%;
   height: 300px;
@@ -15,6 +10,12 @@ export const Wrapper = styled.div`
   border-radius: 15px;
   padding: 30px;
   margin: 0 auto;
+`
+export const MyTitle = styled.div`
+  color: black;
+  text-align: center;
+  font-size: 2rem;
+  padding-bottom: 20px;
 `
 
 export const Form = styled.p`

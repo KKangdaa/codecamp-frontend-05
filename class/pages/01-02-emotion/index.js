@@ -1,16 +1,18 @@
-import {MyTitle, Wrapper, Form, Putter} from '../../styles/emotion'
+// import {} from '../../styles/emotion'
+
+import * as re from '../../styles/emotion'
 
 
 
 export default function EmotionPage () {
   
   return (
-    <Wrapper>
-      <MyTitle>로그인</MyTitle>
-      <Form>아이디</Form>
-      <Putter type="text" />
-      <Form>비밀번호</Form>
-      <Putter type="password" />
-    </Wrapper>
+    <re.Wrapper>
+      <re.MyTitle>로그인</re.MyTitle>
+      <re.Form>아이디</re.Form>
+      <re.Putter type="text" />
+      <re.Form>비밀번호</re.Form>
+      <re.Putter type="password" />
+    </re.Wrapper>
   )
 }
