@@ -1,9 +1,11 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
+import { useRouter } from 'next/router'
 import BoardWriteUI from './BoardWrite.presenter'
 import { CREATE_BOARD, UPDATE_BOARD } from './BoardWrite.queries'
-import { useRouter } from 'next/router'
+
+
 
 export default function BoardWrite(props) {
 

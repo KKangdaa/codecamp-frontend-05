@@ -1,5 +1,3 @@
-
-
 //     함수(function) ↓
 export const getMyDate = (myDate) => {
   const aaa = new Date(myDate)
@@ -11,10 +9,10 @@ export const getMyDate = (myDate) => {
   // 날짜
   const hh = aaa.getHours()
   const mns = aaa.getMinutes()
-  
-  return `${yyyy}. ${mm}. ${dd}. ${ hh}:${mns}`
 
-  /* 
+  return `${yyyy}. ${mm}. ${dd}. ${hh}:${mns}`
+
+  /*
   aaa.getDay()
   // 요일
     */

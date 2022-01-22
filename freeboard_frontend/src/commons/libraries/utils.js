@@ -1,5 +1,3 @@
-
-
 //     함수(function) ↓
 export const getMyDate = (myDate) => {
   const aaa = new Date(myDate)
@@ -9,10 +7,10 @@ export const getMyDate = (myDate) => {
   // 월(getonth을 사용할 땐 0월부터 시작하기 때문에 +1을 넣어줘야함)
   const dd = aaa.getDate()
   // 날짜
-  
+
   return `${yyyy}. ${mm}. ${dd}.`
 
-  /* 
+  /*
   aaa.getDay()
   // 요일
     */

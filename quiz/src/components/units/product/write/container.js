@@ -17,23 +17,17 @@ export default function ProductWrite(props) {
   const [price, setPrice] = useState("")
 
   const createButton = async () => {
-    try {
-      const result = await createProduct({
-        variables: {
-          seller,
-          createProductInput: {
-            name,
-            detail,
-            price: Number(price)
-          }
+    const result = await createProduct({
+      variables: {
+        seller,
+        createProductInput: {
+          name,
+          detail,
+          price: Number(price)
         }
-      })
-      // console.log(router.query.aaa)
-      router.push(`/product/${result.data.createProduct._id}`)
-
-    } catch(error) {
-      console.log(error.message)
-    }
+      }
+    })
+    router.push(`/product/${result.data.createProduct._id}`)
   }
 
   const onChangeName = (event) => {
@@ -60,7 +54,7 @@ export default function ProductWrite(props) {
         }
       }
     })
-    router.push(`/product/${router.query.aaa}`)
+    router.push(`/product/${router.query.idpage}`)
   }
 
 

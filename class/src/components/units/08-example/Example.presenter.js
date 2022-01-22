@@ -1,8 +1,4 @@
-
-
-
 export default function ExampleUI(props) {
-
 
   return (
     <div>

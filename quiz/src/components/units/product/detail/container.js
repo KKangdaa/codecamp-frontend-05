@@ -3,18 +3,18 @@ import { useQuery } from "@apollo/client"
 import ProductUI from "./presenter"
 import { FETCH_PRODUCT } from "./queries"
 
-export default function ProductDetail() {
+export default function ProductPage() {
 
   const router = useRouter()
 
-  const {data} = useQuery(FETCH_PRODUCT, {
+  const { data } = useQuery(FETCH_PRODUCT, {
     variables: {
-      productId: router.query.aaa
+      productId: router.query.idpage
     }
   })
 
   const onClickEditPage = () => {
-    router.push(`/product/${router.query.aaa}/edit`)
+    router.push(`/product/${router.query.idpage}/edit`)
   }
 
   return(

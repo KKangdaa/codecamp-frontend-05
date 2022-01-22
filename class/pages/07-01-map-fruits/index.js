@@ -22,7 +22,7 @@ export default function MapFruitsPage() {
   return(
     <div>{FRUITS
       .filter((el) => (el.number % 2 === 0))
-      .map((el) => (<div>{el.number} {el.title}</div>))
+      .map((el, index) => (<div key={index}> {el.number} {el.title}</div>))
       }</div>
 
   )

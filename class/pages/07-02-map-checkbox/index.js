@@ -31,8 +31,8 @@ export default function MapCheckboxPage(){
 
   return(
     <div>
-      {data?.fetchBoards.map((el) => (
-        <Row>
+      {data?.fetchBoards.map((el, index) => (
+        <Row key={index}>
           <Column><input type="checkbox" /></Column>
           <Column>{el.number}</Column>
           <Column>{el.title}</Column>

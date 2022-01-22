@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import DynamicRoutingUI from './DynamicRouting.presenter'
 
-export default function DynamicRouting(props) {
+export default function DynamicRouting() {
 
 
   const router = useRouter()
@@ -9,8 +9,8 @@ export default function DynamicRouting(props) {
 
   const onClickMove1 = () => {
 
-    const result = createProduct
-    console.log(result)
+    // const result = createProduct
+    // console.log(result)
 
 
     router.push("/05-06-dynamic-routed-board/1")
