@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { IButtonActive } from './BoardWrite.types'
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -14,7 +15,7 @@ export const Main = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 80px;
+  padding: 100px;
   margin: 80px 0;
   border: 1px solid gray;
 `
@@ -172,7 +173,7 @@ export const MainURL = styled.div`
   padding: 20px 0;
 `
 
-/* Gender */
+/* Radio Type */
 export const MainType = styled.div`
   width: 100%;
   margin-bottom: 30px;
@@ -182,15 +183,16 @@ export const MainType = styled.div`
   padding: 20px 0;
 `
 export const TypeInput = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: left;
 `
 export const InputText = styled.div`
   padding: 0 20px 0 5px;
 `
-export const InputRadio = styled.input``
-/* export const InputRadio = styled.input`
+export const InputRadio = styled.input`
 appearance: none;
 width: 13px;
 height: 13px;
@@ -204,10 +206,10 @@ cursor: pointer;
   width: 8px;
   height: 8px;
   border-radius: 8px;
-  margin: 11%;
+  margin: 13%;
   background-color: gold;
 }
-` */
+`
 
 /* button */
 export const RegisBtn = styled.button`
@@ -215,8 +217,8 @@ export const RegisBtn = styled.button`
   height: 45px;
   border: 0;
   border: 1px solid gold;
-  background: ${(props) => props.buttonActive === true ? 'gold' : 'none'};
+  background: ${(props:IButtonActive) => props.buttonActive === true ? 'gold' : 'none'};
   font-weight: 900;
-  margin: 30px 0 50px;
+  margin: 30px 0;
   cursor: pointer;
 `

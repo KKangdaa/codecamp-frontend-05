@@ -1,6 +1,6 @@
-import { useQuery, gql } from "@apollo/client";
-import { useRouter } from "next/router";
-import BoardWrite from "../../../../src/components/units/board/write/BoardWrite.container";
+import { useQuery, gql } from '@apollo/client'
+import { useRouter } from 'next/router'
+import BoardWrite from '../../../../src/components/units/board/write/BoardWrite.container'
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -14,14 +14,14 @@ const FETCH_BOARD = gql`
   }
 `
 
-export default function BoardEdit() {
+export default function BoardEdit () {
   const router = useRouter()
 
-  const {data} = useQuery(FETCH_BOARD, {
+  const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: router.query.idpage }
   })
 
-  return(
+  return (
     <BoardWrite isEdit={true} data={data} />
   )
 }

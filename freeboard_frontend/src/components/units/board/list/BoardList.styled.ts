@@ -34,17 +34,17 @@ export const BoardTitle = styled.div`
   border-bottom: 3px double #ccc;
 `
 export const TitleIcon = styled.div`
-  width: 7%;
+  width: 8%;
 `
 export const Icon = styled.i``
 export const TitleName = styled.div`
-  width: 55%;
+  width: 50%;
 `
 export const TitleWriter = styled.div`
-  width: 12%;
+  width: 13%;
 `
 export const TitleCreateDate = styled.div`
-  width: 12%;
+  width: 13%;
 `
 
 export const BoardList = styled.div`
@@ -62,23 +62,25 @@ export const BoardList = styled.div`
 `
 
 export const Number = styled.div`
-  width: 7%;
+  width: 8%;
 `
 export const Name = styled.div`
-  width: 55%;
+  width: 50%;
+  text-align: left;
+  padding-left: 20px;
   cursor: pointer;
 `
 export const Writer = styled.div`
-  width: 12%;
+  width: 13%;
 `
 export const CreateDate = styled.div`
-  width: 12%;
+  width: 13%;
 `
 export const Watch = styled.div`
-  width: 7%;
+  width: 8%;
 `
 export const Like = styled.div`
-  width: 7%;
+  width: 8%;
 `
 
 export const EditButton = styled.button`
@@ -88,7 +90,7 @@ export const EditButton = styled.button`
   width: 110px;
   height: 40px;
   background: none;
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
 `

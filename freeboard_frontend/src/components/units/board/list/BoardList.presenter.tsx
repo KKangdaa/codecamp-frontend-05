@@ -1,7 +1,8 @@
 import { getMyDate } from '../../../../commons/libraries/utils'
 import * as A from './BoardList.styled'
+import { IBoardListUIProps } from './BoardList.types'
 
-export default function BoardListUI (props) {
+export default function BoardListUI (props: IBoardListUIProps) {
   return (
     <>
       <props.Head>
@@ -21,7 +22,7 @@ export default function BoardListUI (props) {
 
               <A.TitleName>제목</A.TitleName>
               <A.TitleWriter>작성자</A.TitleWriter>
-              <A.TitleCreateDate>날짜</A.TitleCreateDate>
+              <A.TitleCreateDate>작성일</A.TitleCreateDate>
 
               <A.TitleIcon>조회</A.TitleIcon>
               <A.TitleIcon style={{ color: '#731736' }}>
@@ -32,7 +33,6 @@ export default function BoardListUI (props) {
               // number는 el, index로 추가하여
 
               <A.BoardList key={el.number}>
-                {/* <A.ListInput type="checkbox"></A.ListInput> */}
                 <A.Number>{index + 1}</A.Number>
                 <A.Name id={el._id} onClick={props.onClickMoveToDetail}>{el.title}</A.Name>
                 <A.Writer>{el.writer.slice(0, 10)}</A.Writer>
