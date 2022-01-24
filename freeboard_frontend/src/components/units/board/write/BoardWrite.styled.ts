@@ -18,6 +18,7 @@ export const Main = styled.div`
   padding: 100px;
   margin: 80px 0;
   border: 1px solid gray;
+  border-radius: 20px;
 `
 export const Title = styled.div`
   font-size: 2rem;
@@ -76,6 +77,7 @@ export const ImgsUp = styled.div`
   margin-right: 20px;
   background-color: #fff;
   border: 1px solid gold;
+  border-radius: 15px;
   font-size: 0.75rem;
   cursor: pointer;
   &:hover {
@@ -217,6 +219,7 @@ export const RegisBtn = styled.button`
   height: 45px;
   border: 0;
   border: 1px solid gold;
+  border-radius: 15px;
   background: ${(props:IButtonActive) => props.buttonActive === true ? 'gold' : 'none'};
   font-weight: 900;
   margin: 30px 0;
