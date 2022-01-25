@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from 'react'
 import BoardCommentWriteUI from './BoardCommentWrite.presenter'
 import { CREATE_COMMENT, FETCH_COMMENT } from './BoardCommentWrite.queries'
 
-export default function BoardCommentWrite (p) {
+export default function BoardCommentWrite () {
   const router = useRouter()
 
   const [createBoardComment] = useMutation(CREATE_COMMENT)
@@ -13,6 +13,8 @@ export default function BoardCommentWrite (p) {
   const [commentPassword, setCommentPassword] = useState('')
   const [commentContents, setCommentContents] = useState('')
   const [commentButtonAc, setCommentButtonAc] = useState(false)
+
+  const [starValue, setStarValue] = useState(2.5)
 
   const commentWriterBox = (event: ChangeEvent<HTMLInputElement>) => {
     setCommentWriter(event.target.value)
@@ -47,7 +49,7 @@ export default function BoardCommentWrite (p) {
             writer: commentWriter,
             password: commentPassword,
             contents: commentContents,
-            rating: 0
+            rating: starValue
           },
           boardId: router.query.idpage
         },
@@ -65,17 +67,22 @@ export default function BoardCommentWrite (p) {
     }
   }
 
+  const handleChange = (value:any) => {
+    setStarValue(value)
+    console.log(value)
+  }
+
   return (
+    // eslint-disable-next-line react/react-in-jsx-scope
     <BoardCommentWriteUI
-      // fetchCommentData={fetchCommentData}
       commentWriterBox={commentWriterBox}
       commentPasswordBox={commentPasswordBox}
       commentContentsBox={commentContentsBox}
       CreateCommentButton={CreateCommentButton}
       commentContents={commentContents}
       commentButtonAc={commentButtonAc}
-
-      // onClickDeleteComment={onClickDeleteComment}
+      starValue={starValue}
+      handleChange={handleChange}
     />
   )
 }

@@ -3,6 +3,7 @@ import { IBoardDetailUIProps } from './BoardDetail.types'
 import * as A from './BoardDetail.styled'
 import BoardCommentWrite from '../../boardcomment/write/BoardCommentWrite.container'
 import BoardCommentList from '../../boardcomment/list/BoardCommentList.container'
+import ReactPlayer from 'react-player'
 
 export default function BoardDetailUI (props: IBoardDetailUIProps) {
   return (
@@ -22,6 +23,10 @@ export default function BoardDetailUI (props: IBoardDetailUIProps) {
           </A.Topper>
 
           <A.TextBox>{props.fetchBoardData?.fetchBoard?.contents}</A.TextBox>
+          <ReactPlayer
+            url={`${props.fetchBoardData?.fetchBoard?.youtubeUrl}`}
+            controls
+          />
 
           <A.BUTTON onClick={props.onClickLike}>
             <A.Heart className="heart" viewBox="0 0 32 29.6">

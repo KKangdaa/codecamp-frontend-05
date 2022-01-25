@@ -59,8 +59,8 @@ export const ProfileDate = styled.div`
 `
 export const TextBox = styled.div`
   width: 100%;
-  height: 550px;
   border: 0;
+  padding: 20px 0 50px;
   margin-top: 45px;
   font-family: Arial, sans-serif;
   white-space: pre-wrap;
@@ -94,10 +94,11 @@ export const BUTTON = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 20px;
+  height: 25px;
   background: none;
+  padding: 0;
   border: 0;
+  margin-top: 60px;
   cursor: pointer;
   &:focus svg {
     fill: red;
@@ -108,6 +109,7 @@ export const Heart = styled.svg`
   padding: 10px 0;
   width: 20px;
   &:active {
+    fill: red;
     width: 15px;
   }
 `

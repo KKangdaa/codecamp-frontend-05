@@ -2,7 +2,7 @@ import * as A from './BoardWrite.styled'
 import { IBoardWriteUIProps } from './BoardWrite.types'
 
 export default function BoardWriteUI (props:IBoardWriteUIProps) {
-  console.log(props.data)
+  // console.log(props.data)
 
   return (
     <A.Wrapper>
@@ -75,7 +75,12 @@ export default function BoardWriteUI (props:IBoardWriteUIProps) {
 
         <A.MainURL>
           <A.MainInnerTitle>유튜브</A.MainInnerTitle>
-          <A.InnerBoxInput type='url' placeholder='링크를 복사해주세요' />
+          <A.InnerBoxInput
+            type='url'
+            placeholder='링크를 복사해주세요'
+            onChange={props.youtubeUrlText}
+            defaultValue={props.data?.fetchBoard?.youtubeUrl}
+          />
         </A.MainURL>
 
         <A.MainType>

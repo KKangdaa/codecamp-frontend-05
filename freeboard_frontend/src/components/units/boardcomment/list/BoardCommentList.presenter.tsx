@@ -1,6 +1,8 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { getMyDate } from '../../../../commons/libraries/utils-time'
 import * as A from './BoardCommentList.styled'
 import { IBoardCommentListUIProps } from './BoardCommentList.types'
+import { Rate } from 'antd'
 
 export default function BoardCommentListUI (props:IBoardCommentListUIProps) {
   return (
@@ -18,6 +20,7 @@ export default function BoardCommentListUI (props:IBoardCommentListUIProps) {
         <A.CommentWriter>
           <A.CommentProfileImg src="/profile.jpg"/>
           <A.span>{el.writer}</A.span>
+          <Rate allowHalf value={el.rating} disabled />
         </A.CommentWriter>
         <A.CommentContents>{el.contents}</A.CommentContents>
         <A.CommentDate>{getMyDate(el.createdAt)}</A.CommentDate>

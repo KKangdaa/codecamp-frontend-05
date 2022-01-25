@@ -215,7 +215,7 @@ cursor: pointer;
 
 /* button */
 export const RegisBtn = styled.button`
-  width: 150px;
+  width: 120px;
   height: 45px;
   border: 0;
   border: 1px solid gold;

@@ -27,8 +27,10 @@ export default function BoardCommentList () {
       console.log(error.message)
     }
   }
+  // console.log(fetchCommentData)
 
   return (
+    // eslint-disable-next-line react/react-in-jsx-scope
     <BoardCommentListUI
       Head={Head}
       fetchCommentData={fetchCommentData}

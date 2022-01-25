@@ -11,7 +11,7 @@ export const CommentProfileImg = styled.img`
   border-radius: 15px;
   margin-left: 10px;
 `
-/* fetch commet */
+/* fetch comment */
 export const CommentFetchBoard = styled.div`
   width: 67%;
   padding: 25px 20px;

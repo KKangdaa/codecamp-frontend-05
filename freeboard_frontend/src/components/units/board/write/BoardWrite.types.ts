@@ -3,7 +3,6 @@ import { ChangeEvent } from 'react'
 export interface IBoardWriteProps {
   isEdit: boolean
   data?: any
-
 }
 
 export interface IBoardWriteUIProps {
@@ -20,6 +19,8 @@ export interface IBoardWriteUIProps {
   UpdateButton: () => void
   CreateButton: () => void
   buttonActive: boolean
+
+  youtubeUrlText: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export interface IButtonActive {

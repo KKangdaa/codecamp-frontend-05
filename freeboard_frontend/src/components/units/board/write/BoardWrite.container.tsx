@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, ChangeEvent } from 'react'
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 import BoardWriteUI from './BoardWrite.presenter'
@@ -10,7 +10,7 @@ export default function BoardWrite (props:IBoardWriteProps) {
 
   const [createBoard] = useMutation(CREATE_BOARD)
 
-  const [buttonActive, setbuttonActive] = useState(false)
+  const [buttonActive, setButtonActive] = useState(false)
 
   const [createWriter, setCreateWriter] = useState('')
   const [writerError, setWriterError] = useState('')
@@ -20,40 +20,45 @@ export default function BoardWrite (props:IBoardWriteProps) {
   const [titleError, setTitleError] = useState('')
   const [createContents, setCreateContents] = useState('')
   const [contentsError, setContentsError] = useState('')
+  const [youtubeUrl, setYoutubeUrl] = useState('')
 
   const [updateBoard] = useMutation(UPDATE_BOARD)
 
-  const writerText = (event) => {
+  const writerText = (event: ChangeEvent<HTMLInputElement>) => {
     setCreateWriter(event.target.value)
     if (event.target.value && createPassword && createTitle && createContents) {
-      setbuttonActive(true)
+      setButtonActive(true)
     } else {
-      setbuttonActive(false)
+      setButtonActive(false)
     }
   }
-  const passwordText = (event) => {
+  const passwordText = (event: ChangeEvent<HTMLInputElement>) => {
     setCreatePassword(event.target.value)
     if (createWriter && event.target.value && createTitle && createContents) {
-      setbuttonActive(true)
+      setButtonActive(true)
     } else {
-      setbuttonActive(false)
+      setButtonActive(false)
     }
   }
-  const titleText = (event) => {
+  const titleText = (event: ChangeEvent<HTMLInputElement>) => {
     setCreateTitle(event.target.value)
     if (createWriter && createPassword && event.target.value && createContents) {
-      setbuttonActive(true)
+      setButtonActive(true)
     } else {
-      setbuttonActive(false)
+      setButtonActive(false)
     }
   }
-  const contentsText = (event) => {
+  const contentsText = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setCreateContents(event.target.value)
     if (createWriter && createPassword && createTitle && event.target.value) {
-      setbuttonActive(true)
+      setButtonActive(true)
     } else {
-      setbuttonActive(false)
+      setButtonActive(false)
     }
+  }
+
+  const youtubeUrlText = (event: ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value)
   }
 
   const CreateButton = async () => {
@@ -64,7 +69,8 @@ export default function BoardWrite (props:IBoardWriteProps) {
             writer: createWriter,
             password: createPassword,
             title: createTitle,
-            contents: createContents
+            contents: createContents,
+            youtubeUrl
           }
         }
       })
@@ -101,19 +107,26 @@ export default function BoardWrite (props:IBoardWriteProps) {
       // early-exit 패턴(패턴을 만들어서 깔끔하고 빠르게 끝내도록 만들기)
     }
      */
+    interface ITextInput {
+      title?: string
+      contents?: string
+      youtubeUrl?: any
+    }
+    // 리팩토링 (유지보수를 용이하게 사용하는 목적)
+    const Variables:ITextInput = {}
+
+    if (createTitle) Variables.title = createTitle
+    if (createContents) Variables.contents = createContents
+    if (youtubeUrl) Variables.youtubeUrl = youtubeUrl
 
     try {
-      interface ITextInput {
-        title?: string
-        contents?: string
-      }
-      // 리팩토링 (유지보수를 용이하게 사용하는 목적)
-      const Variables:ITextInput = {}
-
-      if (createTitle) Variables.title = createTitle
-      if (createContents) Variables.contents = createContents
-
-      await updateBoard({ variables: Variables })
+      await updateBoard({
+        variables: {
+          boardId: router.query.idpage,
+          password: createPassword,
+          updateBoardInput: Variables
+        }
+      })
 
       // console.log(result.data.updateBoard._id)
       // console.log(router.query.idpage)
@@ -144,6 +157,7 @@ export default function BoardWrite (props:IBoardWriteProps) {
       isEdit={props.isEdit}
       UpdateButton={UpdateButton}
 
+      youtubeUrlText={youtubeUrlText}
       data={props.data}
     />
   )
