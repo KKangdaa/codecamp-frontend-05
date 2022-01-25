@@ -8,7 +8,7 @@ export interface IBoardCommentWriteUIProps {
   commentPasswordBox: (event: ChangeEvent<HTMLInputElement>) => void
   commentContentsBox: (event: ChangeEvent<HTMLTextAreaElement>) => void
   commentContents: string
-  starValue: any
+  star: any
   handleChange: any
 }
 

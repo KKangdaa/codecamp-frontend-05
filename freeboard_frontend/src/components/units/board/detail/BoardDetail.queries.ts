@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from "@apollo/client";
 
 export const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -10,25 +10,37 @@ export const FETCH_BOARD = gql`
       likeCount
       createdAt
       youtubeUrl
+      boardAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
-`
+`;
 
 export const DELETE_BOARD = gql`
   mutation deleteBoard($boardId: ID!) {
     deleteBoard(boardId: $boardId)
   }
-`
+`;
 
 export const LIKE_BOARD = gql`
   mutation likeBoard($boardId: ID!) {
     likeBoard(boardId: $boardId)
   }
-`
+`;
 
 export const CREATE_COMMENT = gql`
-  mutation createBoardComment($createBoardCommentInput: CreateBoardCommentInput!, $boardId: ID!) {
-    createBoardComment(createBoardCommentInput: $createBoardCommentInput, boardId: $boardId) {
+  mutation createBoardComment(
+    $createBoardCommentInput: CreateBoardCommentInput!
+    $boardId: ID!
+  ) {
+    createBoardComment(
+      createBoardCommentInput: $createBoardCommentInput
+      boardId: $boardId
+    ) {
       _id
       writer
       contents
@@ -36,7 +48,7 @@ export const CREATE_COMMENT = gql`
       rating
     }
   }
-`
+`;
 export const FETCH_COMMENT = gql`
   query fetchBoardComments($boardId: ID!) {
     fetchBoardComments(boardId: $boardId) {
@@ -47,10 +59,10 @@ export const FETCH_COMMENT = gql`
       rating
     }
   }
-`
+`;
 
 export const DELETE_COMMENT = gql`
   mutation deleteBoardComment($password: String, $boardCommentId: ID!) {
     deleteBoardComment(password: $password, boardCommentId: $boardCommentId)
   }
-`
+`;

@@ -12,7 +12,7 @@ export default function BoardCommentWriteUI (props:IBoardCommentWriteUIProps) {
         <A.CommentProfileImg src="/profile.jpg"/>
         <A.span>작성자</A.span><A.CommentName type='text' onChange={props.commentWriterBox} />
         <A.span>비밀번호</A.span><A.CommentPassword type='password' onChange={props.commentPasswordBox} />
-        <Rate allowHalf defaultValue={props.starValue} onChange={props.handleChange} />
+        <Rate allowHalf defaultValue={props.star} onChange={props.handleChange} />
       </A.CommentWrite>
       <A.CommentBox>
         <A.CommentText onChange={props.commentContentsBox} />

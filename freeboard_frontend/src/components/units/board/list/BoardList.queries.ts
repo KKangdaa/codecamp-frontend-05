@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from "@apollo/client";
 
 export const FETCH_BOARDS = gql`
   query fetchBoards {
@@ -9,9 +9,15 @@ export const FETCH_BOARDS = gql`
       likeCount
       createdAt
       youtubeUrl
+      boardAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
-`
+`;
 
 /* const DELETE_BOARD = gql`
   query deleteBoard($boardId: ID!) {
