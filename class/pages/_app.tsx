@@ -1,21 +1,25 @@
-import '../styles/globals.css'
-import 'antd/dist/antd.css'
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
-import { AppProps } from 'next/app'
+// import '../styles/globals.css'
+import "antd/dist/antd.css";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { AppProps } from "next/app";
+import Layout from "../src/components/commons/layout";
+import { Global /* , css */ } from "@emotion/react";
+import { globalStyles } from "../src/commons/styles/globalstyles";
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   const client = new ApolloClient({
-    uri: 'http://example.codebootcamp.co.kr/graphql',
-    cache: new InMemoryCache()
-  })
+    uri: "http://example.codebootcamp.co.kr/graphql",
+    cache: new InMemoryCache(),
+  });
 
   return (
     <ApolloProvider client={client}>
-      <Component {...pageProps} />
-
+      <Global styles={globalStyles} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ApolloProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

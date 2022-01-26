@@ -1,8 +1,8 @@
 /* eslint-disable react/react-in-jsx-scope */
-import DaumPostcode from "react-daum-postcode";
-import { Modal } from "antd";
-import * as A from "./BoardWrite.styled";
-import { IBoardWriteUIProps } from "./BoardWrite.types";
+import DaumPostcode from 'react-daum-postcode'
+import { Modal } from 'antd'
+import * as A from './BoardWrite.styled'
+import { IBoardWriteUIProps } from './BoardWrite.types'
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
   // console.log(props.data)
@@ -10,7 +10,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
     <A.Wrapper>
       <A.Main>
-        <A.Title>{props.isEdit ? "게시글 수정" : "게시글 등록"}</A.Title>
+        <A.Title>{props.isEdit ? '게시글 수정' : '게시글 등록'}</A.Title>
 
         <A.MainTitleBox
           type="text"
@@ -79,11 +79,6 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
               <A.TextNum
                 type="text"
                 placeholder="07250"
-                defaultValue={
-                  props.isEdit
-                    ? props.data?.fetchBoard?.boardAddress?.zipcode
-                    : props.zipcode
-                }
                 value={
                   props.zipcode
                     ? props.zipcode
@@ -109,11 +104,6 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
               <A.BoxText
                 type="text"
                 // onChange={props.address}
-                defaultValue={
-                  props.isEdit
-                    ? props.data?.fetchBoard?.boardAddress?.address
-                    : props.address
-                }
                 value={
                   props.address
                     ? props.address
@@ -125,9 +115,6 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
                 type="text"
                 placeholder="상세주소 입력"
                 onChange={props.addressDetailText}
-                defaultValue={
-                  props.data?.fetchBoard?.boardAddress?.addressDetail
-                }
                 value={
                   props.addressDetail
                     ? props.addressDetail
@@ -162,9 +149,9 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
           onClick={props.isEdit ? props.UpdateButton : props.CreateButton}
           buttonActive={props.isEdit ? true : props.buttonActive}
         >
-          {props.isEdit ? "수정" : "등록"}
+          {props.isEdit ? '수정' : '등록'}
         </A.RegisBtn>
       </A.Main>
     </A.Wrapper>
-  );
+  )
 }

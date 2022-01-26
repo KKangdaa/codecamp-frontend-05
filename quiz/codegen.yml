@@ -1,9 +1,7 @@
-[
-  schema: http://example.codebootcamp.co.kr/graphql
-  generates:
-    ./src/commons/types/generated/types.ts:
-      plugins:
-        - typescript
-      config:
-        typesPrefix: I
-]
+schema: http://example.codebootcamp.co.kr/graphql
+generates:
+  ./src/commons/types/generated/types.ts:
+    plugins:
+      - typescript
+    config:
+      typesPrefix: I

@@ -1,16 +1,16 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
 export const span = styled.span`
   margin: 0 10px;
   font-size: 0.85rem;
-`;
+`
 export const CommentProfileImg = styled.img`
   width: 30px;
   height: 30px;
   border: 0;
   border-radius: 15px;
   margin-left: 10px;
-`;
+`
 /* fetch comment */
 export const CommentFetchBoard = styled.div`
   width: 67%;
@@ -27,22 +27,22 @@ export const CommentFetchBoard = styled.div`
   &:hover button:nth-of-type(2) {
     display: block;
   }
-`;
+`
 export const CommentWriter = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
+`
 
 export const CommentContents = styled.div`
   font-size: 0.85rem;
   margin: 20px 10px;
-`;
+`
 export const CommentDate = styled.div`
   font-size: 0.85rem;
   color: #888;
   margin: 0 10px;
-`;
+`
 export const CommentEditButton = styled.button`
   display: none;
   position: absolute;
@@ -58,7 +58,7 @@ export const CommentEditButton = styled.button`
     color: gold;
     font-weight: 700;
   }
-`;
+`
 export const CommentDeleteButton = styled.button`
   display: none;
   position: absolute;
@@ -74,7 +74,7 @@ export const CommentDeleteButton = styled.button`
     color: gold;
     font-weight: 700;
   }
-`;
+`
 export const BUTTON = styled.button`
   display: flex;
   justify-content: center;
@@ -87,7 +87,7 @@ export const BUTTON = styled.button`
   &:focus svg {
     fill: red;
   }
-`;
+`
 
 export const Heart = styled.svg`
   padding: 10px 0;
@@ -95,4 +95,4 @@ export const Heart = styled.svg`
   &:active {
     width: 15px;
   }
-`;
+`
