@@ -10,7 +10,9 @@ export const getMyDate = (myDate) => {
   const hh = aaa.getHours()
   const mns = aaa.getMinutes()
 
-  return `${yyyy}. ${mm}. ${dd}. ${hh}:${mns}`
+  return `${yyyy}. ${mm}. ${dd}. ${String(hh).padStart(2, '0')}:${String(
+    mns
+  ).padStart(2, '0')}`
 
   /*
   aaa.getDay()

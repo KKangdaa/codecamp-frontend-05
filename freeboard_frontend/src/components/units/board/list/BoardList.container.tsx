@@ -2,27 +2,34 @@ import Head from 'next/head'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import BoardListUI from './BoardList.presenter'
-import { FETCH_BOARDS } from './BoardList.queries'
+import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from './BoardList.queries'
+import { MouseEvent } from 'react'
 
-export default function BoardList () {
+export default function BoardList() {
   const router = useRouter()
 
-  const { data } = useQuery(FETCH_BOARDS)
+  const { data, refetch } = useQuery(FETCH_BOARDS, { variables: { page: 1 } })
+  const { data: dataBoardCount } = useQuery(FETCH_BOARDS_COUNT)
+  const lastPage = Math.ceil(dataBoardCount?.fetchBoardsCount / 10)
 
-  function EditFreeboard () {
+  function EditFreeboard() {
     router.push('/boards/new')
   }
-  function onClickMoveToDetail (event) {
-    router.push(`/boards/${event.target.id}`)
+  function onClickMoveToDetail(event: MouseEvent<HTMLInputElement>) {
+    router.push(`/boards/${event.currentTarget.id}`)
     // 상세페이지 이동(event.target -> 태그 event.target.id -> 태그에 대한 id 속성)
   }
 
   return (
-    <BoardListUI
-      data={data}
-      Head={Head}
-      EditFreeboard={EditFreeboard}
-      onClickMoveToDetail={onClickMoveToDetail}
-    />
+    <>
+      <BoardListUI
+        data={data}
+        Head={Head}
+        EditFreeboard={EditFreeboard}
+        onClickMoveToDetail={onClickMoveToDetail}
+        refetch={refetch}
+        lastPage={lastPage}
+      />
+    </>
   )
 }

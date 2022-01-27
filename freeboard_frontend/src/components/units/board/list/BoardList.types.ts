@@ -3,6 +3,13 @@ import { MouseEvent } from 'react'
 export interface IBoardListUIProps {
   data?: any
   Head: any
+  refetch: any
+  lastPage: number
   EditFreeboard: () => void
   onClickMoveToDetail: (event: MouseEvent<HTMLInputElement>) => void
+}
+
+export interface IBoardPaginationProps {
+  refetch: any
+  lastPage: number
 }

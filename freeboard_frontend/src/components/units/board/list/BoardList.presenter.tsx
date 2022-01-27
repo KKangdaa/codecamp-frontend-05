@@ -1,8 +1,9 @@
 import { getMyDate } from '../../../../commons/libraries/utils'
+import Pagination from './BoardList.pagination'
 import * as A from './BoardList.styled'
 import { IBoardListUIProps } from './BoardList.types'
 
-export default function BoardListUI (props: IBoardListUIProps) {
+export default function BoardListUI(props: IBoardListUIProps) {
   return (
     <>
       <props.Head>
@@ -15,6 +16,7 @@ export default function BoardListUI (props: IBoardListUIProps) {
       </props.Head>
       <A.Wrapper>
         <A.BoardWrapper>
+          <A.BoardListTitle>게시판</A.BoardListTitle>
           <A.Board>
             <A.BoardTitle>
               {/* <A.ListInput type="checkbox"></A.ListInput> */}
@@ -29,21 +31,29 @@ export default function BoardListUI (props: IBoardListUIProps) {
                 <A.Icon className="fas fa-heart"></A.Icon>
               </A.TitleIcon>
             </A.BoardTitle>
+
             {props.data?.fetchBoards.map((el, index) => (
               // number는 el, index로 추가하여
 
               <A.BoardList key={el.number}>
                 <A.Number>{index + 1}</A.Number>
-                <A.Name id={el._id} onClick={props.onClickMoveToDetail}>{el.title}</A.Name>
+                <A.Name id={el._id} onClick={props.onClickMoveToDetail}>
+                  {el.title}
+                </A.Name>
                 <A.Writer>{el.writer.slice(0, 10)}</A.Writer>
                 <A.CreateDate>{getMyDate(el.createdAt)}</A.CreateDate>
                 <A.Watch>{Number()}</A.Watch>
                 <A.Like>{el.likeCount}</A.Like>
               </A.BoardList>
             ))}
-
           </A.Board>
-            <A.EditButton onClick={props.EditFreeboard}>Edit<A.Icon className="fas fa-edit" style={{ marginLeft: '10px' }} /></A.EditButton>
+
+          <Pagination refetch={props.refetch} lastPage={props.lastPage} />
+
+          <A.EditButton onClick={props.EditFreeboard}>
+            Edit
+            <A.Icon className="fas fa-edit" style={{ marginLeft: '10px' }} />
+          </A.EditButton>
         </A.BoardWrapper>
       </A.Wrapper>
     </>

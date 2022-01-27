@@ -1,68 +1,41 @@
 import styled from '@emotion/styled'
+import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import Slider from 'react-slick'
 
 const Wrapper = styled.div`
   width: 100%;
-  min-height: 30vw;
-  /* background: red; */
+  height: 32vw;
   overflow: hidden;
 `
 const ImgBox = styled.div`
-  min-height: 30vw;
   width: 100vw;
-  /* min-height: 60vh; */
+  height: 32vw;
+  & > div {
+    background-size: cover;
+    /* background-attachment: fixed; */
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 32vw;
+  }
 `
-
 const ImgOne = styled.div`
-  background: url('/banner1.jpg') 50% 52%;
-  /* background-attachment: fixed; */
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 30vw;
-  width: 100vw;
-  /* min-height: 60vh; */
+  background: url('/images/banner1.jpg') 50% 52%;
 `
 const ImgTwo = styled.div`
-  background: url('/banner2.jpg') 50% 40%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 30vw;
-  width: 100vw;
-  /* min-height: 60vh; */
+  background: url('/images/banner2.jpg') 50% 40%;
 `
 const ImgThree = styled.div`
-  background: url('/banner3.jpg') 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 30vw;
-  width: 100vw;
-  /* min-height: 60vh; */
+  background: url('/images/banner3.jpg') 50% 80%;
 `
 const ImgFour = styled.div`
-  background: url('/banner4.jpg') 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 30vw;
-  width: 100vw;
-  /* min-height: 60vh; */
+  background: url('/images/banner4.jpg') 50% 60%;
 `
 const ImgFive = styled.div`
-  background: url('/banner5.jpg') 50% 70%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 30vw;
-  width: 100vw;
-  /* min-height: 60vh; */
+  background: url('/images/banner5.jpg') 50% 80%;
 `
 const ImgSix = styled.div`
-  background: url('/banner6.jpg') 50% 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 30vw;
-  width: 100vw;
-  /* min-height: 60vh; */
+  background: url('/images/banner6.jpg') 50% 80%;
 `
 
 export default function LayoutBanner() {
@@ -71,6 +44,9 @@ export default function LayoutBanner() {
     slidesToShow: 1,
     swipeToSlide: true,
     infinite: true,
+    autoplay: true,
+    speed: 1500,
+    fade: true,
   }
 
   return (

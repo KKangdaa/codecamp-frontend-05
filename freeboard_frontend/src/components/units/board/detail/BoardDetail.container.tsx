@@ -1,20 +1,20 @@
-import { useRouter } from "next/router";
-import { useMutation, useQuery } from "@apollo/client";
-import BoardDetailUI from "./BoardDetail.presenter";
-import { DELETE_BOARD, FETCH_BOARD, LIKE_BOARD } from "./BoardDetail.queries";
-import { useState } from "react";
+import { useRouter } from 'next/router'
+import { useMutation, useQuery } from '@apollo/client'
+import BoardDetailUI from './BoardDetail.presenter'
+import { DELETE_BOARD, FETCH_BOARD, LIKE_BOARD } from './BoardDetail.queries'
+import { useState } from 'react'
 
 export default function BoardDetail() {
-  const router = useRouter();
+  const router = useRouter()
 
-  const [likeButton] = useMutation(LIKE_BOARD);
-  const [deleteBoard] = useMutation(DELETE_BOARD);
+  const [likeButton] = useMutation(LIKE_BOARD)
+  const [deleteBoard] = useMutation(DELETE_BOARD)
 
   const { data: fetchBoardData } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: router.query.idpage,
     },
-  });
+  })
 
   const onClickLike = () => {
     likeButton({
@@ -22,31 +22,31 @@ export default function BoardDetail() {
       refetchQueries: [
         { query: FETCH_BOARD, variables: { boardId: router.query.idpage } },
       ],
-    });
-  };
+    })
+  }
 
   const onClickListPage = () => {
-    router.push("/boards");
-  };
+    router.push('/boards')
+  }
 
   const onClickEditPage = () => {
-    router.push(`/boards/${router.query.idpage}/edit`);
-  };
+    router.push(`/boards/${router.query.idpage}/edit`)
+  }
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   const toggleButton = () => {
-    setIsModalVisible((prev) => !prev);
-  };
+    setIsModalVisible((prev) => !prev)
+  }
 
   const onClickDelete = () => {
-    setIsModalVisible((prev) => !prev);
+    setIsModalVisible((prev) => !prev)
     deleteBoard({
       variables: { boardId: router.query.idpage },
       refetchQueries: [{ query: FETCH_BOARD }],
-    });
-    router.push("/boards");
-  };
+    })
+    router.push('/boards')
+  }
 
   // console.log(router.query.idpage)
   return (
@@ -62,5 +62,5 @@ export default function BoardDetail() {
       // showModal={showModal}
       toggleButton={toggleButton}
     />
-  );
+  )
 }

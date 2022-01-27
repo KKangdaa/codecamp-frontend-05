@@ -10,6 +10,6 @@ export const globalStyles = css`
     margin: 0;
     box-sizing: border-box;
     /* font-family: "myfont"; */
-    height: 100%;
+    /* height: 100%; */
   }
 `;

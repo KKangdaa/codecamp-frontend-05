@@ -17,6 +17,13 @@ export const BoardWrapper = styled.div`
   justify-content: center;
   align-items: flex-end;
 `
+export const BoardListTitle = styled.span`
+  width: 100%;
+  margin: 30px 0 50px 0;
+  text-align: center;
+  font-size: 4rem;
+  letter-spacing: 1rem;
+`
 export const Board = styled.div`
   width: 100%;
   border-top: 2px solid #ccc;
@@ -49,7 +56,7 @@ export const TitleCreateDate = styled.div`
 
 export const BoardList = styled.div`
   width: 100%;
-  height: 35px;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,10 +92,11 @@ export const Like = styled.div`
 
 export const EditButton = styled.button`
   position: relative;
-  top: 30px;
+  top: 0;
   right: 0;
   width: 110px;
   height: 40px;
+  margin-top: 30px;
   background: none;
   border: 1px solid #ccc;
   border-radius: 5px;

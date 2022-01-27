@@ -1,15 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { getMyDate } from "../../../../commons/libraries/utils-time";
-import { IBoardDetailUIProps } from "./BoardDetail.types";
-import * as A from "./BoardDetail.styled";
-import BoardCommentWrite from "../../boardcomment/write/BoardCommentWrite.container";
-import BoardCommentList from "../../boardcomment/list/BoardCommentList.container";
-import ReactPlayer from "react-player";
-import { Modal } from "antd";
+import { getMyDate } from '../../../../commons/libraries/utils-time'
+import { IBoardDetailUIProps } from './BoardDetail.types'
+import * as A from './BoardDetail.styled'
+import BoardCommentWrite from '../../boardcomment/write/BoardCommentWrite.container'
+import BoardCommentList from '../../boardcomment/list/BoardCommentList.container'
+import ReactPlayer from 'react-player'
+import { Modal } from 'antd'
 
 export default function BoardDetailUI(props: IBoardDetailUIProps) {
-  // console.log(props.fetchBoardData?.fetchBoard?.boardAddress?.address);
-  // console.log(props.fetchBoardData?.fetchBoard?.boardAddress?.addressDetail);
   return (
     <A.Wrapper>
       <A.WrapperMain>
@@ -66,9 +64,9 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
           <A.ClickButton onClick={props.onClickEditPage}>수정</A.ClickButton>
           <A.ClickButton onClick={props.onClickListPage}>목록</A.ClickButton>
         </A.MainButton>
+        <BoardCommentWrite />
+        <BoardCommentList />
       </A.WrapperMain>
-      <BoardCommentWrite />
-      <BoardCommentList />
     </A.Wrapper>
-  );
+  )
 }
