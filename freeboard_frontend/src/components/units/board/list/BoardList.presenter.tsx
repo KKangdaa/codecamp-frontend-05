@@ -1,9 +1,15 @@
 import { getMyDate } from '../../../../commons/libraries/utils'
-import Pagination from './BoardList.pagination'
+import Pagination from '../../../commons/pagination/pagination'
 import * as A from './BoardList.styled'
 import { IBoardListUIProps } from './BoardList.types'
+import { useState } from 'react'
+import { useQuery } from '@apollo/client'
+import { FETCH_BOARDS_COUNT } from './BoardList.queries'
 
 export default function BoardListUI(props: IBoardListUIProps) {
+  const [clickPage, setClickPage] = useState(1)
+  const { data: dataBoardCount } = useQuery(FETCH_BOARDS_COUNT)
+
   return (
     <>
       <props.Head>
@@ -36,7 +42,10 @@ export default function BoardListUI(props: IBoardListUIProps) {
               // number는 el, index로 추가하여
 
               <A.BoardList key={el.number}>
-                <A.Number>{index + 1}</A.Number>
+                <A.Number>
+                  {dataBoardCount?.fetchBoardsCount -
+                    (index + (clickPage - 1) * 10)}
+                </A.Number>
                 <A.Name id={el._id} onClick={props.onClickMoveToDetail}>
                   {el.title}
                 </A.Name>
@@ -48,7 +57,12 @@ export default function BoardListUI(props: IBoardListUIProps) {
             ))}
           </A.Board>
 
-          <Pagination refetch={props.refetch} lastPage={props.lastPage} />
+          <Pagination
+            clickPage={clickPage}
+            setClickPage={setClickPage}
+            refetch={props.refetch}
+            dataBoardCount={dataBoardCount}
+          />
 
           <A.EditButton onClick={props.EditFreeboard}>
             Edit

@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { getMyDate } from '../../../../commons/libraries/utils-time'
 import { IBoardDetailUIProps } from './BoardDetail.types'
 import * as A from './BoardDetail.styled'

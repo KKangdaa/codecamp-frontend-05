@@ -50,7 +50,6 @@ export default function BoardDetail() {
 
   // console.log(router.query.idpage)
   return (
-    // eslint-disable-next-line react/react-in-jsx-scope
     <BoardDetailUI
       fetchBoardData={fetchBoardData}
       onClickEditPage={onClickEditPage}
@@ -58,8 +57,6 @@ export default function BoardDetail() {
       onClickListPage={onClickListPage}
       onClickLike={onClickLike}
       isModalVisible={isModalVisible}
-      // handleCancel={handleCancel}
-      // showModal={showModal}
       toggleButton={toggleButton}
     />
   )

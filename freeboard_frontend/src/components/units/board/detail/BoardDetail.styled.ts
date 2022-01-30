@@ -34,6 +34,10 @@ export const Topper = styled.div`
   align-items: center;
 `
 export const Title = styled.div`
+  width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  height: auto;
   font-size: 2.5rem;
   font-weight: 700;
   padding-bottom: 50px;

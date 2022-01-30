@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import BoardCommentListUI from './BoardCommentList.presenter'
 import { FETCH_COMMENT, DELETE_COMMENT } from './BoardCommentList.queries'
 import { Modal } from 'antd'
-import { /* ChangeEvent, */ useState } from 'react'
+import { ChangeEvent, MouseEvent, useState } from 'react'
 
 export default function BoardCommentList() {
   const router = useRouter()
@@ -13,37 +13,28 @@ export default function BoardCommentList() {
 
   const [isModalVisible, setIsModalVisible] = useState(false)
 
-  const { data: fetchCommentData } = useQuery(FETCH_COMMENT, {
-    variables: { boardId: router.query.idpage },
+  const { data: fetchCommentData, fetchMore } = useQuery(FETCH_COMMENT, {
+    variables: { boardId: String(router.query.idpage), page: 1 },
   })
 
   const [passwordText, setPasswordText] = useState('')
   const [idText, setIdText] = useState('')
 
-  const passwordTextBox = (event) => {
+  const passwordTextBox = (event: ChangeEvent<HTMLInputElement>) => {
     setPasswordText(event.target.value)
-    // return event.currentTarget.value;
   }
-  /* const idTextBox = (event) => {
-    // return event.currentTarget.value;
-  }; */
 
   const onToggleModal = () => {
     setIsModalVisible((prev) => !prev)
   }
 
-  const showModal = (event) => {
+  const showModal = (event: MouseEvent<HTMLButtonElement>) => {
     setIdText(event.currentTarget.id)
     setIsModalVisible(true)
   }
 
-  /* const handleCancel = () => {
-    setIsModalVisible(false);
-  }; */
   const onClickDeleteComment = async () => {
-    // setIsModalVisible(false);
     onToggleModal()
-    // const commentPassword = passwordTextBox(event.target.id);
     try {
       await deleteBoardComment({
         variables: {
@@ -51,7 +42,10 @@ export default function BoardCommentList() {
           boardCommentId: idText,
         },
         refetchQueries: [
-          { query: FETCH_COMMENT, variables: { boardId: router.query.idpage } },
+          {
+            query: FETCH_COMMENT,
+            variables: { boardId: router.query.idpage, page: 1 },
+          },
         ],
       })
 
@@ -59,17 +53,32 @@ export default function BoardCommentList() {
         content: '게시물이 삭제되었습니다.',
       })
     } catch (error) {
-      // console.log(error.message);
       Modal.error({
         content: error.message,
       })
-      // alert("비밀번호가 일치하지 않습니다");
     }
   }
-  // console.log(fetchCommentData)
+
+  const onLoadMore = () => {
+    // if (!fetchCommentData) return
+    fetchMore({
+      variables: {
+        page: Math.ceil(fetchCommentData?.fetchBoardComments.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult.fetchBoardComments)
+          return { fetchBoardComments: [...prev.fetchBoardComments] }
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        }
+      },
+    })
+  }
 
   return (
-    // eslint-disable-next-line react/react-in-jsx-scope
     <BoardCommentListUI
       Head={Head}
       fetchCommentData={fetchCommentData}
@@ -78,6 +87,7 @@ export default function BoardCommentList() {
       showModal={showModal}
       passwordTextBox={passwordTextBox}
       onToggleModal={onToggleModal}
+      onLoadMore={onLoadMore}
     />
   )
 }

@@ -76,6 +76,9 @@ export const Name = styled.div`
   text-align: left;
   padding-left: 20px;
   cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
 export const Writer = styled.div`
   width: 13%;

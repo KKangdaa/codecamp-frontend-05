@@ -13,7 +13,7 @@ export const CommentProfileImg = styled.img`
 `
 /* fetch comment */
 export const CommentFetchBoard = styled.div`
-  width: 67%;
+  width: 100%;
   padding: 25px 20px;
   margin-top: 30px;
   display: flex;
@@ -95,4 +95,16 @@ export const Heart = styled.svg`
   &:active {
     width: 15px;
   }
+`
+
+export const WrapperScroll = styled.div`
+  width: 70%;
+  height: 30vw;
+  padding: 20px;
+  overflow: auto;
+`
+export const ClickLoader = styled.div`
+  text-align: center;
+  cursor: pointer;
+  margin-top: 10px;
 `

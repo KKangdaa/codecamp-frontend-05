@@ -2,15 +2,13 @@ import Head from 'next/head'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import BoardListUI from './BoardList.presenter'
-import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from './BoardList.queries'
+import { FETCH_BOARDS } from './BoardList.queries'
 import { MouseEvent } from 'react'
 
 export default function BoardList() {
   const router = useRouter()
 
   const { data, refetch } = useQuery(FETCH_BOARDS, { variables: { page: 1 } })
-  const { data: dataBoardCount } = useQuery(FETCH_BOARDS_COUNT)
-  const lastPage = Math.ceil(dataBoardCount?.fetchBoardsCount / 10)
 
   function EditFreeboard() {
     router.push('/boards/new')
@@ -28,7 +26,6 @@ export default function BoardList() {
         EditFreeboard={EditFreeboard}
         onClickMoveToDetail={onClickMoveToDetail}
         refetch={refetch}
-        lastPage={lastPage}
       />
     </>
   )
