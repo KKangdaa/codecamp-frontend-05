@@ -34,7 +34,7 @@ export default function PaginationPage() {
 
     const qqq = isEdits;
     qqq[event.target.id] = true;
-    setIsEdits(qqq);
+    setIsEdits([...qqq]);
   };
 
   return (

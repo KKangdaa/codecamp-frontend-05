@@ -1,8 +1,9 @@
-import { getMyDate } from '../../../../commons/libraries/utils-time'
 import * as A from './BoardCommentList.styled'
+// import * as S from '../write/BoardCommentWrite.styled'
 import { IBoardCommentListUIProps } from './BoardCommentList.types'
 import InfiniteScroll from 'react-infinite-scroller'
-import { Rate, Modal } from 'antd'
+import { Modal } from 'antd'
+import BoardCommentListItemUI from './BoardCommentListItem'
 
 export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
   return (
@@ -31,19 +32,17 @@ export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
             </A.ClickLoader>
           }
         >
-          {props.fetchCommentData?.fetchBoardComments.map((el: any) => (
+          {props.fetchCommentData?.fetchBoardComments.map((el, index) => (
             <A.CommentFetchBoard key={el._id}>
-              <A.CommentWriter>
-                <A.CommentProfileImg src="/profile.jpg" />
-                <A.span>{el.writer}</A.span>
-                <Rate allowHalf value={el.rating} disabled />
-              </A.CommentWriter>
-              <A.CommentContents>{el.contents}</A.CommentContents>
-              <A.CommentDate>{getMyDate(el.createdAt)}</A.CommentDate>
-              <A.CommentEditButton className="far fa-edit"></A.CommentEditButton>
-              <A.CommentDeleteButton id={el._id} onClick={props.showModal}>
-                <i className="fas fa-times"></i>
-              </A.CommentDeleteButton>
+              <BoardCommentListItemUI
+                el={el}
+                index={index}
+                onChangePassword={props.onChangePassword}
+                passwordText={props.passwordText}
+                onChangeContents={props.onChangeContents}
+                onChangeWriter={props.onChangeWriter}
+                contentsText={props.contentsText}
+              />
             </A.CommentFetchBoard>
           ))}
           {props.isModalVisible && (
@@ -51,9 +50,9 @@ export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
               visible={props.isModalVisible}
               onOk={props.onClickDeleteComment}
               onCancel={props.onToggleModal}
+              title={'비밀번호를 입력하여 주세요'}
             >
-              비밀번호:
-              <input type="password" onChange={props.passwordTextBox} />
+              <input type="password" onChange={props.onChangePassword} />
             </Modal>
           )}
         </InfiniteScroll>

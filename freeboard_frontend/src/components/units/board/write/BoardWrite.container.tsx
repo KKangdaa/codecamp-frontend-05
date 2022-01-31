@@ -175,23 +175,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
       Modal.error({
         content: error.message,
       })
-      // alert(error.message);
     }
   }
-
-  /*
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-  */
 
   return (
     // eslint-disable-next-line react/react-in-jsx-scope

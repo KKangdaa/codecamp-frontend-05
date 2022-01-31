@@ -4,7 +4,7 @@ import { IButtonProps } from './BoardCommentWrite.types'
 export const MainComment = styled.div`
   width: 70%;
   padding: 40px 20px;
-  display: flex; 
+  display: flex;
   flex-direction: column;
   border-bottom: 1px solid #ccc;
 `
@@ -13,6 +13,11 @@ export const CommentWrite = styled.div`
   display: flex;
   margin-bottom: 20px;
   align-items: center;
+  > ul {
+    padding: 0 0 5px 15px;
+    margin: 0;
+    color: #851c1c;
+  }
 `
 export const CommentProfileImg = styled.img`
   width: 30px;
@@ -38,6 +43,7 @@ export const CommentPassword = styled.input`
   padding: 10px;
   font-size: 0.85rem;
 `
+
 export const span = styled.span`
   margin: 0 10px;
   font-size: 0.85rem;
@@ -67,9 +73,38 @@ export const CommentCreateButton = styled.button`
   background: none;
   font-size: 0.85rem;
   &:hover {
-    cursor: ${(props: IButtonProps) => props.commentButtonActive === true ? 'pointer' : 'auto'};
-    background: ${(props: IButtonProps) => props.commentButtonActive === true ? 'gold' : 'none'};
+    cursor: ${(props: IButtonProps) =>
+      props.commentButtonActive === true ? 'pointer' : 'auto'};
+    background: ${(props: IButtonProps) =>
+      props.commentButtonActive === true ? '#851c1c' : 'none'};
+    color: ${(props: IButtonProps) =>
+      props.commentButtonActive === true ? 'white' : 'black'};
   }
+`
+
+export const CommentEditButton = styled.button`
+  width: 100%;
+  height: 50px;
+  border: 0;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  background: none;
+  font-size: 0.85rem;
+  &:hover {
+    cursor: ${(props: IButtonProps) =>
+      props.commentButtonActive === true ? 'pointer' : 'auto'};
+    background: ${(props: IButtonProps) =>
+      props.commentButtonActive === true ? '#851c1c' : 'none'};
+    color: ${(props: IButtonProps) =>
+      props.commentButtonActive === true ? 'white' : 'black'};
+  }
+`
+export const ButtonGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 20%;
+  padding-left: 10px;
 `
 
 export const BUTTON = styled.button`

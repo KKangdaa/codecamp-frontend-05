@@ -21,6 +21,7 @@ export default function BoardCommentWriteUI(props: IBoardCommentWriteUIProps) {
             allowHalf
             defaultValue={props.star}
             onChange={props.handleChange}
+            // style={{ width: '100%' }}
           />
         </A.CommentWrite>
         <A.CommentBox>

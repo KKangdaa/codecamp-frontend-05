@@ -1,4 +1,4 @@
-import { useMutation /* , useQuery */ } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { ChangeEvent, useState } from 'react'
 import BoardCommentWriteUI from './BoardCommentWrite.presenter'
@@ -70,12 +70,10 @@ export default function BoardCommentWrite() {
           },
         ],
       })
-      // console.log(router.query)
+
       if (commentWriter && commentPassword && commentContents) {
         successModal()
       }
-      // window.location.reload()
-      // console.log(result.data.createBoardComment._id)
     } catch (error) {
       console.log(error.message)
     }
@@ -91,6 +89,7 @@ export default function BoardCommentWrite() {
       commentPasswordBox={commentPasswordBox}
       commentContentsBox={commentContentsBox}
       CreateCommentButton={CreateCommentButton}
+      commentWriter={commentWriter}
       commentContents={commentContents}
       commentButtonAc={commentButtonAc}
       star={star}

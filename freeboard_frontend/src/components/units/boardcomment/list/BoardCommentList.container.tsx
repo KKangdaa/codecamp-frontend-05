@@ -1,9 +1,9 @@
 import Head from 'next/head'
-import { useMutation, useQuery } from '@apollo/client'
+import { Modal } from 'antd'
 import { useRouter } from 'next/router'
+import { useMutation, useQuery } from '@apollo/client'
 import BoardCommentListUI from './BoardCommentList.presenter'
 import { FETCH_COMMENT, DELETE_COMMENT } from './BoardCommentList.queries'
-import { Modal } from 'antd'
 import { ChangeEvent, MouseEvent, useState } from 'react'
 
 export default function BoardCommentList() {
@@ -17,11 +17,18 @@ export default function BoardCommentList() {
     variables: { boardId: String(router.query.idpage), page: 1 },
   })
 
-  const [passwordText, setPasswordText] = useState('')
   const [idText, setIdText] = useState('')
+  const [passwordText, setPasswordText] = useState('')
+  const [contentsText, setContentsText] = useState('')
 
-  const passwordTextBox = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+    setIdText(event.target.value)
+  }
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPasswordText(event.target.value)
+  }
+  const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
+    setContentsText(event.target.value)
   }
 
   const onToggleModal = () => {
@@ -31,6 +38,47 @@ export default function BoardCommentList() {
   const showModal = (event: MouseEvent<HTMLButtonElement>) => {
     setIdText(event.currentTarget.id)
     setIsModalVisible(true)
+  }
+
+  // const [updateBoardComment] = useMutation(UPDATE_COMMENT)
+
+  /* const updateCommentButton = async (event) => {
+    /* const CommentVariables = {}
+
+    if (contentsText) CommentVariables.contents = contentsText
+    if (editStar) CommentVariables.rating = editStar 
+
+    try {
+      await updateBoardComment({
+        variables: {
+          boardCommentId: idText,
+          password: passwordText,
+          updateBoardCommentInput: {
+            contents: contentsText,
+            rating:ratingStar
+          }
+        }
+      })
+    }
+  } */
+
+  const onLoadMore = () => {
+    if (!fetchCommentData) return
+    fetchMore({
+      variables: {
+        page: Math.ceil(fetchCommentData?.fetchBoardComments.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult.fetchBoardComments)
+          return { fetchBoardComments: [...prev.fetchBoardComments] }
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        }
+      },
+    })
   }
 
   const onClickDeleteComment = async () => {
@@ -59,25 +107,6 @@ export default function BoardCommentList() {
     }
   }
 
-  const onLoadMore = () => {
-    // if (!fetchCommentData) return
-    fetchMore({
-      variables: {
-        page: Math.ceil(fetchCommentData?.fetchBoardComments.length / 10) + 1,
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult.fetchBoardComments)
-          return { fetchBoardComments: [...prev.fetchBoardComments] }
-        return {
-          fetchBoardComments: [
-            ...prev.fetchBoardComments,
-            ...fetchMoreResult.fetchBoardComments,
-          ],
-        }
-      },
-    })
-  }
-
   return (
     <BoardCommentListUI
       Head={Head}
@@ -85,9 +114,13 @@ export default function BoardCommentList() {
       onClickDeleteComment={onClickDeleteComment}
       isModalVisible={isModalVisible}
       showModal={showModal}
-      passwordTextBox={passwordTextBox}
       onToggleModal={onToggleModal}
       onLoadMore={onLoadMore}
+      onChangeWriter={onChangeWriter}
+      onChangePassword={onChangePassword}
+      passwordText={passwordText}
+      onChangeContents={onChangeContents}
+      contentsText={contentsText}
     />
   )
 }

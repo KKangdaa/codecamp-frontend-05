@@ -26,6 +26,34 @@ export default function BoardWrite() {
     });
   };
 
+  /* const onChangeWriter = (event) => {
+    // setMyWriter(event.target.value);
+    setInputs({
+      ...inputs,
+      [event.target.id]: event.target.value,
+    });
+
+    // event.target.id  // writer
+  };
+  const onChangePassword = (event) => {
+    // setMyWriter(event.target.value);
+    setInputs({
+      ...inputs,
+      [event.target.id]: event.target.value,
+    });
+
+    // event.target.id  // password
+  };
+  const onChangeContents = (event) => {
+    // setMyWriter(event.target.value);
+    setInputs({
+      ...inputs,
+      [event.target.id]: event.target.value,
+    });
+
+    // event.target.id  // contents
+  }; */
+
   const onChangeInputs = (event) => {
     // setMyWriter(event.target.value);
     setInputs({
