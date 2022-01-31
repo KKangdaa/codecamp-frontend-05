@@ -19,16 +19,12 @@ export default function BoardCommentList() {
 
   const [idText, setIdText] = useState('')
   const [passwordText, setPasswordText] = useState('')
-  const [contentsText, setContentsText] = useState('')
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setIdText(event.target.value)
   }
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPasswordText(event.target.value)
-  }
-  const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
-    setContentsText(event.target.value)
   }
 
   const onToggleModal = () => {
@@ -39,28 +35,6 @@ export default function BoardCommentList() {
     setIdText(event.currentTarget.id)
     setIsModalVisible(true)
   }
-
-  // const [updateBoardComment] = useMutation(UPDATE_COMMENT)
-
-  /* const updateCommentButton = async (event) => {
-    /* const CommentVariables = {}
-
-    if (contentsText) CommentVariables.contents = contentsText
-    if (editStar) CommentVariables.rating = editStar 
-
-    try {
-      await updateBoardComment({
-        variables: {
-          boardCommentId: idText,
-          password: passwordText,
-          updateBoardCommentInput: {
-            contents: contentsText,
-            rating:ratingStar
-          }
-        }
-      })
-    }
-  } */
 
   const onLoadMore = () => {
     if (!fetchCommentData) return
@@ -119,8 +93,6 @@ export default function BoardCommentList() {
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       passwordText={passwordText}
-      onChangeContents={onChangeContents}
-      contentsText={contentsText}
     />
   )
 }

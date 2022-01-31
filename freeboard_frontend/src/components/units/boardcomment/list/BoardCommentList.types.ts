@@ -10,7 +10,11 @@ export interface IBoardCommentListUIProps {
   Head: any
 
   onLoadMore: any
-  // idText: string
-  // passwordText: string
-  commentEditWriterBox: (event: ChangeEvent<HTMLInputElement>) => void
+
+  onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void
+  onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void
+  onChangeContents: (event: ChangeEvent<HTMLInputElement>) => void
+  passwordText: string
+  contentsText: string
+  // commentEditWriterBox: (event: ChangeEvent<HTMLInputElement>) => void
 }

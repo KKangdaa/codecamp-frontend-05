@@ -3,7 +3,7 @@ import * as A from './BoardCommentList.styled'
 import * as S from '../write/BoardCommentWrite.styled'
 // import { IBoardCommentListUIProps } from './BoardCommentList.types'
 import { Rate, Modal } from 'antd'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useMutation } from '@apollo/client'
 import { FETCH_COMMENT, UPDATE_COMMENT } from './BoardCommentList.queries'
@@ -14,24 +14,31 @@ export default function BoardCommentListItemUI(props) {
   const [updateBoardComment] = useMutation(UPDATE_COMMENT)
 
   const [editStar, setEditStar] = useState(props.el.rating)
+  const [editContentsText, setEditContentsText] = useState('')
+  const [editPasswordText, setEditPasswordText] = useState('')
+  const [isEdits, setIsEdits] = useState(false)
 
+  const onChangePassword = (event) => {
+    setEditPasswordText(event.target.value)
+  }
+  const onChangeContents = (event) => {
+    setEditContentsText(event.target.value)
+  }
   const editStarButton = (event) => {
     setEditStar(event)
   }
 
   const VariablesComment = {}
 
-  if (props.contentsText) VariablesComment.contents = props.contentsText
+  if (editContentsText) VariablesComment.contents = editContentsText
   if (editStar) VariablesComment.rating = editStar
-
-  const [isEdits, setIsEdits] = useState(false)
 
   const updateCommentButton = async (event) => {
     try {
       await updateBoardComment({
         variables: {
           boardCommentId: event.currentTarget.id,
-          password: String(props.passwordText),
+          password: editPasswordText,
           updateBoardCommentInput: VariablesComment,
         },
         refetchQueries: [
@@ -42,6 +49,9 @@ export default function BoardCommentListItemUI(props) {
         ],
       })
       setIsEdits(false)
+      Modal.success({
+        content: '댓글 수정이 완료되었습니다.',
+      })
     } catch (error) {
       Modal.error({
         content: error.message,
@@ -50,9 +60,6 @@ export default function BoardCommentListItemUI(props) {
   }
 
   const onClickCommentEdit = (event) => {
-    /* const qqq = isEdits
-    qqq[event.target.id] = true
-    setIsEdits([...qqq]) */
     setIsEdits(true)
   }
 
@@ -61,23 +68,15 @@ export default function BoardCommentListItemUI(props) {
   }
 
   return (
-    <>
-      <div>
-        {isEdits ? (
-          <div>
+    <div>
+      {isEdits ? (
+        <div>
+          <A.CommentFetchBoard key={props.el._id}>
             <S.CommentWrite>
               <S.CommentProfileImg src="/profile.jpg" />
-              <S.span>작성자</S.span>
-              <S.CommentName
-                type="text"
-                onChange={props.onChangeWriter}
-                defaultValue={props.el.writer}
-              />
+              <A.InputWriter>{props.el.writer}</A.InputWriter>
               <S.span>비밀번호</S.span>
-              <S.CommentPassword
-                type="password"
-                onChange={props.onChangePassword}
-              />
+              <S.CommentPassword type="password" onChange={onChangePassword} />
               <Rate
                 allowHalf
                 defaultValue={props.el.rating}
@@ -87,10 +86,9 @@ export default function BoardCommentListItemUI(props) {
 
             <S.CommentBox>
               <S.CommentText
-                onChange={props.onChangeContents}
+                onChange={onChangeContents}
                 defaultValue={props.el.contents}
               />
-              {/* <span>{props.commentContents.length}</span> */}
               <S.ButtonGroup>
                 <S.CommentEditButton
                   onClick={updateCommentButton}
@@ -114,9 +112,11 @@ export default function BoardCommentListItemUI(props) {
                 </S.CommentEditButton>
               </S.ButtonGroup>
             </S.CommentBox>
-          </div>
-        ) : (
-          <div>
+          </A.CommentFetchBoard>
+        </div>
+      ) : (
+        <div>
+          <A.CommentFetchBoard key={props.el._id}>
             <A.CommentWriter>
               <A.CommentProfileImg src="/profile.jpg" />
               <A.InputWriter>{props.el.writer}</A.InputWriter>
@@ -126,7 +126,6 @@ export default function BoardCommentListItemUI(props) {
             <A.CommentDate>{getMyDate(props.el.createdAt)}</A.CommentDate>
             <A.NoneBoxButton>
               <A.CommentEditButton
-                id={props.index}
                 className="far fa-edit"
                 onClick={onClickCommentEdit}
               ></A.CommentEditButton>
@@ -137,9 +136,9 @@ export default function BoardCommentListItemUI(props) {
                 <i className="fas fa-times"></i>
               </A.CommentDeleteButton>
             </A.NoneBoxButton>
-          </div>
-        )}
-      </div>
-    </>
+          </A.CommentFetchBoard>
+        </div>
+      )}
+    </div>
   )
 }

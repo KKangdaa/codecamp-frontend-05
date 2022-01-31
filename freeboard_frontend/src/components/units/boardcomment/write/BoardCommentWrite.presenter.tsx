@@ -11,22 +11,24 @@ export default function BoardCommentWriteUI(props: IBoardCommentWriteUIProps) {
         <A.CommentWrite>
           <A.CommentProfileImg src="/profile.jpg" />
           <A.span>작성자</A.span>
-          <A.CommentName type="text" onChange={props.commentWriterBox} />
+          <A.CommentName
+            type="text"
+            onChange={props.commentWriterBox}
+            value={props.commentWriter}
+          />
           <A.span>비밀번호</A.span>
           <A.CommentPassword
             type="password"
             onChange={props.commentPasswordBox}
+            value={props.commentPassword}
           />
-          <Rate
-            allowHalf
-            defaultValue={props.star}
-            onChange={props.handleChange}
-            // style={{ width: '100%' }}
-          />
+          <Rate allowHalf onChange={props.handleChange} value={props.star} />
         </A.CommentWrite>
         <A.CommentBox>
-          <A.CommentText onChange={props.commentContentsBox} />
-          {/* <span>{props.commentContents.length}</span> */}
+          <A.CommentText
+            onChange={props.commentContentsBox}
+            value={props.commentContents}
+          />
           <A.CommentCreateButton
             onClick={props.CreateCommentButton}
             commentButtonActive={props.commentButtonAc}

@@ -32,18 +32,12 @@ export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
             </A.ClickLoader>
           }
         >
-          {props.fetchCommentData?.fetchBoardComments.map((el, index) => (
-            <A.CommentFetchBoard key={el._id}>
-              <BoardCommentListItemUI
-                el={el}
-                index={index}
-                onChangePassword={props.onChangePassword}
-                passwordText={props.passwordText}
-                onChangeContents={props.onChangeContents}
-                onChangeWriter={props.onChangeWriter}
-                contentsText={props.contentsText}
-              />
-            </A.CommentFetchBoard>
+          {props.fetchCommentData?.fetchBoardComments.map((el) => (
+            <BoardCommentListItemUI
+              el={el}
+              onChangePassword={props.onChangePassword}
+              passwordText={props.passwordText}
+            />
           ))}
           {props.isModalVisible && (
             <Modal

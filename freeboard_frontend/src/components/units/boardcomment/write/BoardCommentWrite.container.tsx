@@ -71,6 +71,11 @@ export default function BoardCommentWrite() {
         ],
       })
 
+      setCommentWriter('')
+      setCommentPassword('')
+      setCommentContents('')
+      setStar(2.5)
+
       if (commentWriter && commentPassword && commentContents) {
         successModal()
       }
@@ -90,6 +95,7 @@ export default function BoardCommentWrite() {
       commentContentsBox={commentContentsBox}
       CreateCommentButton={CreateCommentButton}
       commentWriter={commentWriter}
+      commentPassword={commentPassword}
       commentContents={commentContents}
       commentButtonAc={commentButtonAc}
       star={star}
