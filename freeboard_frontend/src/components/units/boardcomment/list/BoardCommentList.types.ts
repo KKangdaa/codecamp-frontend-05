@@ -1,13 +1,13 @@
 import { ChangeEvent, MouseEvent } from 'react'
 
 export interface IBoardCommentListUIProps {
+  Head: any
   fetchCommentData?: any
   isModalVisible: boolean
-  showModal: (event: MouseEvent<HTMLButtonElement>) => void
-  passwordTextBox: (event: ChangeEvent<HTMLInputElement>) => void
   onToggleModal: () => void
+  showModal: (event: MouseEvent<HTMLButtonElement>) => void
   onClickDeleteComment: (event: any) => void
-  Head: any
+  passwordTextBox: (event: ChangeEvent<HTMLInputElement>) => void
 
   onLoadMore: any
 
@@ -16,5 +16,9 @@ export interface IBoardCommentListUIProps {
   onChangeContents: (event: ChangeEvent<HTMLInputElement>) => void
   passwordText: string
   contentsText: string
-  // commentEditWriterBox: (event: ChangeEvent<HTMLInputElement>) => void
+}
+
+export interface ICommentInput {
+  contents?: string
+  rating?: any
 }

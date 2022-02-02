@@ -9,13 +9,13 @@ export interface IBoardWriteUIProps {
   data?: any
   isEdit: boolean
   writerError: string
-  writerText: (event: ChangeEvent<HTMLInputElement>) => void
   passwordError: string
-  passwordText: (event: ChangeEvent<HTMLInputElement>) => void
   titleError: string
-  titleText: (event: ChangeEvent<HTMLInputElement>) => void
   contentsError: string
-  contentsText: (event: ChangeEvent<HTMLTextAreaElement>) => void
+  onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void
+  onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void
+  onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void
+  onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void
   UpdateButton: () => void
   CreateButton: () => void
   buttonActive: boolean

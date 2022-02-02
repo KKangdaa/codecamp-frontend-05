@@ -25,14 +25,10 @@ export default function BoardListUI(props: IBoardListUIProps) {
           <A.BoardListTitle>게시판</A.BoardListTitle>
           <A.Board>
             <A.BoardTitle>
-              {/* <A.ListInput type="checkbox"></A.ListInput> */}
               <A.TitleIcon>NO</A.TitleIcon>
-
               <A.TitleName>제목</A.TitleName>
               <A.TitleWriter>작성자</A.TitleWriter>
               <A.TitleCreateDate>작성일</A.TitleCreateDate>
-
-              <A.TitleIcon>조회</A.TitleIcon>
               <A.TitleIcon style={{ color: '#731736' }}>
                 <A.Icon className="fas fa-heart"></A.Icon>
               </A.TitleIcon>
@@ -51,7 +47,6 @@ export default function BoardListUI(props: IBoardListUIProps) {
                 </A.Name>
                 <A.Writer>{el.writer.slice(0, 10)}</A.Writer>
                 <A.CreateDate>{getMyDate(el.createdAt)}</A.CreateDate>
-                <A.Watch>{Number()}</A.Watch>
                 <A.Like>{el.likeCount}</A.Like>
               </A.BoardList>
             ))}

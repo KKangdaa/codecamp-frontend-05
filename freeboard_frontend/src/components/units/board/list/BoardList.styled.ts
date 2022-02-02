@@ -41,17 +41,17 @@ export const BoardTitle = styled.div`
   border-bottom: 3px double #ccc;
 `
 export const TitleIcon = styled.div`
-  width: 8%;
+  width: 10%;
 `
 export const Icon = styled.i``
 export const TitleName = styled.div`
   width: 50%;
 `
 export const TitleWriter = styled.div`
-  width: 13%;
+  width: 15%;
 `
 export const TitleCreateDate = styled.div`
-  width: 13%;
+  width: 15%;
 `
 
 export const BoardList = styled.div`
@@ -69,7 +69,7 @@ export const BoardList = styled.div`
 `
 
 export const Number = styled.div`
-  width: 8%;
+  width: 10%;
 `
 export const Name = styled.div`
   width: 50%;
@@ -81,16 +81,13 @@ export const Name = styled.div`
   text-overflow: ellipsis;
 `
 export const Writer = styled.div`
-  width: 13%;
+  width: 15%;
 `
 export const CreateDate = styled.div`
-  width: 13%;
-`
-export const Watch = styled.div`
-  width: 8%;
+  width: 15%;
 `
 export const Like = styled.div`
-  width: 8%;
+  width: 10%;
 `
 
 export const EditButton = styled.button`

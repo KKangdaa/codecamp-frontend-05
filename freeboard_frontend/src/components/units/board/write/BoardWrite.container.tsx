@@ -10,39 +10,57 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const router = useRouter()
 
   const [createBoard] = useMutation(CREATE_BOARD)
-
-  const [buttonActive, setButtonActive] = useState(false)
+  const [updateBoard] = useMutation(UPDATE_BOARD)
 
   const [createWriter, setCreateWriter] = useState('')
   const [writerError, setWriterError] = useState('')
+
   const [createPassword, setCreatePassword] = useState('')
   const [passwordError, setPasswordError] = useState('')
+
   const [createTitle, setCreateTitle] = useState('')
   const [titleError, setTitleError] = useState('')
+
   const [createContents, setCreateContents] = useState('')
   const [contentsError, setContentsError] = useState('')
-  const [youtubeUrl, setYoutubeUrl] = useState('')
 
-  const [updateBoard] = useMutation(UPDATE_BOARD)
+  const [buttonActive, setButtonActive] = useState(false)
 
-  const writerText = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setCreateWriter(event.target.value)
+
+    if (event.target.value !== '') {
+      setWriterError('')
+    }
+
     if (event.target.value && createPassword && createTitle && createContents) {
       setButtonActive(true)
     } else {
       setButtonActive(false)
     }
   }
-  const passwordText = (event: ChangeEvent<HTMLInputElement>) => {
+
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setCreatePassword(event.target.value)
+
+    if (event.target.value !== '') {
+      setPasswordError('')
+    }
+
     if (createWriter && event.target.value && createTitle && createContents) {
       setButtonActive(true)
     } else {
       setButtonActive(false)
     }
   }
-  const titleText = (event: ChangeEvent<HTMLInputElement>) => {
+
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setCreateTitle(event.target.value)
+
+    if (event.target.value !== '') {
+      setTitleError('')
+    }
+
     if (
       createWriter &&
       createPassword &&
@@ -54,14 +72,22 @@ export default function BoardWrite(props: IBoardWriteProps) {
       setButtonActive(false)
     }
   }
-  const contentsText = (event: ChangeEvent<HTMLTextAreaElement>) => {
+
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setCreateContents(event.target.value)
+
+    if (event.target.value !== '') {
+      setContentsError('')
+    }
+
     if (createWriter && createPassword && createTitle && event.target.value) {
       setButtonActive(true)
     } else {
       setButtonActive(false)
     }
   }
+
+  const [youtubeUrl, setYoutubeUrl] = useState('')
 
   const youtubeUrlText = (event: ChangeEvent<HTMLInputElement>) => {
     setYoutubeUrl(event.target.value)
@@ -88,7 +114,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
   const successModal = () => {
     Modal.success({
-      content: '게시물이 등록되었습니다.',
+      content: '게시물이 정상적으로 등록되었습니다.',
     })
   }
 
@@ -110,10 +136,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
           },
         },
       })
-      // successModal();
       router.push(`/boards/${result.data.createBoard._id}`)
     } catch (error) {
-      console.log(error.message)
+      Modal.error({
+        content: error.message,
+      })
     }
 
     if (!createTitle) {
@@ -127,12 +154,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
     if (createPassword.length <= 4 && createPassword.length >= 8) {
       setPasswordError('비밀번호는 4~8자 사이로 입력하세요.')
-    } else if (
-      createWriter &&
-      createPassword &&
-      createTitle &&
-      createContents
-    ) {
+    }
+    if (createWriter && createPassword && createTitle && createContents) {
       successModal()
     }
   }
@@ -166,9 +189,6 @@ export default function BoardWrite(props: IBoardWriteProps) {
           updateBoardInput: Variables,
         },
       })
-
-      // console.log(result.data.updateBoard._id)
-      // console.log(router.query.idpage)
       successModal()
       router.push(`/boards/${router.query.idpage}`)
     } catch (error) {
@@ -179,16 +199,15 @@ export default function BoardWrite(props: IBoardWriteProps) {
   }
 
   return (
-    // eslint-disable-next-line react/react-in-jsx-scope
     <BoardWriteUI
-      titleText={titleText}
-      titleError={titleError}
-      contentsText={contentsText}
-      contentsError={contentsError}
-      writerText={writerText}
       writerError={writerError}
-      passwordText={passwordText}
       passwordError={passwordError}
+      titleError={titleError}
+      contentsError={contentsError}
+      onChangeTitle={onChangeTitle}
+      onChangeContents={onChangeContents}
+      onChangeWriter={onChangeWriter}
+      onChangePassword={onChangePassword}
       onCompleteDaumPostcode={onCompleteDaumPostcode}
       zipcode={zipcode}
       address={address}

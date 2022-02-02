@@ -16,14 +16,14 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
           type="text"
           placeholder="제목"
           style={{ border: props.titleError }}
-          onChange={props.titleText}
+          onChange={props.onChangeTitle}
           defaultValue={props.data?.fetchBoard?.title}
         />
         <A.Line></A.Line>
         <A.MainTextBox
           placeholder="내용을 작성해주세요"
           style={{ border: props.contentsError }}
-          onChange={props.contentsText}
+          onChange={props.onChangeContents}
           defaultValue={props.data?.fetchBoard?.contents}
         />
 
@@ -51,7 +51,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
             <A.InnerBoxInput
               type="text"
               placeholder="이름을 입력해주십시오"
-              onChange={props.writerText}
+              onChange={props.onChangeWriter}
               defaultValue={props.data?.fetchBoard?.writer}
               readOnly={!!props.data?.fetchBoard?.writer}
               // !!이중부정 연산자 (true)
@@ -66,7 +66,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
             <A.InnerBoxInput
               type="password"
               placeholder="비밀번호를 입력해주십시오"
-              onChange={props.passwordText}
+              onChange={props.onChangePassword}
             />
             <A.ErrorRed>{props.passwordError}</A.ErrorRed>
           </A.MainInnerBox>

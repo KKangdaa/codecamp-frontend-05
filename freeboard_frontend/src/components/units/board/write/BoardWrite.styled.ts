@@ -61,6 +61,7 @@ export const MainAddImg = styled.div`
   border-top: 1px solid #ccc;
 `
 export const AddImgImgs = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -103,7 +104,7 @@ export const InnerBoxInput = styled.input`
 `
 export const ErrorRed = styled.span`
   width: 100%;
-  padding-top: 5px;
+  padding: 10px 0 0 10px;
   color: red;
 `
 

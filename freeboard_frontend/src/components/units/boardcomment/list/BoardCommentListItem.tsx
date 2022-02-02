@@ -1,9 +1,9 @@
 import { getMyDate } from '../../../../commons/libraries/utils-time'
 import * as A from './BoardCommentList.styled'
 import * as S from '../write/BoardCommentWrite.styled'
-// import { IBoardCommentListUIProps } from './BoardCommentList.types'
+import { ICommentInput } from './BoardCommentList.types'
 import { Rate, Modal } from 'antd'
-import { ChangeEvent, useState } from 'react'
+import { MouseEvent, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useMutation } from '@apollo/client'
 import { FETCH_COMMENT, UPDATE_COMMENT } from './BoardCommentList.queries'
@@ -24,16 +24,16 @@ export default function BoardCommentListItemUI(props) {
   const onChangeContents = (event) => {
     setEditContentsText(event.target.value)
   }
-  const editStarButton = (event) => {
-    setEditStar(event)
+  const editStarButton = (value) => {
+    setEditStar(value)
   }
 
-  const VariablesComment = {}
+  const VariablesComment: ICommentInput = {}
 
   if (editContentsText) VariablesComment.contents = editContentsText
   if (editStar) VariablesComment.rating = editStar
 
-  const updateCommentButton = async (event) => {
+  const updateCommentButton = async (event: MouseEvent<HTMLInputElement>) => {
     try {
       await updateBoardComment({
         variables: {
@@ -59,7 +59,7 @@ export default function BoardCommentListItemUI(props) {
     }
   }
 
-  const onClickCommentEdit = (event) => {
+  const onClickCommentEdit = () => {
     setIsEdits(true)
   }
 

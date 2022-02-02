@@ -33,6 +33,7 @@ export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
           }
         >
           {props.fetchCommentData?.fetchBoardComments.map((el) => (
+            // eslint-disable-next-line react/jsx-key
             <BoardCommentListItemUI
               el={el}
               onChangePassword={props.onChangePassword}
