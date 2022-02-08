@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-// import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { ReactChild } from 'react'
 import LayoutBanner from './banner'
 import LayoutFooter from './footer'
@@ -11,22 +11,22 @@ const LayoutBody = styled.div`
   height: 100%;
 `
 
-// const HIDDEN_HEADER = ['']
+const HIDDEN_HEADER = ['/']
 
 interface IProps {
   children: ReactChild
 }
 
 export default function Layout(props: IProps) {
-  // const router = useRouter()
+  const router = useRouter()
 
-  // const isHiddenHeader = HIDDEN_HEADER.includes(router.asPath)
+  const isHiddenHeader = HIDDEN_HEADER.includes(router.asPath)
 
   return (
     <>
       <LayoutHeader />
-      <LayoutBanner />
-      <LayoutNavigation />
+      {!isHiddenHeader && <LayoutBanner />}
+      {!isHiddenHeader && <LayoutNavigation />}
       <LayoutBody>{props.children}</LayoutBody>
       <LayoutFooter />
     </>

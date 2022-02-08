@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import BoardListUI from './BoardList.presenter'
@@ -22,7 +21,6 @@ export default function BoardList() {
     <>
       <BoardListUI
         data={data}
-        Head={Head}
         EditFreeboard={EditFreeboard}
         onClickMoveToDetail={onClickMoveToDetail}
         refetch={refetch}

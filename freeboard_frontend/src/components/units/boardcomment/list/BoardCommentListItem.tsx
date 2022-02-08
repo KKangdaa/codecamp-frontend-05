@@ -71,72 +71,65 @@ export default function BoardCommentListItemUI(props) {
     <div>
       {isEdits ? (
         <div>
-          <A.CommentFetchBoard key={props.el._id}>
-            <S.CommentWrite>
-              <S.CommentProfileImg src="/profile.jpg" />
-              <A.InputWriter>{props.el.writer}</A.InputWriter>
-              <S.span>비밀번호</S.span>
-              <S.CommentPassword type="password" onChange={onChangePassword} />
-              <Rate
-                allowHalf
-                defaultValue={props.el.rating}
-                onChange={editStarButton}
-              />
-            </S.CommentWrite>
+          <S.CommentWrite>
+            <S.CommentProfileImg src="/profile.jpg" />
+            <A.InputWriter>{props.el.writer}</A.InputWriter>
+            <S.span>비밀번호</S.span>
+            <S.CommentPassword type="password" onChange={onChangePassword} />
+            <Rate
+              allowHalf
+              defaultValue={props.el.rating}
+              onChange={editStarButton}
+            />
+          </S.CommentWrite>
 
-            <S.CommentBox>
-              <S.CommentText
-                onChange={onChangeContents}
-                defaultValue={props.el.contents}
-              />
-              <S.ButtonGroup>
-                <S.CommentEditButton
-                  onClick={updateCommentButton}
-                  id={props.el._id}
-                  style={{
-                    cursor: 'pointer',
-                  }}
-                  // commentButtonActive={props.commentButtonAc}
-                >
-                  등록
-                </S.CommentEditButton>
-                <S.CommentEditButton
-                  onClick={onClickCancel}
-                  style={{
-                    background: '#851c1c',
-                    color: 'white',
-                    cursor: 'pointer',
-                  }}
-                >
-                  취소
-                </S.CommentEditButton>
-              </S.ButtonGroup>
-            </S.CommentBox>
-          </A.CommentFetchBoard>
+          <S.CommentBox>
+            <S.CommentText
+              onChange={onChangeContents}
+              defaultValue={props.el.contents}
+            />
+            <S.ButtonGroup>
+              <S.CommentEditButton
+                onClick={updateCommentButton}
+                id={props.el._id}
+                style={{
+                  cursor: 'pointer',
+                }}
+                // commentButtonActive={props.commentButtonAc}
+              >
+                등록
+              </S.CommentEditButton>
+              <S.CommentEditButton
+                onClick={onClickCancel}
+                style={{
+                  background: '#851c1c',
+                  color: 'white',
+                  cursor: 'pointer',
+                }}
+              >
+                취소
+              </S.CommentEditButton>
+            </S.ButtonGroup>
+          </S.CommentBox>
         </div>
       ) : (
         <div>
-          <A.CommentFetchBoard key={props.el._id}>
-            <A.CommentWriter>
-              <A.CommentProfileImg src="/profile.jpg" />
-              <A.InputWriter>{props.el.writer}</A.InputWriter>
-              <Rate allowHalf value={props.el.rating} disabled />
-            </A.CommentWriter>
-            <A.CommentContents>{props.el.contents}</A.CommentContents>
-            <A.CommentDate>{getMyDate(props.el.createdAt)}</A.CommentDate>
-            <A.NoneBoxButton>
-              <A.CommentEditButton
-                className="far fa-edit"
-                onClick={onClickCommentEdit}
-              ></A.CommentEditButton>
-              <A.CommentDeleteButton
-                id={props.el._id}
-                onClick={props.showModal}
-              >
-                <i className="fas fa-times"></i>
-              </A.CommentDeleteButton>
-            </A.NoneBoxButton>
-          </A.CommentFetchBoard>
+          <A.CommentWriter>
+            <A.CommentProfileImg src="/profile.jpg" />
+            <A.InputWriter>{props.el.writer}</A.InputWriter>
+            <Rate allowHalf value={props.el.rating} disabled />
+          </A.CommentWriter>
+          <A.CommentContents>{props.el.contents}</A.CommentContents>
+          <A.CommentDate>{getMyDate(props.el.createdAt)}</A.CommentDate>
+          <A.NoneBoxButton>
+            <A.CommentEditButton
+              className="far fa-edit"
+              onClick={onClickCommentEdit}
+            ></A.CommentEditButton>
+            <A.CommentDeleteButton id={props.el._id} onClick={props.showModal}>
+              <i className="fas fa-times"></i>
+            </A.CommentDeleteButton>
+          </A.NoneBoxButton>
         </div>
       )}
     </div>

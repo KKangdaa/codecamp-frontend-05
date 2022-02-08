@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { getMyDate } from '../../../../commons/libraries/utils'
 import Pagination from '../../../commons/pagination/pagination'
 import * as A from './BoardList.styled'
@@ -12,14 +13,14 @@ export default function BoardListUI(props: IBoardListUIProps) {
 
   return (
     <>
-      <props.Head>
+      <Head>
         <link
           rel="stylesheet"
           href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
           crossOrigin="anonymous"
         />
-      </props.Head>
+      </Head>
       <A.Wrapper>
         <A.BoardWrapper>
           <A.BoardListTitle>게시판</A.BoardListTitle>

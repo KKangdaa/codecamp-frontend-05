@@ -60,7 +60,7 @@ export const MainAddImg = styled.div`
   padding: 30px 0 20px;
   border-top: 1px solid #ccc;
 `
-export const AddImgImgs = styled.div`
+export const AddImgs = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;

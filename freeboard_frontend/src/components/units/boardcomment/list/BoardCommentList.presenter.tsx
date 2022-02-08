@@ -1,5 +1,4 @@
 import * as A from './BoardCommentList.styled'
-// import * as S from '../write/BoardCommentWrite.styled'
 import { IBoardCommentListUIProps } from './BoardCommentList.types'
 import InfiniteScroll from 'react-infinite-scroller'
 import { Modal } from 'antd'
@@ -33,13 +32,16 @@ export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
           }
         >
           {props.fetchCommentData?.fetchBoardComments.map((el) => (
-            // eslint-disable-next-line react/jsx-key
-            <BoardCommentListItemUI
-              el={el}
-              onChangePassword={props.onChangePassword}
-              passwordText={props.passwordText}
-            />
+            <A.CommentFetchBoard key={el._id}>
+              <BoardCommentListItemUI
+                el={el}
+                onChangePassword={props.onChangePassword}
+                passwordText={props.passwordText}
+                showModal={props.showModal}
+              />
+            </A.CommentFetchBoard>
           ))}
+
           {props.isModalVisible && (
             <Modal
               visible={props.isModalVisible}

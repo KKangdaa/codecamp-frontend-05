@@ -29,7 +29,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
 
         <A.MainAddImg>
           <A.MainInnerTitle>사진첨부</A.MainInnerTitle>
-          <A.AddImgImgs>
+          <A.AddImgs>
             <A.ImgsUp>
               +<br />
               Upload
@@ -42,7 +42,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
               +<br />
               Upload
             </A.ImgsUp>
-          </A.AddImgImgs>
+          </A.AddImgs>
         </A.MainAddImg>
 
         <A.MainWriter>
