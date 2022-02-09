@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 `
 
 const PageNumber = styled.span`
-  width: 25px;
+  width: 30px;
   text-align: center;
   font-size: 0.9rem;
   cursor: pointer;
@@ -55,47 +55,52 @@ const NextArrow = styled.div`
 `
 
 export default function Pagination(props: IBoardPaginationProps) {
-  const [startPage, setStartPage] = useState(1)
   const lastPage = Math.ceil(props.dataBoardCount?.fetchBoardsCount / 10)
 
   const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
-    props.refetch({ page: Number(event.currentTarget.id) })
+    // if (event.target instanceof Element)
+    props.refetch({
+      page: Number(event.currentTarget.id),
+      search: props.keyword,
+    })
     props.setClickPage(Number(event.currentTarget.id))
   }
 
   const onClickPrevPage = () => {
-    if (startPage === 1) return
-    setStartPage((prev) => prev - 10)
-    props.refetch({ page: startPage - 10 })
-    props.setClickPage(startPage - 10)
+    if (props.startPage === 1) return
+    props.setStartPage((prev) => prev - 10)
+    props.refetch({ page: props.startPage - 10 })
+    props.setClickPage(props.startPage - 10)
   }
 
   const onClickNextPage = () => {
-    if (startPage + 10 > lastPage) return
-    setStartPage((prev) => prev + 10)
-    props.refetch({ page: startPage + 10 })
-    props.setClickPage(startPage + 10)
+    if (props.startPage + 10 > lastPage) return
+    props.setStartPage((prev) => prev + 10)
+    props.refetch({ page: props.startPage + 10 })
+    props.setClickPage(props.startPage + 10)
   }
 
   return (
     <Wrapper>
-      {startPage !== 1 && <PrevArrow onClick={onClickPrevPage}></PrevArrow>}
+      {props.startPage !== 1 && (
+        <PrevArrow onClick={onClickPrevPage}></PrevArrow>
+      )}
 
       {new Array(10).fill(1).map(
         (_, index) =>
-          index + startPage <= lastPage && (
+          index + props.startPage <= lastPage && (
             <PageNumber
-              key={index + startPage}
+              key={index + props.startPage}
               onClick={onClickPage}
-              id={String(index + startPage)}
+              id={String(index + props.startPage)}
               clickPage={props.clickPage}
             >
-              {` ${index + startPage} `}
+              {` ${index + props.startPage} `}
             </PageNumber>
           )
       )}
 
-      {startPage + 10 < lastPage && (
+      {props.startPage + 10 < lastPage && (
         <NextArrow onClick={onClickNextPage}></NextArrow>
       )}
     </Wrapper>

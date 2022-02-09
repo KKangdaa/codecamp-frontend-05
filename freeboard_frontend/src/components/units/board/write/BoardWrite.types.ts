@@ -32,6 +32,11 @@ export interface IBoardWriteUIProps {
   successModal: () => void
 
   youtubeUrlText: (event: ChangeEvent<HTMLInputElement>) => void
+
+  images: any
+  onChangeImgFile: (event: ChangeEvent<HTMLInputElement>) => Promise<void>
+  imgRef: any
+  onClickImage: () => void
 }
 
 export interface IButtonActive {
@@ -41,7 +46,8 @@ export interface IButtonActive {
 export interface ITextInput {
   title?: string
   contents?: string
-  youtubeUrl?: any
+  youtubeUrl?: string
+  images?: any
   boardAddress?: {
     zipcode?: string
     address?: string

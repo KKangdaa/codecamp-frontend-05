@@ -23,7 +23,7 @@ export const SliderGroup = styled.div`
   & > img {
     width: 50%;
   }
-  & p:nth-child(2) {
+  & p:nth-of-type(1) {
     @font-face {
       font-family: 'Lobster';
       font-weight: normal;
@@ -35,7 +35,7 @@ export const SliderGroup = styled.div`
     font-size: 8vw;
     margin-bottom: 1rem;
   }
-  & p:nth-child(3) {
+  & p:nth-of-type(2) {
     width: 600px;
     text-align: center;
     font-size: 1.2rem;
@@ -76,10 +76,10 @@ export const ImgRow = styled.div`
     display: block;
     background: rgba(0, 0, 0, 0.3);
   }
-  &:hover :nth-child(3) {
+  &:hover p:nth-of-type(1) {
     bottom: 10%;
   }
-  &:hover :nth-child(4) {
+  &:hover p:nth-of-type(2) {
     opacity: 1;
   }
 `

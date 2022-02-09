@@ -1,8 +1,8 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useRef } from 'react'
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 import BoardWriteUI from './BoardWrite.presenter'
-import { CREATE_BOARD, UPDATE_BOARD } from './BoardWrite.queries'
+import { CREATE_BOARD, UPDATE_BOARD, UPLOAD_FILE } from './BoardWrite.queries'
 import { IBoardWriteProps, ITextInput } from './BoardWrite.types'
 import { Modal } from 'antd'
 
@@ -43,7 +43,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setCreatePassword(event.target.value)
 
-    if (event.target.value !== '') {
+    if (event.target.value.length >= 4) {
       setPasswordError('')
     }
 
@@ -112,6 +112,32 @@ export default function BoardWrite(props: IBoardWriteProps) {
     setAddressDetail(event.target.value)
   }
 
+  const [uploadFile] = useMutation(UPLOAD_FILE)
+
+  const imgRef = useRef(null)
+  const [images, setImages] = useState([])
+
+  const onChangeImgFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const imgUrl = []
+    // for (let i = 0; i < event.target.files.length; i++) {
+    const file = event.target.files?.[0]
+    try {
+      const result = await uploadFile({ variables: { file } })
+      imgUrl.push(result.data?.uploadFile.url)
+    } catch (error) {
+      Modal.error({
+        content: error.message,
+      })
+    }
+    // }
+
+    setImages([...images, ...imgUrl])
+  }
+
+  const onClickImage = () => {
+    imgRef.current?.click()
+  }
+
   const successModal = () => {
     Modal.success({
       content: '게시물이 정상적으로 등록되었습니다.',
@@ -128,6 +154,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
             title: createTitle,
             contents: createContents,
             youtubeUrl,
+            images,
             boardAddress: {
               zipcode,
               address,
@@ -152,7 +179,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     if (!createWriter) {
       setWriterError('작성자를 입력하세요')
     }
-    if (createPassword.length <= 4 && createPassword.length >= 8) {
+    if (createPassword.length <= 4 || createPassword.length >= 8) {
       setPasswordError('비밀번호는 4~8자 사이로 입력하세요.')
     }
     if (createWriter && createPassword && createTitle && createContents) {
@@ -174,6 +201,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     if (createTitle) Variables.title = createTitle
     if (createContents) Variables.contents = createContents
     if (youtubeUrl) Variables.youtubeUrl = youtubeUrl
+    if (images) Variables.images = images
     if (zipcode || address || addressDetail) {
       Variables.boardAddress = {}
       if (zipcode) Variables.boardAddress.zipcode = zipcode
@@ -222,6 +250,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
       successModal={successModal}
       isEdit={props.isEdit}
       data={props.data}
+      images={images}
+      onChangeImgFile={onChangeImgFile}
+      imgRef={imgRef}
+      onClickImage={onClickImage}
     />
   )
 }

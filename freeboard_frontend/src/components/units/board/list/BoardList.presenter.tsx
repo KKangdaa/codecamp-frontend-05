@@ -1,29 +1,31 @@
-import Head from 'next/head'
 import { getMyDate } from '../../../../commons/libraries/utils'
 import Pagination from '../../../commons/pagination/pagination'
 import * as A from './BoardList.styled'
 import { IBoardListUIProps } from './BoardList.types'
-import { useState } from 'react'
-import { useQuery } from '@apollo/client'
-import { FETCH_BOARDS_COUNT } from './BoardList.queries'
+import { v4 as uuidv4 } from 'uuid'
 
 export default function BoardListUI(props: IBoardListUIProps) {
-  const [clickPage, setClickPage] = useState(1)
-  const { data: dataBoardCount } = useQuery(FETCH_BOARDS_COUNT)
-
   return (
     <>
-      <Head>
+      <props.Head>
         <link
           rel="stylesheet"
           href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
           crossOrigin="anonymous"
         />
-      </Head>
+      </props.Head>
       <A.Wrapper>
         <A.BoardWrapper>
           <A.BoardListTitle>게시판</A.BoardListTitle>
+          <div>
+            <input
+              type="text"
+              onChange={props.onChangeSearch}
+              placeholder="검색"
+            />
+            {/* <button onClick={props.onClickSearch}>검색</button> */}
+          </div>
           <A.Board>
             <A.BoardTitle>
               <A.TitleIcon>NO</A.TitleIcon>
@@ -38,13 +40,27 @@ export default function BoardListUI(props: IBoardListUIProps) {
             {props.data?.fetchBoards.map((el, index) => (
               // number는 el, index로 추가하여
 
-              <A.BoardList key={el.number}>
+              <A.BoardList key={uuidv4()}>
                 <A.Number>
-                  {dataBoardCount?.fetchBoardsCount -
-                    (index + (clickPage - 1) * 10)}
+                  {props.dataBoardCount?.fetchBoardsCount -
+                    (index + (props.clickPage - 1) * 10)}
                 </A.Number>
                 <A.Name id={el._id} onClick={props.onClickMoveToDetail}>
-                  {el.title}
+                  {el.title
+                    .replaceAll(props.keyword, `@#$%${props.keyword}@#$%`)
+                    .split('@#$%')
+                    .map((el) => (
+                      <span
+                        key={uuidv4()}
+                        style={
+                          el === props.keyword
+                            ? { color: 'red' }
+                            : { color: 'black' }
+                        }
+                      >
+                        {el}
+                      </span>
+                    ))}
                 </A.Name>
                 <A.Writer>{el.writer.slice(0, 10)}</A.Writer>
                 <A.CreateDate>{getMyDate(el.createdAt)}</A.CreateDate>
@@ -54,10 +70,14 @@ export default function BoardListUI(props: IBoardListUIProps) {
           </A.Board>
 
           <Pagination
-            clickPage={clickPage}
-            setClickPage={setClickPage}
+            clickPage={props.clickPage}
+            setClickPage={props.setClickPage}
             refetch={props.refetch}
-            dataBoardCount={dataBoardCount}
+            dataBoardCount={props.dataBoardCount}
+            keyword={props.keyword}
+            countRefetch={props.countRefetch}
+            startPage={props.startPage}
+            setStartPage={props.setStartPage}
           />
 
           <A.EditButton onClick={props.EditFreeboard}>

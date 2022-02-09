@@ -70,10 +70,12 @@ export const ImgsUp = styled.div`
   width: 70px;
   height: 70px;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  overflow: Hidden;
   margin-right: 20px;
   background-color: #fff;
   border: 1px solid gold;
@@ -82,6 +84,16 @@ export const ImgsUp = styled.div`
   cursor: pointer;
   &:hover {
     background-color: gold;
+  }
+  & > img {
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    object-position: center;
+    background: white;
   }
 `
 

@@ -3,6 +3,7 @@ export interface IBoardPaginationProps {
   clickPage: number
   setClickPage: any
   dataBoardCount: any
+  keyword: string
 }
 
 export interface IPaginationStyleProps {

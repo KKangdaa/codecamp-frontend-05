@@ -39,10 +39,10 @@ export default function Layout(props: IProps) {
       <LayoutHeader />
       <LayoutBanner />
       <LayoutNavigation />
-      <BodyWrapper>
-        <LayoutSidebar />
-        <LayoutBody>{props.children}</LayoutBody>
-      </BodyWrapper>
+      {/* <BodyWrapper> */}
+      {/* <LayoutSidebar /> */}
+      <LayoutBody>{props.children}</LayoutBody>
+      {/* </BodyWrapper> */}
       <LayoutFooter />
     </Body>
   );

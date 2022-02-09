@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react'
+import { ChangeEvent, MouseEvent } from 'react'
 
 export interface IBoardListUIProps {
   data?: any
@@ -6,11 +6,6 @@ export interface IBoardListUIProps {
   refetch: any
   EditFreeboard: () => void
   onClickMoveToDetail: (event: MouseEvent<HTMLInputElement>) => void
+  keyword: string
+  onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void
 }
-
-/* export interface IBoardPaginationProps {
-  refetch: any
-  lastPage: number
-  clickPage: number
-  dataBoardCount?: any
-} */

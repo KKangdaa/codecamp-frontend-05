@@ -20,6 +20,7 @@ const Menu = styled.div`
   display: grid;
   grid-template-columns: 5fr 1fr 5fr;
   font-weight: 700;
+  margin: auto;
   & div {
     text-align: center;
   }
@@ -34,11 +35,12 @@ const Menu = styled.div`
 const LoginIcon = styled.div`
   display: flex;
   justify-content: end;
+  margin: auto 0;
   & i {
     font-size: 1.2rem;
     margin-left: 20px;
   }
-  &:nth-child(1) {
+  & i:nth-of-type(1) {
     margin-left: 0px;
   }
 `
@@ -69,7 +71,7 @@ export default function LayoutHeader() {
         </Logo>
         <Menu>
           <div>
-            <span onClick={onClickHome}>HOME</span>
+            <span onClick={onClickHome}>NEWS</span>
           </div>
           <div>
             <span onClick={onClickBoard}>BOARD</span>

@@ -30,18 +30,39 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
         <A.MainAddImg>
           <A.MainInnerTitle>사진첨부</A.MainInnerTitle>
           <A.AddImgs>
-            <A.ImgsUp>
+            <A.ImgsUp onClick={props.onClickImage}>
               +<br />
               Upload
+              {props.images[0] && (
+                <img
+                  src={`https://storage.googleapis.com/${props.images[0]}`}
+                />
+              )}
             </A.ImgsUp>
-            <A.ImgsUp>
+            <A.ImgsUp onClick={props.onClickImage}>
               +<br />
               Upload
+              {props.images[1] && (
+                <img
+                  src={`https://storage.googleapis.com/${props.images[1]}`}
+                />
+              )}
             </A.ImgsUp>
-            <A.ImgsUp>
+            <A.ImgsUp onClick={props.onClickImage}>
               +<br />
               Upload
+              {props.images[2] && (
+                <img
+                  src={`https://storage.googleapis.com/${props.images[2]}`}
+                />
+              )}
             </A.ImgsUp>
+            <input
+              type="file"
+              onChange={props.onChangeImgFile}
+              ref={props.imgRef}
+              style={{ display: 'none' }}
+            />
           </A.AddImgs>
         </A.MainAddImg>
 

@@ -1,5 +1,8 @@
 import styled from '@emotion/styled'
 import Modal from 'antd/lib/modal/Modal'
+import Slider from 'react-slick'
+
+// export const SlickSlider = styled(Slider)``
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -7,6 +10,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 80px;
+  /* background: #e6decf; */
 `
 export const WrapperMain = styled.div`
   width: 100%;
@@ -70,6 +74,21 @@ export const TextBox = styled.div`
   font-family: Arial, sans-serif;
   white-space: pre-wrap;
   word-wrap: break-word;
+`
+export const ImgBox = styled(Slider)`
+  width: 100%;
+`
+export const SliderGroup = styled.div`
+  width: 100%;
+  /* height: 50vw; */
+  margin: 0 auto;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  & > img {
+    width: 100%;
+  }
 `
 
 /* main button */

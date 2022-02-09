@@ -20,7 +20,7 @@ export const BoardWrapper = styled.div`
 export const BoardListTitle = styled.span`
   width: 100%;
   margin: 30px 0 50px 0;
-  text-align: center;
+  padding-left: 20px;
   font-size: 4rem;
   letter-spacing: 1rem;
 `

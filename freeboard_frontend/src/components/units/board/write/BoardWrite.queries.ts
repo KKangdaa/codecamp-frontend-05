@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -8,6 +8,7 @@ export const CREATE_BOARD = gql`
       title
       contents
       youtubeUrl
+      images
       boardAddress {
         _id
         zipcode
@@ -16,7 +17,7 @@ export const CREATE_BOARD = gql`
       }
     }
   }
-`;
+`
 
 export const UPDATE_BOARD = gql`
   mutation updateBoard(
@@ -34,6 +35,7 @@ export const UPDATE_BOARD = gql`
       title
       contents
       youtubeUrl
+      images
       boardAddress {
         _id
         zipcode
@@ -42,4 +44,13 @@ export const UPDATE_BOARD = gql`
       }
     }
   }
-`;
+`
+
+export const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      _id
+      url
+    }
+  }
+`

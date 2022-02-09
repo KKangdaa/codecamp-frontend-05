@@ -7,6 +7,15 @@ import ReactPlayer from 'react-player'
 import { Modal } from 'antd'
 
 export default function BoardDetailUI(props: IBoardDetailUIProps) {
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    fade: true,
+    autoplay: true,
+    arrows: false,
+  }
   return (
     <A.Wrapper>
       <A.WrapperMain>
@@ -26,18 +35,27 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
               </A.ProfileDate>
             </A.Profile>
           </A.Topper>
-
-          <A.TextBox>{props.fetchBoardData?.fetchBoard?.contents}</A.TextBox>
           <div>
             {props.fetchBoardData?.fetchBoard?.boardAddress?.zipcode}
             {props.fetchBoardData?.fetchBoard?.boardAddress?.address}
             {props.fetchBoardData?.fetchBoard?.boardAddress?.addressDetail}
           </div>
-          <ReactPlayer
-            url={`${props.fetchBoardData?.fetchBoard?.youtubeUrl}`}
-            controls
-          />
-
+          <A.TextBox>{props.fetchBoardData?.fetchBoard?.contents}</A.TextBox>
+          <A.ImgBox {...settings}>
+            {props.fetchBoardData?.fetchBoard?.images.map((el, index) => (
+              <A.SliderGroup key={el._id}>
+                <img
+                  src={`https://storage.googleapis.com/${props.fetchBoardData?.fetchBoard?.images[index]}`}
+                />
+              </A.SliderGroup>
+            ))}
+          </A.ImgBox>
+          {props.fetchBoardData?.fetchBoard?.youtubeUrl && (
+            <ReactPlayer
+              url={`${props.fetchBoardData?.fetchBoard?.youtubeUrl}`}
+              controls
+            />
+          )}
           <A.BUTTON onClick={props.onClickLike}>
             <A.Heart className="heart" viewBox="0 0 32 29.6">
               <path
