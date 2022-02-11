@@ -23,13 +23,13 @@ export default function BoardList() {
     setClickPage(1)
     setStartPage(1)
     setKeyword(data)
-  }, 200)
+  }, 300)
 
   const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
     getDebounce(event.target.value)
   }
 
-  /* // 검색창에 키워드를 입력하고 검색 버튼을 눌렀을 떄 검색됨
+  /* // 검색창에 키워드를 입력하고 검색 버튼을 눌렀을 때 검색됨
   const [keyword, setKeyword] = useState('')
   const [search, setSearch] = useState('')
 
@@ -55,16 +55,16 @@ export default function BoardList() {
       <BoardListUI
         Head={Head}
         data={data}
+        dataBoardCount={dataBoardCount}
         EditFreeboard={EditFreeboard}
         onClickMoveToDetail={onClickMoveToDetail}
-        dataBoardCount={dataBoardCount}
+        refetch={refetch}
         countRefetch={countRefetch}
+        keyword={keyword}
+        onChangeSearch={onChangeSearch}
+        // onClickSearch={onClickSearch}
         clickPage={clickPage}
         setClickPage={setClickPage}
-        refetch={refetch}
-        keyword={keyword}
-        // onClickSearch={onClickSearch}
-        onChangeSearch={onChangeSearch}
         startPage={startPage}
         setStartPage={setStartPage}
       />

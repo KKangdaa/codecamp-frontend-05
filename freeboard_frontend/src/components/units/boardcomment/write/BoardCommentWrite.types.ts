@@ -2,13 +2,15 @@ import { ChangeEvent } from 'react'
 
 export interface IBoardCommentWriteUIProps {
   data?: any
-  CreateCommentButton: () => void
+  commentWriter: string
+  commentPassword: string
+  commentContents: string
   commentButtonAc: boolean
+  CreateCommentButton: () => void
   commentWriterBox: (event: ChangeEvent<HTMLInputElement>) => void
   commentPasswordBox: (event: ChangeEvent<HTMLInputElement>) => void
   commentContentsBox: (event: ChangeEvent<HTMLTextAreaElement>) => void
-  commentContents: string
-  star: any
+  star: number
   handleChange: any
 }
 
