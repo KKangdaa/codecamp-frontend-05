@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 `
 
 export const SlickSlider = styled(Slider)`
-  padding-bottom: 10vw;
+  padding-bottom: 7vw;
 `
 
 export const SliderGroup = styled.div`

@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 80px;
-  /* background: #e6decf; */
+  /* background: #fad483; */
 `
 export const WrapperMain = styled.div`
   width: 100%;

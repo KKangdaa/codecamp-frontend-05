@@ -8,20 +8,23 @@ const HeaderWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 10fr 1fr;
   /* grid-template-rows: ; */
-  background: #e6decf;
+  background: #fff7e5;
 `
 const Logo = styled.div`
   img {
     width: 20vmin;
+    cursor: pointer;
   }
 `
 const Menu = styled.div`
   width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: 5fr 1fr 5fr;
   font-weight: 700;
   margin: auto;
   & div {
+    margin: auto 0;
     text-align: center;
   }
   & span:hover {
@@ -39,6 +42,7 @@ const LoginIcon = styled.div`
   & i {
     font-size: 1.2rem;
     margin-left: 20px;
+    cursor: pointer;
   }
   & i:nth-of-type(1) {
     margin-left: 0px;
@@ -51,8 +55,14 @@ export default function LayoutHeader() {
   const onClickHome = () => {
     router.push('/')
   }
+  const onClickFirebaseBoard = () => {
+    router.push('/firebase-board')
+  }
   const onClickBoard = () => {
     router.push('/boards')
+  }
+  const onClickLogin = () => {
+    router.push('/login')
   }
   return (
     <>
@@ -67,11 +77,11 @@ export default function LayoutHeader() {
 
       <HeaderWrapper>
         <Logo>
-          <img src="/images/logo.png" alt="로고" />
+          <img src="/images/logo.png" alt="로고" onClick={onClickHome} />
         </Logo>
         <Menu>
           <div>
-            <span onClick={onClickHome}>NEWS</span>
+            <span onClick={onClickFirebaseBoard}>FIREBASE-BOARD</span>
           </div>
           <div>
             <span onClick={onClickBoard}>BOARD</span>
@@ -81,7 +91,7 @@ export default function LayoutHeader() {
           </div>
         </Menu>
         <LoginIcon>
-          <i className="far fa-user-alt"></i>
+          <i className="far fa-user-alt" onClick={onClickLogin}></i>
           <i style={{ marginLeft: '20px' }} className="fas fa-search"></i>
         </LoginIcon>
       </HeaderWrapper>

@@ -18,11 +18,11 @@ export default function MapElPage() {
   }); */
 
   // 4. el과 index를 바꿔보기
-  ["철수", "영희", "훈이"].forEach(function (index, el) {
+  /* ["철수", "영희", "훈이"].forEach(function (index, el) {
     // index -> el, el -> index
     console.log("el:", el);
     console.log("index:", index);
-  });
+  }); */
 
   // ["철수","영희","훈이"].map()
 
