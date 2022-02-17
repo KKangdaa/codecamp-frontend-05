@@ -48,7 +48,8 @@ export default function SearchPage() {
   const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
     if (event.target instanceof Element)
       refetch({ search: keyword, page: Number(event?.target.id) });
-    // search값을 keyword에 담아줬기 때문에 검색 버튼을 눌렀을 때 값이 담겨 input에 다른 검색어를 입력하고 검색 버튼을 누르지 않고 페이지 버튼을 눌렀을 때 keyword 값이 그대로 남아 있어 값이 변경 되지 않는다.
+    // search값을 keyword에 담아줬기 때문에 검색 버튼을 눌렀을 때 값이 담겨 input에 다른 검색어를 입력하고
+    // 검색 버튼을 누르기x 페이지 버튼을 눌렀을 때 keyword 값이 그대로 남아 있어 값이 변경 되지 않는다.
   };
 
   return (

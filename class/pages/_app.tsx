@@ -14,7 +14,13 @@ import { createUploadLink } from "apollo-upload-client";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,21 +33,61 @@ const firebaseConfig = {
   messagingSenderId: "610604769229",
   appId: "1:610604769229:web:2665ff2937e481f7132e84",
 };
+export const firebaseApp = initializeApp(firebaseConfig);
+
+interface IUserInfo {
+  name?: string;
+  email?: string;
+  picture?: string;
+}
 
 interface IGlobalContext {
   accessToken?: String;
   setAccessToken?: Dispatch<SetStateAction<string>>;
+  userInfo?: IUserInfo;
+  setUserInfo?: Dispatch<SetStateAction<IUserInfo>>;
 }
 // Initialize Firebase
-export const firebaseApp = initializeApp(firebaseConfig);
 export const GlobalContext = createContext<IGlobalContext>({});
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [accessToken, setAccessToken] = useState("");
+  const [userInfo, setUserInfo] = useState<IUserInfo>({});
   const value = {
     accessToken,
     setAccessToken,
+    userInfo,
+    setUserInfo,
   };
+
+  // ①
+  /* if (process.browser) {
+    if (localStorage.getItem("accessToken")) {
+      setAccessToken(localStorage.getItem("accessToken") || "");
+    }
+  } */
+
+  // ②
+  /* if (typeof window !== "undefined") {
+    // window => browser
+    if (localStorage.getItem("accessToken")) {
+      setAccessToken(localStorage.getItem("accessToken") || "");
+    }
+  } */
+
+  // ③
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      setAccessToken(localStorage.getItem("accessToken") || "");
+    }
+  }, []);
+
+  // 셋 중 하나를 사용하면 되지만 useEffect가 가장 좋은 방법
+  // 왜? 놓침.. 나중에 강의 다시보기...
+
+  /* if (localStorage.getItem("accessToken")) {
+    setAccessToken(localStorage.getItem("accessToken") || "");
+  } */
 
   const uploadLink = createUploadLink({
     uri: "http://backend05.codebootcamp.co.kr/graphql",
@@ -55,7 +101,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <GlobalContext.Provider value={value}>
-      {/* key value가 같기 때문에 숏핸드프로퍼티로 사용 */}
       <ApolloProvider client={client}>
         <Global styles={globalStyles} />
         <Layout>

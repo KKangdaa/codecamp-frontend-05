@@ -69,7 +69,7 @@ export const LoginPassword = styled.input`
 export const LoginButton = styled.button`
   width: 100%;
   height: 55px;
-  margin-top: 5px;
+  margin-top: 20px;
   border: 0;
   border-radius: 15px;
 `

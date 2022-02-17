@@ -9,12 +9,54 @@ import {
 import { AppProps } from 'next/app'
 import Layout from '../src/components/commons/layout'
 import { Global } from '@emotion/react'
-import { createUploadLink } from 'apollo-upload-client'
 import { globalStyles } from '../src/commons/styles/globalStyles'
+import { createUploadLink } from 'apollo-upload-client'
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react'
+
+/* interface IUserInfo {
+  name?: string;
+  email?: string;
+  picture?: string;
+} */
+
+interface IGlobalContext {
+  accessToken?: String
+  setAccessToken?: Dispatch<SetStateAction<string>>
+  /* userInfo?: IUserInfo;
+  setUserInfo?: Dispatch<SetStateAction<IUserInfo>>; */
+}
+
+export const GlobalContext = createContext<IGlobalContext>({})
+// createContext({}) 사용시 객체안에 속성이 없기 때문에 typescript 정의해줘야함
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [accessToken, setAccessToken] = useState('')
+  const [userInfo, setUserInfo] = useState('')
+  const value = {
+    accessToken,
+    setAccessToken,
+    userInfo,
+    setUserInfo,
+    // key와 value가 같기 때문에 shorthand property로 사용
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
+      setAccessToken(localStorage.getItem('accessToken') || '')
+    }
+  }, [])
+
   const uploadLink = createUploadLink({
     uri: 'http://backend05.codebootcamp.co.kr/graphql',
+    // accessToken 사용시 HTTP HEADER에 작성해야 Mutation에서 생성이 가능함
+    headers: { Authorization: `Bearer ${accessToken}` },
+    // Authorization = 인가, Bearer = 관례상 사용함
   })
 
   const client = new ApolloClient({
@@ -23,14 +65,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   })
 
   return (
-    <div>
+    <GlobalContext.Provider value={value}>
       <ApolloProvider client={client}>
         <Global styles={globalStyles} />
         <Layout>
           <Component {...pageProps} />
         </Layout>
       </ApolloProvider>
-    </div>
+    </GlobalContext.Provider>
   )
 }
 

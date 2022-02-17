@@ -1,6 +1,7 @@
 import * as A from './Login.styled'
+import { ILoginUIProps } from './Login.types'
 
-export default function LoginUI(props) {
+export default function LoginUI(props: ILoginUIProps) {
   return (
     <>
       <A.LoginBackground>
@@ -37,7 +38,7 @@ export default function LoginUI(props) {
           <A.LoginBottom>
             <span>이메일 찾기</span>
             <span>비밀번호 찾기</span>
-            <span>회원가입</span>
+            <span onClick={props.onclickSignUp}>회원가입</span>
           </A.LoginBottom>
         </A.LoginWrapper>
       </A.LoginBackground>

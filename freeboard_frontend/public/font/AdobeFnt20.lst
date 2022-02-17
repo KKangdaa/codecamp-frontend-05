@@ -1,0 +1,47 @@
+%!Adobe-FontList 1.20
+%Locale:0x412
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Comforter-Regular
+FamilyName:Comforter
+StyleName:Regular
+FullName:Comforter Regular
+MenuName:Comforter
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\kkang\OneDrive\바탕 화면\codecamp-frontend-05-kkang\freeboard_frontend\public\Font\Comforter-Regular.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:277084
+FileModTime:1632830400
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Win,1,Comforter
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Lobster-Regular
+FamilyName:Lobster
+StyleName:Regular
+FullName:Lobster Regular
+MenuName:Lobster
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\kkang\OneDrive\바탕 화면\codecamp-frontend-05-kkang\freeboard_frontend\public\Font\Lobster-Regular.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:396740
+FileModTime:1274022000
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Win,1,Lobster
+%EndFont
+

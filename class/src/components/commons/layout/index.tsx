@@ -31,7 +31,6 @@ interface IProps {
 
 export default function Layout(props: IProps) {
   const router = useRouter();
-  console.log(router);
 
   const isHiddenHearder = HIDDEN_HEADERS.includes(router.asPath);
   // console.log(router)로 router의 object가 어떤게 있는지 확인하여 (router.asPath)가 있는지 includes 확인 후 숨김
