@@ -8,7 +8,11 @@ import { IProductNewUIProps } from './ProductWrite.types'
 const ProductNewUI = (props: IProductNewUIProps) => {
   return (
     <A.Wrapper>
-      <form onSubmit={props.handleSubmit(props.onClickSubmit)}>
+      <form
+        onSubmit={props.handleSubmit(
+          props.isEdit ? props.onClickEditSubmit : props.onClickSubmit
+        )}
+      >
         상품명 :
         <Input01
           type="text"
@@ -17,6 +21,7 @@ const ProductNewUI = (props: IProductNewUIProps) => {
           defaultValue={props.data?.fetchUseditem.name}
         />
         {props.formState.errors.name?.message}
+        <br />
         상품설명 :
         <Input01
           type="text"
@@ -25,6 +30,7 @@ const ProductNewUI = (props: IProductNewUIProps) => {
           defaultValue={props.data?.fetchUseditem.contents}
         />
         {props.formState.errors.contents?.message}
+        <br />
         상품가격 :
         <Input01
           type="text"
@@ -33,6 +39,7 @@ const ProductNewUI = (props: IProductNewUIProps) => {
           defaultValue={props.data?.fetchUseditem.price}
         />
         {props.formState.errors.price?.message}
+        <br />
         비고 :
         <Input01
           type="text"
@@ -41,6 +48,7 @@ const ProductNewUI = (props: IProductNewUIProps) => {
           defaultValue={props.data?.fetchUseditem.remarks}
         />
         {props.formState.errors.remarks?.message}
+        <br />
         {/* <Input01 type="text" register={register('seller')} maxLength={5} />
         {formState.errors.seller?.message} */}
         <Button01

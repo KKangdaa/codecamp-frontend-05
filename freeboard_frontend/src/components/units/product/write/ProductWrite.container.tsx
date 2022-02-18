@@ -21,6 +21,7 @@ export default function ProductNew(props: IEditProps) {
   const [updateUseditem] = useMutation(UPDATE_USED_ITEM)
 
   const { register, handleSubmit, formState } = useForm({
+    mode: 'onChange',
     defaultValues: {},
     resolver: yupResolver(schema),
   })
@@ -59,6 +60,7 @@ export default function ProductNew(props: IEditProps) {
           },
         },
       })
+      router.push(`/product/${router.query.productidpage}`)
     } catch (error) {
       alert(error.message)
     }

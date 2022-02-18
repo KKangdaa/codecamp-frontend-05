@@ -20,7 +20,8 @@ export interface IProductNewUIProps {
   isEdit: boolean
   data?: any
   handleSubmit: UseFormHandleSubmit<FieldValues>
-  onClickSubmit: (data: IData) => Promise<void>
+  onClickEditSubmit: () => void
+  onClickSubmit: () => void
   formState: FormState<FieldValues>
   register: UseFormRegister<FieldValues>
 }

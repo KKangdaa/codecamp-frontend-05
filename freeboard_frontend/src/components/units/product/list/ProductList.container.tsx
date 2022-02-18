@@ -46,10 +46,8 @@ export default function ProductList() {
           onClick={onClickMoveToDetail(el._id)}
           style={{ cursor: 'pointer' }}
         >
-          <span>{el.name}</span>
-          <span>{el.remarks}</span>
-          <span>{el.contents}</span>
-          <span>{el.price}</span>
+          <span>{el.name}</span> / <span>{el.remarks}</span> /{' '}
+          <span>{el.contents}</span> / <span>{el.price}</span>
           <button onClick={onClickMoveToEdit(el._id)}>수정</button>
           <button onClick={onClickDelete(el._id)}>삭제</button>
         </div>

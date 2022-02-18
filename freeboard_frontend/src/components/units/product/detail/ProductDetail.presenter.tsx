@@ -9,6 +9,7 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
       <div>{props.data?.fetchUseditem?.price}</div>
       <button onClick={props.onClickDelete}>삭제</button>
       <button onClick={props.onClickMoveToEdit}>수정</button>
+      <button onClick={props.onClickMoveToList}>목록</button>
     </>
   )
 }

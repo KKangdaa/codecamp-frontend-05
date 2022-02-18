@@ -26,12 +26,16 @@ export default function ProductDetail() {
   const onClickMoveToEdit = () => {
     router.push(`/product/${router.query.productidpage}/edit`)
   }
+  const onClickMoveToList = () => {
+    router.push('/product')
+  }
 
   return (
     <ProductDetailUI
       data={data}
       onClickDelete={onClickDelete}
       onClickMoveToEdit={onClickMoveToEdit}
+      onClickMoveToList={onClickMoveToList}
     />
   )
 }
