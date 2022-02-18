@@ -44,7 +44,7 @@ export default function BoardCommentListItemUI(props) {
         refetchQueries: [
           {
             query: FETCH_COMMENT,
-            variables: { boardId: String(router.query.idpage), page: 1 },
+            variables: { boardId: String(router.query.boardidpage), page: 1 },
           },
         ],
       })

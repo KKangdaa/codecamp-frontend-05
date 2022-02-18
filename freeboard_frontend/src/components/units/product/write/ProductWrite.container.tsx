@@ -1,31 +1,27 @@
+import ProductNewUI from './ProductWrite.presenter'
+import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from './ProductWrite.queries'
 import { useMutation } from '@apollo/client'
-import { CREATE_USED_ITEM } from './ProductWrite.queries'
+import { IData, IEditProps } from './ProductWrite.types'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import ProductNewUI from './ProductWrite.presenter'
-import { IData } from './ProductWrite.types'
+import { useRouter } from 'next/router'
 
 const schema = yup.object().shape({
   name: yup.string().max(100).required('필수입력'),
   price: yup.number().min(1000).required('필수입력'),
-  /* seller: yup
-    .string()
-    .max(5, '작성자는 5글자 이내 문자열입니다.')
-    .required('필수입력'), */
   contents: yup.string().max(1000).required('필수입력'),
   remarks: yup.string().max(1000).required('필수입력'),
 })
 
-export default function ProductNew() {
-  const [createUseditem] = useMutation(CREATE_USED_ITEM)
+export default function ProductNew(props: IEditProps) {
+  const router = useRouter()
 
-  /* const [name, setName] = useState('')
-  const [contents, setContents] = useState('')
-  const [price, setPrice] = useState('') */
-  // const [seller, setSeller] = useState('')
+  const [createUseditem] = useMutation(CREATE_USED_ITEM)
+  const [updateUseditem] = useMutation(UPDATE_USED_ITEM)
 
   const { register, handleSubmit, formState } = useForm({
+    defaultValues: {},
     resolver: yupResolver(schema),
   })
 
@@ -42,18 +38,41 @@ export default function ProductNew() {
           },
         },
       })
-      console.log(result.data?.createUseditem._id)
-      alert('성공')
+      // console.log(result.data?.createUseditem._id)
+      router.push(`/product/${result.data?.createUseditem._id}`)
     } catch (error) {
       alert(error.message)
     }
   }
+
+  const onClickEditSubmit = async (data: IData) => {
+    console.log(data)
+    try {
+      await updateUseditem({
+        variables: {
+          useditemId: props.data?.fetchUseditem._id,
+          updateUseditemInput: {
+            name: data.name,
+            remarks: data.remarks,
+            contents: data.contents,
+            price: Number(data.price),
+          },
+        },
+      })
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
   return (
     <ProductNewUI
-      handleSubmit={handleSubmit}
-      onClickSubmit={onClickSubmit}
+      data={props.data}
+      isEdit={props.isEdit}
       formState={formState}
       register={register}
+      handleSubmit={handleSubmit}
+      onClickSubmit={onClickSubmit}
+      onClickEditSubmit={onClickEditSubmit}
     />
   )
 }

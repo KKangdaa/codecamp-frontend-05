@@ -61,12 +61,12 @@ export default function BoardCommentWrite() {
             contents: commentContents,
             rating: star,
           },
-          boardId: router.query.idpage,
+          boardId: router.query.boardidpage,
         },
         refetchQueries: [
           {
             query: FETCH_COMMENT,
-            variables: { boardId: router.query.idpage, page: 1 },
+            variables: { boardId: router.query.boardidpage, page: 1 },
           },
         ],
       })

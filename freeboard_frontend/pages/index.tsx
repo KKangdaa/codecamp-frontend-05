@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import * as A from './../styles/styled'
 import { gql, useQuery } from '@apollo/client'
-import { withAuth } from '../src/components/commons/hocs/withAuth'
 
 const FETCH_USER_LOGGED_IN = gql`
   query fetchUserLoggedIn {
@@ -12,7 +11,7 @@ const FETCH_USER_LOGGED_IN = gql`
   }
 `
 
-const HomePage = () => {
+export default function HomePage() {
   const { data } = useQuery(FETCH_USER_LOGGED_IN)
 
   const settings = {
@@ -99,5 +98,3 @@ const HomePage = () => {
     </div>
   )
 }
-
-export default withAuth(HomePage)

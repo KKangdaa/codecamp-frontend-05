@@ -8,7 +8,7 @@ export default function LoginUI(props: ILoginUIProps) {
         {/* <img src="/images/login.png" /> */}
         <A.LoginWrapper>
           <img src="/images/login.png" />
-          <img src="/images/logo2.png" />
+          <img src="/images/logo2.png" onClick={props.onClickMoveToHome} />
           <A.LoginId
             type="text"
             placeholder="이메일"

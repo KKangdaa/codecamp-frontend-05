@@ -8,4 +8,5 @@ export interface ILoginUIProps {
   onChangeUserPassword: (event: ChangeEvent<HTMLInputElement>) => void
   onClickLogin: () => void
   onclickSignUp: () => void
+  onClickMoveToHome: () => void
 }

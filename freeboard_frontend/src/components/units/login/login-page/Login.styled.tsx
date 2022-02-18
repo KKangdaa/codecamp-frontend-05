@@ -34,6 +34,7 @@ export const LoginWrapper = styled.div`
   }
   img:nth-of-type(2) {
     margin: 10px 0 20px;
+    cursor: pointer;
   }
   > span {
     color: red;

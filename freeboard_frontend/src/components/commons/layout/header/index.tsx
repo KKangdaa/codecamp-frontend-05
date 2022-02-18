@@ -64,6 +64,9 @@ export default function LayoutHeader() {
   const onClickLogin = () => {
     router.push('/login')
   }
+  const onClickProduct = () => {
+    router.push('/product')
+  }
   return (
     <>
       <Head>
@@ -87,7 +90,7 @@ export default function LayoutHeader() {
             <span onClick={onClickBoard}>BOARD</span>
           </div>
           <div>
-            <span>SHOP</span>
+            <span onClick={onClickProduct}>SHOP</span>
           </div>
         </Menu>
         <LoginIcon>

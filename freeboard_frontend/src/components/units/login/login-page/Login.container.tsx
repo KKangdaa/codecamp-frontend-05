@@ -68,9 +68,9 @@ export default function Login() {
           },
         })
 
-        const accessToken = result.data?.loginUser.accessToken
-        if (setAccessToken) setAccessToken(accessToken || '')
-        localStorage.setItem('accessToken', accessToken || '')
+        const accessToken = result.data?.loginUser.accessToken || ''
+        if (setAccessToken) setAccessToken(accessToken)
+        localStorage.setItem('accessToken', accessToken)
 
         router.push('/')
       } catch (error) {
@@ -83,6 +83,10 @@ export default function Login() {
         content: '이메일과 비밀번호를 올바르게 입력해주세요',
       })
     }
+  }
+
+  const onClickMoveToHome = () => {
+    router.push('/')
   }
 
   const onclickSignUp = () => {
@@ -98,6 +102,7 @@ export default function Login() {
       onChangeUserPassword={onChangeUserPassword}
       onClickLogin={onClickLogin}
       onclickSignUp={onclickSignUp}
+      onClickMoveToHome={onClickMoveToHome}
     />
   )
 }

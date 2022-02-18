@@ -5,15 +5,20 @@ import {
   UseFormRegister,
 } from 'react-hook-form'
 
+export interface IEditProps {
+  isEdit: boolean
+  data?: any
+}
 export interface IData {
   name: string
   contents: string
   price: number
   remarks: string
-  // seller: string
 }
 
 export interface IProductNewUIProps {
+  isEdit: boolean
+  data?: any
   handleSubmit: UseFormHandleSubmit<FieldValues>
   onClickSubmit: (data: IData) => Promise<void>
   formState: FormState<FieldValues>
