@@ -7,14 +7,14 @@ export default function ProductDetail() {
   const router = useRouter()
 
   const { data } = useQuery(FETCH_USED_ITEM, {
-    variables: { useditemId: router.query.productidpage },
+    variables: { useditemId: router.query.productid },
   })
   const [deleteUseditem] = useMutation(DELETE_USED_ITEM)
 
   const onClickDelete = async () => {
     try {
       await deleteUseditem({
-        variables: { useditemId: router.query.productidpage },
+        variables: { useditemId: router.query.productid },
       })
       alert('성공')
       router.push('/product')
@@ -24,11 +24,12 @@ export default function ProductDetail() {
   }
 
   const onClickMoveToEdit = () => {
-    router.push(`/product/${router.query.productidpage}/edit`)
+    router.push(`/product/${router.query.productid}/edit`)
   }
   const onClickMoveToList = () => {
     router.push('/product')
   }
+  // console.log(router.query.productid)
 
   return (
     <ProductDetailUI

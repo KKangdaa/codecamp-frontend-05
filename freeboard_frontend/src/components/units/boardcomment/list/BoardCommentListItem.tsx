@@ -1,4 +1,4 @@
-import { getMyDate } from '../../../../commons/libraries/utils-time'
+import { getMyDateTime } from '../../../../commons/libraries/utils'
 import * as A from './BoardCommentList.styled'
 import * as S from '../write/BoardCommentWrite.styled'
 import { ICommentInput } from './BoardCommentList.types'
@@ -120,7 +120,7 @@ export default function BoardCommentListItemUI(props) {
             <Rate allowHalf value={props.el.rating} disabled />
           </A.CommentWriter>
           <A.CommentContents>{props.el.contents}</A.CommentContents>
-          <A.CommentDate>{getMyDate(props.el.createdAt)}</A.CommentDate>
+          <A.CommentDate>{getMyDateTime(props.el.createdAt)}</A.CommentDate>
           <A.NoneBoxButton>
             <A.CommentEditButton
               className="far fa-edit"

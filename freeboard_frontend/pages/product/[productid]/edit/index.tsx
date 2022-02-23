@@ -17,7 +17,7 @@ const FETCH_USED_ITEM = gql`
 export default function ProductEditPage() {
   const router = useRouter()
   const { data } = useQuery(FETCH_USED_ITEM, {
-    variables: { useditemId: router.query.productidpage },
+    variables: { useditemId: router.query.productid },
   })
 
   return <ProductNew isEdit={true} data={data} />

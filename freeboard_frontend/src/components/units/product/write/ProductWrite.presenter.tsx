@@ -9,9 +9,11 @@ const ProductNewUI = (props: IProductNewUIProps) => {
   return (
     <A.Wrapper>
       <form
-        onSubmit={props.handleSubmit(
-          props.isEdit ? props.onClickEditSubmit : props.onClickSubmit
-        )}
+        onSubmit={
+          props.isEdit
+            ? props.handleSubmit(props.onClickEditSubmit)
+            : props.handleSubmit(props.onClickSubmit)
+        }
       >
         상품명 :
         <Input01

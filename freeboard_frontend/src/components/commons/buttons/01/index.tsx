@@ -16,7 +16,11 @@ interface IButton01Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export default function Button01(props: IButton01Props) {
   return (
-    <GoldButton type={props.type} isValid={props.isValid}>
+    <GoldButton
+      type={props.type}
+      isValid={props.isValid}
+      onClick={props.onClick}
+    >
       {props.name}
     </GoldButton>
   )

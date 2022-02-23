@@ -30,12 +30,16 @@ interface IGlobalContext {
   setAccessToken?: Dispatch<SetStateAction<string>>
   /* userInfo?: IUserInfo;
   setUserInfo?: Dispatch<SetStateAction<IUserInfo>>; */
+  item?: any
+  setItem?: any
 }
 
 export const GlobalContext = createContext<IGlobalContext>({})
 // createContext({}) 사용시 객체안에 속성이 없기 때문에 typescript 정의해줘야함
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [item, setItem] = useState([])
+
   const [accessToken, setAccessToken] = useState('')
   const [userInfo, setUserInfo] = useState('')
   const value = {
@@ -44,6 +48,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     userInfo,
     setUserInfo,
     // key와 value가 같기 때문에 shorthand property로 사용
+    item,
+    setItem,
   }
 
   useEffect(() => {

@@ -1,58 +1,69 @@
-import { useMutation, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { DELETE_USED_ITEM, FETCH_USED_ITEMS } from './ProductList.queries'
+import { useContext } from 'react'
+import { GlobalContext } from '../../../../../pages/_app'
+import { getMyDate2 } from '../../../../commons/libraries/utils'
+import ProductListUI from './ProductList.presenter'
+import { FETCH_USED_ITEMS } from './ProductList.queries'
 
 export default function ProductList() {
+  const { setItem } = useContext(GlobalContext)
+
   const router = useRouter()
 
-  const { data } = useQuery(FETCH_USED_ITEMS)
-  const [deleteUseditem] = useMutation(DELETE_USED_ITEM)
+  const { data, fetchMore } = useQuery(FETCH_USED_ITEMS, {
+    variables: {
+      page: 1,
+    },
+  })
 
-  const onClickMoveToEdit = (productId: string) => () => {
-    router.push(`/product/${productId}/edit`)
-  }
+  const todayDate = getMyDate2(new Date())
 
-  const onClickDelete = (useditemId) => async () => {
-    await deleteUseditem({
-      variables: { useditemId },
-      update(cache, { data }) {
-        cache.modify({
-          fields: {
-            fetchUseditems: (prev, { readField }) => {
-              const filterPrev = prev.filter(
-                (el) => readField('_id', el) !== data.deleteUseditem
-              )
-              return [...filterPrev]
-            },
-          },
-        })
-      },
-    })
-  }
+  const onClickMoveToDetail = (el) => () => {
+    const baskets = JSON.parse(localStorage.getItem(todayDate) || '[]')
+    const temp = baskets.filter((filterEl) => filterEl._id === el._id)
+    if (temp.length === 1) {
+      return
+    }
 
-  const onClickMoveToDetail = (id: string) => () => {
-    router.push(`/product/${id}`)
+    const { __typename, ...plus } = el
+    baskets.unshift(plus)
+    localStorage.setItem(todayDate, JSON.stringify(baskets))
+
+    setItem(baskets)
+
+    router.push(`/product/${el._id}`)
   }
 
   const onClickNew = () => {
     router.push('/product/new')
   }
 
+  const onLoadMore = () => {
+    if (!data) return
+    fetchMore({
+      variables: {
+        page: Math.ceil(data?.fetchUseditems.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult.fetchUseditems)
+          return { fetchUseditems: [...prev.fetchUseditems] }
+        return {
+          fetchUseditems: [
+            ...prev.fetchUseditems,
+            ...fetchMoreResult.fetchUseditems,
+          ],
+        }
+      },
+    })
+  }
+
   return (
-    <>
-      {data?.fetchUseditems.map((el) => (
-        <div
-          key={el._id}
-          onClick={onClickMoveToDetail(el._id)}
-          style={{ cursor: 'pointer' }}
-        >
-          <span>{el.name}</span> / <span>{el.remarks}</span> /{' '}
-          <span>{el.contents}</span> / <span>{el.price}</span>
-          <button onClick={onClickMoveToEdit(el._id)}>수정</button>
-          <button onClick={onClickDelete(el._id)}>삭제</button>
-        </div>
-      ))}
-      <button onClick={onClickNew}>등록</button>
-    </>
+    <ProductListUI
+      data={data}
+      onClickMoveToDetail={onClickMoveToDetail}
+      onClickNew={onClickNew}
+      onLoadMore={onLoadMore}
+    />
   )
 }

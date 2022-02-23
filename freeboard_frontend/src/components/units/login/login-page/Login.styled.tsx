@@ -4,9 +4,6 @@ export const LoginBackground = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  /* background: url('/images/login-background.png') 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover; */
   background-color: #fff9ec;
 `
 export const LoginWrapper = styled.div`
@@ -22,7 +19,6 @@ export const LoginWrapper = styled.div`
   padding: 40px 30px;
   border-radius: 20px;
   box-shadow: 0.1rem 0.1rem 1.5rem #ddbc73, -0.1rem -0.1rem 1.5rem #ddbc73;
-  /* border: 1px solid black; */
   img:nth-of-type(1),
   img:nth-of-type(2) {
     width: 50%;
@@ -76,6 +72,7 @@ export const LoginButton = styled.button`
   border: 0;
   border-radius: 15px;
   margin: 10px 0;
+  outline: 0;
 `
 
 export const LoginBottom = styled.div`

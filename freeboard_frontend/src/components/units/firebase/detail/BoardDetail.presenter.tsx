@@ -1,4 +1,4 @@
-import { getMyDate } from '../../../../commons/libraries/utils-time'
+import { getMyDateTime } from '../../../../commons/libraries/utils'
 import { IBoardDetailUIProps } from './BoardDetail.types'
 import * as A from './BoardDetail.styled'
 import BoardCommentWrite from '../../boardcomment/write/BoardCommentWrite.container'
@@ -31,7 +31,7 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
               </A.ProfileDetail>
 
               <A.ProfileDate>
-                {getMyDate(props.fetchBoardData?.fetchBoard?.createdAt)}
+                {getMyDateTime(props.fetchBoardData?.fetchBoard?.createdAt)}
               </A.ProfileDate>
             </A.Profile>
           </A.Topper>

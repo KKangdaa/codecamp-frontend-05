@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 export const Wrapper = styled.div`
-  background: #fff7e5;
+  background: #fffaf1;
   width: 100%;
   font-size: 0.8rem;
   display: grid;

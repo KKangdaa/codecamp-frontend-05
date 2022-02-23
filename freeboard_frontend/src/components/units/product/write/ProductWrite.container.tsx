@@ -6,12 +6,13 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 const schema = yup.object().shape({
   name: yup.string().max(100).required('필수입력'),
   price: yup.number().min(1000).required('필수입력'),
   contents: yup.string().max(1000).required('필수입력'),
-  remarks: yup.string().max(1000).required('필수입력'),
+  // remarks: yup.string().max(1000).required('필수입력'),
 })
 
 export default function ProductNew(props: IEditProps) {
@@ -20,22 +21,30 @@ export default function ProductNew(props: IEditProps) {
   const [createUseditem] = useMutation(CREATE_USED_ITEM)
   const [updateUseditem] = useMutation(UPDATE_USED_ITEM)
 
-  const { register, handleSubmit, formState } = useForm({
+  const { register, handleSubmit, formState, setValue } = useForm({
     mode: 'onChange',
     defaultValues: {},
     resolver: yupResolver(schema),
   })
 
+  useEffect(() => {
+    setValue('name', props.data?.fetchUseditem.name)
+    setValue('remarks', props.data?.fetchUseditem.remarks)
+    setValue('contents', props.data?.fetchUseditem.contents)
+    setValue('price', props.data?.fetchUseditem.price)
+    // setValue('images', props.data?.fetchUseditem.images)
+  }, [props.data])
+
   const onClickSubmit = async (data: IData) => {
-    console.log(data)
+    const { name, contents, remarks, price } = data
     try {
       const result = await createUseditem({
         variables: {
           createUseditemInput: {
-            name: data.name,
-            contents: data.contents,
-            remarks: data.remarks,
-            price: Number(data.price),
+            name,
+            contents,
+            remarks,
+            price: Number(price),
           },
         },
       })
@@ -47,20 +56,20 @@ export default function ProductNew(props: IEditProps) {
   }
 
   const onClickEditSubmit = async (data: IData) => {
-    console.log(data)
+    const { name, contents, remarks, price } = data
     try {
       await updateUseditem({
         variables: {
           useditemId: props.data?.fetchUseditem._id,
           updateUseditemInput: {
-            name: data.name,
-            remarks: data.remarks,
-            contents: data.contents,
-            price: Number(data.price),
+            name,
+            remarks,
+            contents,
+            price: Number(price),
           },
         },
       })
-      router.push(`/product/${router.query.productidpage}`)
+      router.push(`/product/${router.query.productid}`)
     } catch (error) {
       alert(error.message)
     }

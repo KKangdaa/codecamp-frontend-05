@@ -15,3 +15,29 @@ export const getMyDate = (myDate) => {
   // 요일
     */
 }
+
+export const getMyDateTime = (myDate) => {
+  const aaa = new Date(myDate)
+  const yyyy = aaa.getFullYear()
+  const mm = aaa.getMonth() + 1
+  const dd = aaa.getDate()
+  const hh = aaa.getHours()
+  const mns = aaa.getMinutes()
+
+  return `${yyyy}. ${mm}. ${dd}. ${String(hh).padStart(2, '0')}:${String(
+    mns
+  ).padStart(2, '0')}`
+}
+
+export const getMyDate2 = (myDate) => {
+  const aaa = new Date(myDate)
+  const yyyy = aaa.getFullYear()
+  const mm = aaa.getMonth() + 1
+  const dd = aaa.getDate()
+
+  return `${yyyy}-${String(mm).padStart(2, '0')}-${String(dd).padStart(2, '0')}`
+}
+
+export const getPrice = (price) => {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}

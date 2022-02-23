@@ -7,8 +7,7 @@ const HeaderWrapper = styled.div`
   padding: 2em 5vw;
   display: grid;
   grid-template-columns: 1fr 10fr 1fr;
-  /* grid-template-rows: ; */
-  background: #fff7e5;
+  background: #fffaf1;
 `
 const Logo = styled.div`
   img {
@@ -62,11 +61,14 @@ export default function LayoutHeader() {
     router.push('/boards')
   }
   const onClickLogin = () => {
+    localStorage.removeItem('accessToken')
+
     router.push('/login')
   }
   const onClickProduct = () => {
     router.push('/product')
   }
+
   return (
     <>
       <Head>
