@@ -29,7 +29,6 @@ export default function ProductDetail() {
   const onClickMoveToList = () => {
     router.push('/product')
   }
-  // console.log(router.query.productid)
 
   return (
     <ProductDetailUI

@@ -1,8 +1,11 @@
-import { useMutation } from '@apollo/client'
+import * as A from './ProductCommentAnswerList.styled'
+
+import { useMutation, useQuery } from '@apollo/client'
 import { Modal } from 'antd'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import {
+  FETCH_USER_LOGGED_IN,
   FETCH_USED_ITEM_QUESTION_ANSWER,
   UPDATE_USED_ITEM_QUESTION_ANSWER,
 } from './ProductCommentAnswerList.queries'
@@ -14,6 +17,7 @@ export default function ProductCommentAnswerListItem(props) {
   const [isEdits, setIsEdits] = useState(false)
   const [contents, setContents] = useState('')
 
+  const { data } = useQuery(FETCH_USER_LOGGED_IN)
   const [updateUseditemQuestionAnswer] = useMutation(
     UPDATE_USED_ITEM_QUESTION_ANSWER
   )
@@ -25,8 +29,6 @@ export default function ProductCommentAnswerListItem(props) {
   const onClickUpdate = async (event) => {
     const VariablesAnswer: IAnswerInput = {}
     if (contents) VariablesAnswer.contents = contents
-
-    // console.log(event)
 
     try {
       await updateUseditemQuestionAnswer({
@@ -56,7 +58,7 @@ export default function ProductCommentAnswerListItem(props) {
   }
 
   return (
-    <>
+    <A.AnswerWrapper>
       {isEdits ? (
         <div style={{ border: '1px solid black' }}>
           내용:{' '}
@@ -70,14 +72,19 @@ export default function ProductCommentAnswerListItem(props) {
           </button>
         </div>
       ) : (
-        <div style={{ border: '1px solid black' }}>
-          <div>{props.el.contents}</div>
-          <button id={props.el._id} onClick={props.onClickDelete}>
-            삭제
-          </button>
-          <button onClick={onClickQuestionEdit}>수정</button>
-        </div>
+        <A.AnswerWrapper>
+          <div>
+            <div>└ {props.el.contents}</div>
+          </div>
+          <A.AnswerButton>
+            <span>{data?.fetchUserLoggedIn.name}</span>
+            <button id={props.el._id} onClick={props.onClickDelete}>
+              삭제
+            </button>
+            <button onClick={onClickQuestionEdit}>수정</button>
+          </A.AnswerButton>
+        </A.AnswerWrapper>
       )}
-    </>
+    </A.AnswerWrapper>
   )
 }

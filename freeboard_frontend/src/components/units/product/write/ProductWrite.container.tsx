@@ -10,7 +10,7 @@ import { useEffect } from 'react'
 
 const schema = yup.object().shape({
   name: yup.string().max(100).required('필수입력'),
-  price: yup.number().min(1000).required('필수입력'),
+  price: yup.number().min(1).required('필수입력'),
   contents: yup.string().max(1000).required('필수입력'),
   // remarks: yup.string().max(1000).required('필수입력'),
 })

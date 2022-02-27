@@ -26,7 +26,7 @@ export default function BoardEdit() {
   const router = useRouter()
 
   const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: router.query.boardidpage },
+    variables: { boardId: router.query.boardid },
   })
 
   return <BoardWrite isEdit={true} data={data} />

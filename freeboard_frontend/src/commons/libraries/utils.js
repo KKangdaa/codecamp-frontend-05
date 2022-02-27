@@ -39,5 +39,5 @@ export const getMyDate2 = (myDate) => {
 }
 
 export const getPrice = (price) => {
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  return String(price).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }

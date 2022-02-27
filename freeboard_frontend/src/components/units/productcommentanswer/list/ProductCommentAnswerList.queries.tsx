@@ -31,3 +31,11 @@ export const UPDATE_USED_ITEM_QUESTION_ANSWER = gql`
     }
   }
 `
+export const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      name
+      picture
+    }
+  }
+`

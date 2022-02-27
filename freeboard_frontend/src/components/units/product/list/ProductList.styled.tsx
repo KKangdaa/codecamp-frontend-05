@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 export const ListWrapper = styled.div`
-  width: 80vw;
+  width: 75vw;
   margin: 0 auto;
   padding-top: 50px;
   & > button {
@@ -12,8 +12,12 @@ export const ListWrapper = styled.div`
     width: 80px;
     height: 50px;
     border-radius: 10px;
-    background: gold;
+    background: #fad483;
     border: 1px solid gold;
+    cursor: pointer;
+    :hover {
+      background: #ffcb5b;
+    }
   }
 `
 export const List = styled.div`
@@ -23,11 +27,9 @@ export const List = styled.div`
 `
 export const ListItems = styled.div`
   width: 100%;
-  height: 32vw;
+  height: 30vw;
   overflow: hidden;
   > div:nth-of-type(1) {
-    /* width: 100%; */
-    /* padding-bottom: 100%; */
     height: 60%;
     text-align: center;
     vertical-align: middle;

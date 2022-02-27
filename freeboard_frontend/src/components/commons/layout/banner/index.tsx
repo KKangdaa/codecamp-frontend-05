@@ -65,7 +65,7 @@ export default function LayoutBanner() {
     slidesToShow: 1,
     swipeToSlide: true,
     infinite: true,
-    autoplay: true,
+    // autoplay: true,
     speed: 2000,
     fade: true,
     arrows: false,

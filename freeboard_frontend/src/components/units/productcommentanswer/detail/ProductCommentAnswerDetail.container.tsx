@@ -44,14 +44,20 @@ export default function Answer(props) {
   }
   return (
     <>
-      <ProductCommentAnswerWrite
-        useditemQuestionId={props.useditemQuestionId}
-      />
-      {data?.fetchUseditemQuestionAnswers.map((el) => (
-        <div key={el._id}>
-          <ProductCommentAnswerList el={el} onClickDelete={onClickDelete} />
+      {props.isAnswer ? (
+        <div style={{ width: '90%', margin: 'auto' }}>
+          {data?.fetchUseditemQuestionAnswers.map((el) => (
+            <div key={el._id}>
+              <ProductCommentAnswerList el={el} onClickDelete={onClickDelete} />
+            </div>
+          ))}
+          <ProductCommentAnswerWrite
+            useditemQuestionId={props.useditemQuestionId}
+          />
         </div>
-      ))}
+      ) : (
+        <></>
+      )}
     </>
   )
 }

@@ -212,13 +212,13 @@ export default function BoardWrite(props: IBoardWriteProps) {
     try {
       await updateBoard({
         variables: {
-          boardId: router.query.boardidpage,
+          boardId: router.query.boardid,
           password: createPassword,
           updateBoardInput: Variables,
         },
       })
       successModal()
-      router.push(`/boards/${router.query.boardidpage}`)
+      router.push(`/boards/${router.query.boardid}`)
     } catch (error) {
       Modal.error({
         content: error.message,

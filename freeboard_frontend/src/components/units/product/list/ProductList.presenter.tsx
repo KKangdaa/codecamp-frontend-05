@@ -13,7 +13,11 @@ export default function ProductListUI(props: IProductListUIProps) {
         // useWindow={false}
         loadMore={props.onLoadMore}
         loader={
-          <div className="loader" key={0} /* onClick={props.onLoadMore} */>
+          <div
+            className="loader"
+            key={0}
+            style={{ textAlign: 'center', padding: '20px 0' }}
+          >
             더보기
           </div>
         }

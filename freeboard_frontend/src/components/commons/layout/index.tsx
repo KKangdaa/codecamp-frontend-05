@@ -21,15 +21,25 @@ export default function Layout(props: IProps) {
   const router = useRouter()
 
   const HIDDEN_HEADER = ['/login', '/login/sign-up']
-  const HIDDEN_BANNER = ['/', '/login', '/login/sign-up', '/firebase-board']
+  const HIDDEN_BANNER = [
+    '/',
+    '/#',
+    '/login',
+    '/login/sign-up',
+    '/login/mypage',
+    `/product/${router.query.productid}`,
+    '/firebase-board',
+  ]
   // const HIDDEN_NAVIGATION = ['/', '/login', '/login/sign-up', '/firebase-board']
   const HIDDEN_FOOTER = ['/login', '/login/sign-up']
   const HIDDEN_SIDEBER = [
     '/',
+    '/#',
     '/boards',
     '/login',
-    `/boards/${router.query.boardidpage}`,
+    `/boards/${router.query.boardid}`,
     '/login/sign-up',
+    '/login/mypage',
     '/firebase-board',
   ]
 

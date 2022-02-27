@@ -1,3 +1,4 @@
+import * as A from './ProductCommentList.styled'
 import { useMutation } from '@apollo/client'
 import { Modal } from 'antd'
 import { useRouter } from 'next/router'
@@ -56,8 +57,7 @@ export default function ProductCommentListItem(props) {
   return (
     <>
       {isEdits ? (
-        <div style={{ border: '1px solid black' }}>
-          내용:{' '}
+        <div>
           <input
             type="text"
             onChange={onChangeContents}
@@ -68,13 +68,16 @@ export default function ProductCommentListItem(props) {
           </button>
         </div>
       ) : (
-        <div style={{ border: '1px solid black' }}>
-          <div>{props.el.contents}</div>
+        <A.QuestionContent>
+          <div style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
+            {props.el.contents}
+          </div>
+          <button onClick={props.onClickAnswer}>댓글</button>
           <button id={props.el._id} onClick={props.onClickDelete}>
             삭제
           </button>
           <button onClick={onClickQuestionEdit}>수정</button>
-        </div>
+        </A.QuestionContent>
       )}
     </>
   )

@@ -4,8 +4,7 @@ import {
   DELETE_USED_ITEM_QUESTION,
   FETCH_USED_ITEM_QUESTION,
 } from './ProductCommentList.queries'
-import Answer from '../../productcommentanswer/detail/ProductCommentDetail.container'
-import ProductCommentListItem from './ProductCommentList.containerItem'
+import ProductCommentListUI from './ProductCommentList.presenter'
 
 export default function ProductCommentList() {
   const router = useRouter()
@@ -32,16 +31,5 @@ export default function ProductCommentList() {
       console.log(error.message)
     }
   }
-
-  return (
-    <>
-      {data?.fetchUseditemQuestions.map((el) => (
-        <div key={el._id}>
-          <ProductCommentListItem el={el} onClickDelete={onClickDelete} />
-          <p>--</p>
-          <Answer useditemQuestionId={el._id} />
-        </div>
-      ))}
-    </>
-  )
+  return <ProductCommentListUI data={data} onClickDelete={onClickDelete} />
 }

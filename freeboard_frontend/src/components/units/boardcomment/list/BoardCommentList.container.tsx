@@ -14,7 +14,7 @@ export default function BoardCommentList() {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const { data: fetchCommentData, fetchMore } = useQuery(FETCH_COMMENT, {
-    variables: { boardId: String(router.query.boardidpage), page: 1 },
+    variables: { boardId: String(router.query.boardid), page: 1 },
   })
 
   const [idText, setIdText] = useState('')
@@ -66,7 +66,7 @@ export default function BoardCommentList() {
         refetchQueries: [
           {
             query: FETCH_COMMENT,
-            variables: { boardId: router.query.boardidpage, page: 1 },
+            variables: { boardId: router.query.boardid, page: 1 },
           },
         ],
       })

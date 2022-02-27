@@ -21,17 +21,12 @@ export default function ProductList() {
 
   const onClickMoveToDetail = (el) => () => {
     const baskets = JSON.parse(localStorage.getItem(todayDate) || '[]')
-    const temp = baskets.filter((filterEl) => filterEl._id === el._id)
-    if (temp.length === 1) {
-      return
-    }
+    const temp = baskets.filter((filterEl) => filterEl._id !== el._id)
 
     const { __typename, ...plus } = el
-    baskets.unshift(plus)
-    localStorage.setItem(todayDate, JSON.stringify(baskets))
-
-    setItem(baskets)
-
+    temp.unshift(plus)
+    localStorage.setItem(todayDate, JSON.stringify(temp))
+    setItem(temp)
     router.push(`/product/${el._id}`)
   }
 

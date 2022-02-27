@@ -2,7 +2,7 @@ import ProductCommentAnswerListItem from './ProductCommentAnswerList.containerIt
 
 export default function ProductCommentAnswerList(props) {
   return (
-    <div>
+    <div style={{ margin: '20px 0' }}>
       <ProductCommentAnswerListItem
         el={props.el}
         onClickDelete={props.onClickDelete}

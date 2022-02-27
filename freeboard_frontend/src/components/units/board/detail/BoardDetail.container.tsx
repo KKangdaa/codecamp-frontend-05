@@ -12,17 +12,17 @@ export default function BoardDetail() {
 
   const { data: fetchBoardData } = useQuery(FETCH_BOARD, {
     variables: {
-      boardId: router.query.boardidpage,
+      boardId: router.query.boardid,
     },
   })
 
   const onClickLike = () => {
     likeButton({
-      variables: { boardId: router.query.boardidpage },
+      variables: { boardId: router.query.boardid },
       refetchQueries: [
         {
           query: FETCH_BOARD,
-          variables: { boardId: router.query.boardidpage },
+          variables: { boardId: router.query.boardid },
         },
       ],
     })
@@ -33,7 +33,7 @@ export default function BoardDetail() {
   }
 
   const onClickEditPage = () => {
-    router.push(`/boards/${router.query.boardidpage}/edit`)
+    router.push(`/boards/${router.query.boardid}/edit`)
   }
 
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -45,13 +45,13 @@ export default function BoardDetail() {
   const onClickDelete = () => {
     setIsModalVisible((prev) => !prev)
     deleteBoard({
-      variables: { boardId: router.query.boardidpage },
+      variables: { boardId: router.query.boardid },
       refetchQueries: [{ query: FETCH_BOARD }],
     })
     router.push('/boards')
   }
 
-  // console.log(router.query.boardidpage)
+  // console.log(router.query.boardid)
   return (
     <BoardDetailUI
       fetchBoardData={fetchBoardData}

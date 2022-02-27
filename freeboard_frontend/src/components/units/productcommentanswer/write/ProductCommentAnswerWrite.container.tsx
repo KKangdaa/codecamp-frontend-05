@@ -6,6 +6,7 @@ import {
   CREATE_USED_ITEM_QUESTION_ANSWER,
   FETCH_USED_ITEM_QUESTION_ANSWER,
 } from './ProductCommentAnswerWrite.queries'
+import * as A from './ProductCommentAnswerWrite.styled'
 
 export default function ProductCommentAnswerWrite(props) {
   const router = useRouter()
@@ -56,11 +57,13 @@ export default function ProductCommentAnswerWrite(props) {
   }
 
   return (
-    <div>
-      {/* <div></div> */}
-      대댓글 :{' '}
-      <input type="text" onChange={onChangeContents} value={contents} />
+    <A.CommentWrapper>
+      <textarea
+        onChange={onChangeContents}
+        value={contents}
+        placeholder={'답변'}
+      />
       <button onClick={onClickCreateComment}>등록</button>
-    </div>
+    </A.CommentWrapper>
   )
 }

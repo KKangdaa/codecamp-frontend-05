@@ -1,41 +1,27 @@
-import { gql, useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
+import { Modal } from 'antd'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-
-const CREATE_USED_ITEM_QUESTION = gql`
-  mutation createUseditemQuestion(
-    $createUseditemQuestionInput: CreateUseditemQuestionInput!
-    $useditemId: ID!
-  ) {
-    createUseditemQuestion(
-      createUseditemQuestionInput: $createUseditemQuestionInput
-      useditemId: $useditemId
-    ) {
-      _id
-      contents
-    }
-  }
-`
-const FETCH_USED_ITEM_QUESTION = gql`
-  query fetchUseditemQuestions($page: Int, $useditemId: ID!) {
-    fetchUseditemQuestions(page: $page, useditemId: $useditemId) {
-      _id
-      contents
-    }
-  }
-`
+import ProductCommentWriteUI from './ProductCommentWrite.presenter'
+import {
+  CREATE_USED_ITEM_QUESTION,
+  FETCH_USER_LOGGED_IN,
+  FETCH_USED_ITEM_QUESTION,
+} from './ProductCommentWrite.queries'
 
 export default function ProductCommentWrite() {
   const router = useRouter()
   const [contents, setContents] = useState('')
 
   const [createUseditemQuestion] = useMutation(CREATE_USED_ITEM_QUESTION)
+  const { data } = useQuery(FETCH_USER_LOGGED_IN)
 
   const onChangeContents = (e) => {
     setContents(e.target.value)
   }
 
   const onClickCreateComment = async () => {
+    if (!contents) return
     try {
       await createUseditemQuestion({
         variables: {
@@ -51,21 +37,25 @@ export default function ProductCommentWrite() {
           },
         ],
       })
+      Modal.success({
+        content: '댓글 등록이 완료되었습니다.',
+      })
       setContents('')
-
-      if (contents) {
-        alert('성공')
-      }
     } catch (error) {
-      console.log(error.message)
+      Modal.error({
+        content: error.message,
+      })
     }
   }
 
   return (
-    <div>
-      {/* <div></div> */}
-      내용 : <input type="text" onChange={onChangeContents} value={contents} />
-      <button onClick={onClickCreateComment}>등록</button>
-    </div>
+    <>
+      <ProductCommentWriteUI
+        data={data}
+        onChangeContents={onChangeContents}
+        contents={contents}
+        onClickCreateComment={onClickCreateComment}
+      />
+    </>
   )
 }
