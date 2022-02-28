@@ -7,6 +7,7 @@ export const CREATE_USED_ITEM = gql`
       name
       contents
       price
+      images
     }
   }
 `
@@ -25,6 +26,7 @@ export const UPDATE_USED_ITEM = gql`
       remarks
       contents
       price
+      images
     }
   }
 `

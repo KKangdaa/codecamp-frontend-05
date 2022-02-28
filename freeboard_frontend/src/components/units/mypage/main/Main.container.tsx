@@ -1,22 +1,24 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { useState } from 'react'
 import { Modal } from 'antd'
-import * as A from './Main.styled'
 import Head from 'next/head'
+
 import {
   FETCH_USER_LOGGED_IN,
   CREATE_POINT_TRANSACTION_OF_LOADING,
   FETCH_POINT_TRANSACTIONS,
 } from './Main.queries'
+import MainUI from './Main.presenter'
 
 export default function Main() {
   const [amount, setAmount] = useState(0)
+  const [visible, setVisible] = useState(false)
 
   const { data: userData } = useQuery(FETCH_USER_LOGGED_IN)
-  const { data: pointData } = useQuery(FETCH_POINT_TRANSACTIONS)
+  const { data: pointData } = useQuery(FETCH_POINT_TRANSACTIONS, {
+    variables: { page: 1 },
+  })
   const [createPoint] = useMutation(CREATE_POINT_TRANSACTION_OF_LOADING)
-
-  const [visible, setVisible] = useState(false)
 
   const onChangeAmount = (e) => {
     setAmount(Number(e.target.value))
@@ -59,77 +61,27 @@ export default function Main() {
           impUid: rsp.imp_uid,
         },
       })
-      console.log('성공')
+      alert('성공')
     } catch (error) {
       Modal.error({
         content: error.message,
       })
     }
   }
-  console.log(pointData?.fetchPointTransactions.balance)
-
+  /* console.log(pointData?.fetchPointTransactions.balance)
   console.log(pointData?.fetchPointTransactions.amount)
   console.log(pointData?.fetchPointTransactions.status)
-  console.log(pointData?.fetchPointTransactions._id)
+  console.log(pointData?.fetchPointTransactions._id) */
 
   return (
-    <>
-      <Head>
-        <script
-          type="text/javascript"
-          src="https://code.jquery.com/jquery-1.12.4.min.js"
-        ></script>
-        <script
-          type="text/javascript"
-          src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
-        ></script>
-      </Head>
-      <A.MyPageWrapper>
-        <p>마이페이지</p>
-        <A.UserContainer>
-          <A.UserImg>
-            <img src="/images/logo-icon.png" />
-          </A.UserImg>
-          <A.UserName>
-            <div>
-              <span>{userData?.fetchUserLoggedIn.name}</span>님
-            </div>
-            <div>[ {userData?.fetchUserLoggedIn.email} ]</div>
-          </A.UserName>
-          <A.BookScrap>
-            <A.BookList />
-            <div>스크랩</div>
-          </A.BookScrap>
-          <A.UserOrder>
-            <div>주문정보</div>
-            <div>구매 내역</div>
-            <div>판매 내역</div>
-          </A.UserOrder>
-          <A.UserPoint>
-            {/* <div>전체 주문 내역</div> */}
-            <A.PointButton onClick={() => setVisible(true)}>
-              포인트충전
-            </A.PointButton>
-            <A.PointModal
-              // title="Modal 1000px width"
-              // centered
-              visible={visible}
-              onOk={onClickPayment}
-              onCancel={() => setVisible(false)}
-              width={'500px'}
-            >
-              <input type="text" onChange={onChangeAmount} />
-              {/* <select name="price" onChange={onChangeAmount}>
-                <option value="1000">1000 point</option>
-                <option value="2000">2000 point</option>
-                <option value="3000">3000 point</option>
-                <option value="4000">4000 point</option>
-                <option value="5000">5000 point</option>
-              </select> */}
-            </A.PointModal>
-          </A.UserPoint>
-        </A.UserContainer>
-      </A.MyPageWrapper>
-    </>
+    <MainUI
+      Head={Head}
+      userData={userData}
+      pointData={pointData}
+      visible={visible}
+      setVisible={setVisible}
+      onClickPayment={onClickPayment}
+      onChangeAmount={onChangeAmount}
+    />
   )
 }

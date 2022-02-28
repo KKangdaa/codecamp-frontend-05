@@ -5,6 +5,23 @@ import * as A from './ProductDetail.styled'
 import ProductCommentWrite from '../../productcomment/write/ProductCommentWrite.container'
 import ProductCommentList from '../../productcomment/list/ProductCommentList.container'
 import { getPrice } from '../../../../commons/libraries/utils'
+import { EditorState, convertToRaw, getCurrentContent } from 'draft-js'
+import draftToHtml from 'draftjs-to-html'
+import styled from '@emotion/styled'
+import { useEffect, useState } from 'react'
+import { addBasePath } from 'next/dist/shared/lib/router/router'
+import { Avatar } from 'antd'
+
+const IntroduceContent = styled.div`
+  position: relative;
+  border: 0.0625rem solid #d7e2eb;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  padding: 1.5rem;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 4rem;
+`
 
 export default function ProductDetailUI(props: IProductDetailUIProps) {
   const settings = {
@@ -16,7 +33,22 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
     speed: 500,
     arrows: false,
   }
-  console.log()
+  /* const editorToHtml = draftToHtml(
+    convertToRaw(
+      JSON.parse(props.data?.fetchUseditem?.contents).getCurrentContent()
+    )
+  ) */
+
+  const [editorToHtml, setEditorToHtml] = useState({})
+  useEffect(() => {
+    if (props.data?.fetchUseditem?.contents) {
+      const aaa = draftToHtml(
+        convertToRaw(JSON.parse(props.data?.fetchUseditem?.contents))
+      )
+    }
+    console.log(aaa)
+    // console.log(JSON.parse(props.data?.fetchUseditem?.contents))
+  }, [props.data])
 
   return (
     <A.DetailWrapper>
@@ -46,7 +78,11 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
       </A.ItemWrapper>
       <A.ItemContents>
         <div>{props.data?.fetchUseditem?.remarks}</div>
-        <div>{props.data?.fetchUseditem?.contents}</div>
+        {/* {props.data?.fetchUseditem?.contents && (
+          <IntroduceContent
+            dangerouslySetInnerHTML={{ __html: editorToHtml }}
+          />
+        )} */}
       </A.ItemContents>
 
       <A.ItemButtonGroup>

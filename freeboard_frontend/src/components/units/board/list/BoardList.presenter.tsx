@@ -1,4 +1,4 @@
-import { getMyDate } from '../../../../commons/libraries/utils'
+import { getMyDateTime } from '../../../../commons/libraries/utils'
 import Pagination from '../../../commons/pagination/pagination'
 import * as A from './BoardList.styled'
 import { IBoardListUIProps } from './BoardList.types'
@@ -63,7 +63,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
                     ))}
                 </A.Name>
                 <A.Writer>{el.writer.slice(0, 10)}</A.Writer>
-                <A.CreateDate>{getMyDate(el.createdAt)}</A.CreateDate>
+                <A.CreateDate>{getMyDateTime(el.createdAt)}</A.CreateDate>
                 <A.Like>{el.likeCount}</A.Like>
               </A.BoardList>
             ))}

@@ -19,12 +19,11 @@ export const CREATE_POINT_TRANSACTION_OF_LOADING = gql`
 `
 
 export const FETCH_POINT_TRANSACTIONS = gql`
-  query fetchPointTransactions {
-    fetchPointTransactions {
+  query fetchPointTransactions($page: Int) {
+    fetchPointTransactions(page: $page) {
       _id
       amount
       balance
-      status
     }
   }
 `

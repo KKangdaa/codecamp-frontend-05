@@ -14,13 +14,13 @@ export default function LoginUI(props: ILoginUIProps) {
             placeholder="이메일"
             onChange={props.onChangeUserEmail}
           />
-          <span>{props.errorUserEmail}</span>
+          <span>{props.errorEmail}</span>
           <A.LoginPassword
             type="password"
             placeholder="비밀번호"
             onChange={props.onChangeUserPassword}
           />
-          <span>{props.errorUserPassword}</span>
+          <span>{props.errorPassword}</span>
           <A.LoginCheck>
             <input type="checkbox" />
             <span>로그인 상태 유지</span>

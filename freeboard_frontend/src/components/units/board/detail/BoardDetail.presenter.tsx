@@ -1,10 +1,10 @@
-import { getMyDateTime } from '../../../../commons/libraries/utils'
 import { IBoardDetailUIProps } from './BoardDetail.types'
 import * as A from './BoardDetail.styled'
 import BoardCommentWrite from '../../boardcomment/write/BoardCommentWrite.container'
 import BoardCommentList from '../../boardcomment/list/BoardCommentList.container'
 import ReactPlayer from 'react-player'
 import { Modal } from 'antd'
+import { getMyDateTime } from '../../../../commons/libraries/utils'
 
 export default function BoardDetailUI(props: IBoardDetailUIProps) {
   const settings = {

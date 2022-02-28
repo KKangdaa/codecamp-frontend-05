@@ -7,8 +7,9 @@ import {
   ApolloLink,
 } from '@apollo/client'
 import { AppProps } from 'next/app'
-import Layout from '../src/components/commons/layout'
 import { Global } from '@emotion/react'
+import { onError } from '@apollo/client/link/error'
+import Layout from '../src/components/commons/layout'
 import { globalStyles } from '../src/commons/styles/globalStyles'
 import { createUploadLink } from 'apollo-upload-client'
 import {
@@ -18,12 +19,7 @@ import {
   useEffect,
   useState,
 } from 'react'
-
-/* interface IUserInfo {
-  name?: string;
-  email?: string;
-  picture?: string;
-} */
+import { getAccessToken } from '../src/commons/libraries/getAccessToken'
 
 interface IGlobalContext {
   accessToken?: String
@@ -43,30 +39,64 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [accessToken, setAccessToken] = useState('')
   const [userInfo, setUserInfo] = useState('')
   const value = {
+    // key와 value가 같기 때문에 shorthand property로 사용
     accessToken,
     setAccessToken,
     userInfo,
     setUserInfo,
-    // key와 value가 같기 때문에 shorthand property로 사용
     item,
     setItem,
   }
 
   useEffect(() => {
-    if (localStorage.getItem('accessToken')) {
+    /* if (localStorage.getItem('accessToken')) {
       setAccessToken(localStorage.getItem('accessToken') || '')
-    }
+    } */
+    getAccessToken().then((newAccessToken) => {
+      setAccessToken(newAccessToken)
+    })
   }, [])
 
-  const uploadLink = createUploadLink({
+  /* const uploadLink = createUploadLink({
     uri: 'http://backend05.codebootcamp.co.kr/graphql',
     // accessToken 사용시 HTTP HEADER에 작성해야 Mutation에서 생성이 가능함
     headers: { Authorization: `Bearer ${accessToken}` },
     // Authorization = 인가, Bearer = 관례상 사용함
+  }) */
+
+  const uploadLink = createUploadLink({
+    uri: 'https://backend05.codebootcamp.co.kr/graphql',
+    headers: { Authorization: `Bearer ${accessToken}` },
+    credentials: 'include',
+  })
+
+  const errorLink = onError(({ graphQLErrors, operation, forward }) => {
+    // 1. 에러를 캐치
+    if (graphQLErrors) {
+      for (const err of graphQLErrors) {
+        // 2. 해당 에러가 토큰만료 에러인지 체크 (Unauthenticated)
+        if (err.extensions.code === 'UNAUTHENTICATED') {
+          // 3. refreshToken으로 accessToken을 재발급 받기
+          getAccessToken().then((newAccessToken) => {
+            // 4. 재발급 받은 accessToken 저장하기
+            setAccessToken(newAccessToken)
+
+            // 5. 재발급 받은 accessToken으로 방금 실패한 쿼리 재요청하기
+            operation.setContext({
+              headers: {
+                ...operation.getContext().headers,
+                Authorization: `Bearer ${newAccessToken}`,
+              },
+            }) // 설정 변경(accessToken만 바꿔치기)
+            return forward(operation) // 변경된 operation 재요청하기
+          })
+        }
+      }
+    }
   })
 
   const client = new ApolloClient({
-    link: ApolloLink.from([uploadLink as unknown as ApolloLink]),
+    link: ApolloLink.from([errorLink, uploadLink as unknown as ApolloLink]),
     cache: new InMemoryCache(),
   })
 

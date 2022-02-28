@@ -40,7 +40,7 @@ export const ImgBox = styled.div`
 
 export const ItemInformation = styled.div`
   width: 50%;
-  height: 32vw;
+  height: 34vw;
   display: inline-block;
   padding: 20px 40px;
   display: grid;
@@ -62,7 +62,7 @@ export const ItemInformation = styled.div`
 `
 export const ItemBuy = styled.div`
   width: 100%;
-  padding: 5px 20px 0;
+  padding: 0 20px;
   display: grid;
   grid-template-columns: 2fr 3fr;
   grid-column-gap: 20px;
