@@ -28,16 +28,20 @@ export default function Layout(props: IProps) {
     '/login/sign-up',
     '/login/mypage',
     `/product/${router.query.productid}`,
+    `/product/${router.query.productid}/edit`,
     '/firebase-board',
   ]
   // const HIDDEN_NAVIGATION = ['/', '/login', '/login/sign-up', '/firebase-board']
-  const HIDDEN_FOOTER = ['/login', '/login/sign-up']
+  const HIDDEN_FOOTER = ['/login', '/login/sign-up', '/login/mypage']
   const HIDDEN_SIDEBER = [
     '/',
     '/#',
     '/boards',
     '/login',
     `/boards/${router.query.boardid}`,
+    `/boards/${router.query.boardid}/edit`,
+    `/product/new`,
+    `/product/${router.query.productid}/edit`,
     '/login/sign-up',
     '/login/mypage',
     '/firebase-board',

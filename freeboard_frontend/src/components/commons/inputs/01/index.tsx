@@ -1,4 +1,13 @@
 import { UseFormRegisterReturn } from 'react-hook-form'
+import styled from '@emotion/styled'
+
+const InputBox = styled.input`
+  width: 100%;
+  height: 40px;
+  border: 1px solid #ccc;
+  outline: 0;
+  padding: 0 10px;
+`
 
 interface IInput01Props {
   type: string
@@ -9,11 +18,10 @@ interface IInput01Props {
 
 export default function Input01(props: IInput01Props) {
   return (
-    <input
+    <InputBox
       type={props.type}
       {...props.register}
       maxLength={props.maxLength}
-      // defaultValue={props.defaultValue}
     />
   )
 }

@@ -1,12 +1,10 @@
-// import { UPLOAD_FILE } from './imageUploadForProduct.queries'
-// import { checkFileValidation } from '../libraries/utils'
 import { ChangeEvent, useRef } from 'react'
 import { gql, useMutation } from '@apollo/client'
+import { PlusOutlined } from '@ant-design/icons'
 import {
   IMutation,
   IMutationUploadFileArgs,
 } from '../../../../../src/commons/types/generated/types'
-// import { BsJournalCheck } from 'react-icons/bs'
 
 const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
@@ -43,16 +41,40 @@ export default function ImagesUploadForProduct(props) {
   }
 
   return (
-    <div>
+    <div style={{ marginRight: '20px' }}>
       {props.images ? (
-        <img
-          src={`https://storage.googleapis.com/${props.images}`}
-          onClick={onClickImage}
-        />
+        <div
+          style={{
+            width: '80px',
+            height: '80px',
+            overflow: 'hidden',
+            textAlign: 'center',
+            border: '1px solid #ccc',
+            padding: '5px',
+          }}
+        >
+          <img
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+            }}
+            src={`https://storage.googleapis.com/${props.images}`}
+            onClick={onClickImage}
+          />
+        </div>
       ) : (
-        <button type="button" onClick={onClickImage}>
-          <>+</>
-        </button>
+        <PlusOutlined
+          type="button"
+          onClick={onClickImage}
+          style={{
+            width: '80px',
+            height: '80px',
+            lineHeight: '80px',
+            border: '1px solid #ccc',
+            background: '#fff',
+          }}
+        />
       )}
       <input
         style={{ display: 'none' }}

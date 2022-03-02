@@ -7,8 +7,8 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { convertToRaw, EditorState, getCurrentContent } from 'draft-js'
-import domPurify from 'dompurify'
+import { convertToRaw, EditorState } from 'draft-js'
+import draftToHtml from 'draftjs-to-html'
 
 const schema = yup.object().shape({
   name: yup.string().max(100).required('필수입력'),
@@ -24,6 +24,10 @@ export interface IFormValues {
   contents?: string
   title?: string
   images?: string[]
+  zipcode?: string
+  address?: string
+  addressDetail?: string
+  email?: string
 }
 
 export default function ProductNew(props: IEditProps) {
@@ -54,31 +58,57 @@ export default function ProductNew(props: IEditProps) {
 
   useEffect(() => {
     if (props.isEdit) {
-      setImages(props.data?.fetchUseditems?.images)
+      setImages(props.data?.fetchUseditem?.images)
       setValue('name', props.data?.fetchUseditem.name)
-
       setValue('remarks', props.data?.fetchUseditem.remarks)
       // setValue('contents', props.data?.fetchUseditem.contents)
       setValue('price', props.data?.fetchUseditem.price)
+      /* setValue('zipcode', props.data?.fetchUseditem?.useditemAddress?.zipcode)
+      setValue('address', props.data?.fetchUseditem?.useditemAddress?.address) */
+      setValue(
+        'addressDetail',
+        props.data?.fetchUseditem?.useditemAddress?.addressDetail
+      )
+      /* setValue('email', props.data?.fetchUseditem.seller.email)
+      setValue('name', props.data?.fetchUseditem.seller.name) */
     }
   }, [props.data])
 
+  const editorToHtml = draftToHtml(
+    convertToRaw(editorState.getCurrentContent())
+  )
+
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [zipcode, setZipcode] = useState('')
+  const [address, setAddress] = useState('')
+  // const [addressDetail, setAddressDetail] = useState('')
+  const onToggleModal = () => {
+    setIsModalVisible((prev) => !prev)
+  }
+
+  const onCompleteDaumPostcode = (data) => {
+    setAddress(data.address)
+    setZipcode(data.zonecode)
+    setIsModalVisible((prev) => !prev)
+  }
+
   const onClickSubmit = async (data: IData) => {
-    const convertContent =
-      editorState instanceof EditorState
-        ? convertToRaw(editorState.getCurrentContent())
-        : editorState
-    // const { name, contents, remarks, price } = data
-    console.log('test :', typeof convertContent)
+    const { name, remarks, price, /* zipcode, address, */ addressDetail } = data
+    console.log(images)
     try {
       const result = await createUseditem({
         variables: {
           createUseditemInput: {
-            name: data.name,
-            contents: JSON.stringify(convertContent),
-            remarks: data.remarks,
-            price: Number(data.price),
-            images: data.images,
+            name,
+            contents: editorToHtml,
+            remarks,
+            price: Number(price),
+            images,
+            useditemAddress: {
+              zipcode,
+              address,
+              addressDetail,
+            },
           },
         },
       })
@@ -91,7 +121,7 @@ export default function ProductNew(props: IEditProps) {
   }
 
   const onClickEditSubmit = async (data: IData) => {
-    const { name, contents, remarks, price } = data
+    const { name, remarks, price, addressDetail } = data
     try {
       await updateUseditem({
         variables: {
@@ -99,8 +129,14 @@ export default function ProductNew(props: IEditProps) {
           updateUseditemInput: {
             name,
             remarks,
-            contents,
+            contents: editorToHtml,
             price: Number(price),
+            images,
+            useditemAddress: {
+              zipcode,
+              address,
+              addressDetail,
+            },
           },
         },
       })
@@ -121,11 +157,13 @@ export default function ProductNew(props: IEditProps) {
       onClickEditSubmit={onClickEditSubmit}
       images={images}
       onChangeFileUrls={onChangeFileUrls}
-      // onChangeContents={onChangeContents}
-      // contents={contents}
-      // setContents={setContents}
       editorState={editorState}
       onEditorStateChange={onEditorStateChange}
+      zipcode={zipcode}
+      address={address}
+      isModalVisible={isModalVisible}
+      onToggleModal={onToggleModal}
+      onCompleteDaumPostcode={onCompleteDaumPostcode}
     />
   )
 }

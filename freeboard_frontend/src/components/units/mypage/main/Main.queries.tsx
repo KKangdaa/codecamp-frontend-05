@@ -5,6 +5,10 @@ export const FETCH_USER_LOGGED_IN = gql`
     fetchUserLoggedIn {
       email
       name
+      userPoint {
+        _id
+        amount
+      }
     }
   }
 `
@@ -14,16 +18,6 @@ export const CREATE_POINT_TRANSACTION_OF_LOADING = gql`
     createPointTransactionOfLoading(impUid: $impUid) {
       _id
       impUid
-    }
-  }
-`
-
-export const FETCH_POINT_TRANSACTIONS = gql`
-  query fetchPointTransactions($page: Int) {
-    fetchPointTransactions(page: $page) {
-      _id
-      amount
-      balance
     }
   }
 `

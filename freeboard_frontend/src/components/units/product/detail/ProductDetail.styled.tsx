@@ -31,10 +31,9 @@ export const ImgBox = styled.div`
   object-position: center;
   overflow: hidden;
   > img {
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0);
+    width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 `
 
@@ -45,17 +44,17 @@ export const ItemInformation = styled.div`
   padding: 20px 40px;
   display: grid;
   grid-template-rows: 1fr 2fr 2.5fr 1.5fr 1.8fr;
-  > div:nth-of-type(1) {
+  > div {
     width: 100%;
+  }
+  > div:nth-of-type(1) {
     font-size: 1.1rem;
   }
   > div:nth-of-type(2) {
-    width: 100%;
     font-size: 1.5rem;
     font-weight: 500;
   }
   > div:nth-of-type(3) {
-    width: 100%;
     font-size: 2rem;
     font-weight: 700;
   }
@@ -77,7 +76,7 @@ export const ItemBuy = styled.div`
     height: 100%;
     border: 0;
     border-radius: 20px;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: #ff7300;
     cursor: pointer;
@@ -108,4 +107,11 @@ export const Line = styled.div`
   width: 100%;
   border-bottom: 1px solid black;
   margin: 50px 0;
+`
+
+export const IntroduceContent = styled.div`
+  overflow: hidden;
+  padding: 1.5rem;
+  margin: 0 auto;
+  margin-bottom: 4rem;
 `

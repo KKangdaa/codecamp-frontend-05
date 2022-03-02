@@ -37,10 +37,9 @@ export const ListItems = styled.div`
     overflow: hidden;
     border: 1px solid black;
     img {
-      position: relative;
-      left: 50%;
-      transform: translate(-50%, 0);
+      width: 100%;
       height: 100%;
+      object-fit: cover;
     }
   }
   > div:nth-of-type(2) {

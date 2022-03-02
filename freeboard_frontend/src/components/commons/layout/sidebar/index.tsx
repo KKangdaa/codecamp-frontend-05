@@ -28,10 +28,9 @@ const ImgContainer = styled.div`
   height: 45px;
   overflow: 'hidden';
   img {
+    width: 100%;
     height: 100%;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0);
+    object-fit: cover;
   }
 `
 const Items = styled.div`
@@ -92,7 +91,7 @@ export default function LayoutSidebar() {
                 </Items>
               ))
               .filter((el, index) => {
-                if (index <= 3) return el
+                if (index < 5) return el
               })}
           </>
         </Wrapper>

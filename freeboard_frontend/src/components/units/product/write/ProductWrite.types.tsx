@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react'
 import {
   FieldValues,
   FormState,
@@ -16,6 +17,10 @@ export interface IData {
   price: number
   remarks: string
   images: string[]
+  zipcode: string
+  address: string
+  addressDetail: string
+  email: string
 }
 
 export interface IProductNewUIProps {
@@ -25,8 +30,18 @@ export interface IProductNewUIProps {
   handleSubmit: UseFormHandleSubmit<FieldValues>
   onClickEditSubmit: () => void
   onClickSubmit: () => void
+
   formState: FormState<FieldValues>
   register: UseFormRegister<FieldValues>
+  editorState: any
+  onEditorStateChange: () => void
+  onChangeFileUrls: (event: ChangeEvent<HTMLInputElement>) => Promise<void>
+
+  isModalVisible: boolean
+  onToggleModal: () => void
+  onCompleteDaumPostcode: () => void
+  zipcode?: string
+  address?: string
 }
 
 export interface IFormValues extends ICreateUseditemInput {

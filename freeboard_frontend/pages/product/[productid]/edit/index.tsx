@@ -10,6 +10,13 @@ const FETCH_USED_ITEM = gql`
       remarks
       contents
       price
+      images
+      useditemAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `

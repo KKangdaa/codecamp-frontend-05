@@ -8,6 +8,12 @@ export const CREATE_USED_ITEM = gql`
       contents
       price
       images
+      useditemAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `
@@ -27,6 +33,12 @@ export const UPDATE_USED_ITEM = gql`
       contents
       price
       images
+      useditemAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `

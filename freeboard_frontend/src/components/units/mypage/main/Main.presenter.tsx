@@ -15,22 +15,18 @@ const MainUI = (props) => {
         ></script>
       </props.Head>
       <A.MyPageWrapper>
-        <p>마이페이지</p>
+        {/* <p>마이페이지</p> */}
         <A.UserContainer>
           <A.UserImg>
             <img src="/images/logo-icon.png" />
           </A.UserImg>
           <A.UserName>
             <div>
-              <span>{props.userData?.fetchUserLoggedIn.name}</span>님
+              <span>{props.data?.fetchUserLoggedIn.name}</span>님
             </div>
-            <div>[ {props.userData?.fetchUserLoggedIn.email} ]</div>
-            <div>
-              {props.pointData?.fetchPointTransactions.amount}안녕하세요
-            </div>
-            <div>
-              {props.pointData?.fetchPointTransactions.balance}안녕하세요
-            </div>
+            {/* <div>[ {props.data?.fetchUserLoggedIn.email} ]</div> */}
+            <div>{props.data?.fetchUserLoggedIn.userPoint.amount} 포인트</div>
+            <div></div>
           </A.UserName>
           <A.BookScrap>
             <A.BookList />
@@ -43,7 +39,10 @@ const MainUI = (props) => {
           </A.UserOrder>
           <A.UserPoint>
             {/* <div>전체 주문 내역</div> */}
-            <A.PointButton onClick={() => props.setVisible(true)}>
+            <A.PointButton
+              onClick={() => props.setVisible(true)}
+              style={{ cursor: 'pointer' }}
+            >
               포인트충전
             </A.PointButton>
             <A.PointModal
@@ -51,16 +50,20 @@ const MainUI = (props) => {
               visible={props.visible}
               onOk={props.onClickPayment}
               onCancel={() => props.setVisible(false)}
+              okText="충전하기"
+              cancelText="취소하기"
               width={'500px'}
             >
-              <input type="text" onChange={props.onChangeAmount} />
-              {/* <select name="price" onChange={onChangeAmount}>
-                <option value="1000">1000 point</option>
-                <option value="2000">2000 point</option>
-                <option value="3000">3000 point</option>
-                <option value="4000">4000 point</option>
-                <option value="5000">5000 point</option>
-              </select> */}
+              <select name="price" onChange={props.onChangeAmount}>
+                <option selected disabled>
+                  충전금액을 선택해주세요
+                </option>
+                <option value="1000">1000 포인트</option>
+                <option value="2000">2000 포인트</option>
+                <option value="3000">3000 포인트</option>
+                <option value="4000">4000 포인트</option>
+                <option value="5000">5000 포인트</option>
+              </select>
             </A.PointModal>
           </A.UserPoint>
         </A.UserContainer>
