@@ -58,11 +58,13 @@ export const LoginPassword = styled.input`
 export const LoginCheck = styled.div`
   width: 100%;
   margin: 10px 0;
-  > input[type='checkbox'] {
-    /* appearance: none; */
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+  display: flex;
+  align-items: center;
+  .ant-switch-checked {
+    background-color: #ff9900;
+  }
+  span {
+    margin-left: 5px;
   }
 `
 
@@ -80,11 +82,13 @@ export const LoginBottom = styled.div`
   display: grid;
   /* grid-template-rows: 1fr 1fr 1fr; */
   /* grid-template-columns: repeat(3, 1fr); */
-  grid-template-columns: 3fr 2fr 3fr;
+  grid-template-columns: 4fr 2fr 4fr;
   text-align: center;
-  justify-content: space-evenly;
   margin-top: 15px;
   span {
     cursor: pointer;
+    :hover {
+      color: #ff9900;
+    }
   }
 `

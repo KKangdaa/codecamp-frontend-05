@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import ProductDetailUI from './ProductDetail.presenter'
-import { Modal } from 'antd'
+// import { Modal } from 'antd'
 import {
   CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING,
   DELETE_USED_ITEM,
@@ -60,6 +60,9 @@ export default function ProductDetail() {
 
   return (
     <ProductDetailUI
+      lat={itemData?.fetchUseditem?.useditemAddress?.lat}
+      lng={itemData?.fetchUseditem?.useditemAddress?.lng}
+      address={itemData?.fetchUseditem?.useditemAddress?.address}
       itemData={itemData}
       userData={userData}
       onClickDelete={onClickDelete}

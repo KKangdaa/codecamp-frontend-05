@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Modal from 'antd/lib/modal/Modal'
+import { Modal } from 'antd'
 import Slider from 'react-slick'
 
 // export const SlickSlider = styled(Slider)``

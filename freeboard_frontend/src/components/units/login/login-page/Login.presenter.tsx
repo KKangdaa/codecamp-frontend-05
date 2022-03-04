@@ -1,7 +1,11 @@
 import * as A from './Login.styled'
 import { ILoginUIProps } from './Login.types'
+import { Switch } from 'antd'
 
 export default function LoginUI(props: ILoginUIProps) {
+  function onChange(checked) {
+    console.log(`switch to ${checked}`)
+  }
   return (
     <>
       <A.LoginBackground>
@@ -22,7 +26,7 @@ export default function LoginUI(props: ILoginUIProps) {
           />
           <span>{props.errorPassword}</span>
           <A.LoginCheck>
-            <input type="checkbox" />
+            <Switch onChange={onChange} />
             <span>로그인 상태 유지</span>
           </A.LoginCheck>
           <A.LoginButton

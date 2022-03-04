@@ -65,20 +65,15 @@ export const ItemBuy = styled.div`
   display: grid;
   grid-template-columns: 2fr 3fr;
   grid-column-gap: 20px;
-  button:first-child {
-    background: #ffe4aa;
-  }
-  button:last-child {
-    background: #fad483;
-  }
   button {
     width: 100%;
-    height: 100%;
-    border: 0;
-    border-radius: 20px;
+    height: 100px;
+    margin: auto;
     font-size: 1.3rem;
     font-weight: 700;
+    background: none;
     color: #ff7300;
+    border: 2px solid #fad483;
     cursor: pointer;
     :hover {
       background: #ffcb5b;

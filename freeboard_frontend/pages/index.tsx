@@ -12,6 +12,10 @@ const FETCH_USER_LOGGED_IN = gql`
   }
 `
 
+declare const window: typeof globalThis & {
+  kakao: any
+}
+
 export default function HomePage() {
   const { data } = useQuery(FETCH_USER_LOGGED_IN)
 
