@@ -1,14 +1,14 @@
-import React, { SetStateAction, useEffect, useState } from "react";
-import { Upload, Modal } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import { UploadChangeParam, UploadFile } from "antd/lib/upload/interface";
-import { gql, useMutation } from "@apollo/client";
+import { SetStateAction, useEffect, useState } from 'react'
+import { Upload, Modal } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
+import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
+import { gql, useMutation } from '@apollo/client'
 import {
   IMutation,
   IMutationUploadFileArgs,
-} from "../../../../commons/types/generated/types";
-import _ from "lodash";
-import { addFile, deleteFile } from "./functions";
+} from '../../../../commons/types/generated/types'
+import _ from 'lodash'
+import { addFile, deleteFile } from './functions'
 
 const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
@@ -17,63 +17,63 @@ const UPLOAD_FILE = gql`
       _id
     }
   }
-`;
+`
 
 interface IPictureWallProps {
-  images: string[];
-  setImages: (images: SetStateAction<string[]>) => void;
+  images: string[]
+  setImages: (images: SetStateAction<string[]>) => void
 }
 
 export default function PicturesWall(props: IPictureWallProps) {
   const [preview, setPreview] = useState({
     visible: false,
-    image: "",
-    title: "",
-  });
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+    image: '',
+    title: '',
+  })
+  const [fileList, setFileList] = useState<UploadFile[]>([])
   const [uploadFile] = useMutation<
-    Pick<IMutation, "uploadFile">,
+    Pick<IMutation, 'uploadFile'>,
     IMutationUploadFileArgs
-  >(UPLOAD_FILE);
+  >(UPLOAD_FILE)
 
   useEffect(() => {
     if (props.images.length > 0) {
-      const files: UploadFile[] = [];
+      const files: UploadFile[] = []
       props.images.forEach((el, idx) => {
         files.push({
           uid: String(idx),
           name: el,
           url: el,
-        });
-      });
+        })
+      })
 
-      setFileList(files);
+      setFileList(files)
     }
-  }, []);
+  }, [])
 
   const handleCancel = () =>
     setPreview((prev) => {
-      return { ...prev, visible: false };
-    });
+      return { ...prev, visible: false }
+    })
 
   const handlePreview = (file: UploadFile) => {
-    console.log(file);
-    if (!file.url) return;
+    console.log(file)
+    if (!file.url) return
     setPreview({
       visible: true,
       image: file.url,
       title: file.name,
-    });
-  };
+    })
+  }
 
   const handleChange = async ({
     fileList: changedFileList,
   }: UploadChangeParam) => {
-    getDebounce(changedFileList);
-  };
+    getDebounce(changedFileList)
+  }
 
   const getDebounce = _.debounce(async (changedFileList: UploadFile[]) => {
-    if (changedFileList.length === fileList.length) return;
+    if (changedFileList.length === fileList.length) return
 
     if (changedFileList.length > fileList.length) {
       addFile(
@@ -82,7 +82,7 @@ export default function PicturesWall(props: IPictureWallProps) {
         uploadFile,
         props.setImages,
         setFileList
-      );
+      )
     } else {
       deleteFile(
         fileList,
@@ -90,16 +90,16 @@ export default function PicturesWall(props: IPictureWallProps) {
         props.images,
         props.setImages,
         setFileList
-      );
+      )
     }
-  }, 200);
+  }, 200)
 
   const uploadButton = (
     <div>
       <PlusOutlined />
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
-  );
+  )
   return (
     <>
       <Upload
@@ -116,8 +116,8 @@ export default function PicturesWall(props: IPictureWallProps) {
         footer={null}
         onCancel={handleCancel}
       >
-        <img alt="example" style={{ width: "100%" }} src={preview.image} />
+        <img alt="example" style={{ width: '100%' }} src={preview.image} />
       </Modal>
     </>
-  );
+  )
 }

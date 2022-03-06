@@ -9,7 +9,8 @@ export const DetailWrapper = styled.div`
 export const ItemWrapper = styled.div`
   width: 100%;
   display: flex;
-  .slick-list {
+  > div {
+    height: 37.5vw;
   }
   .slick-dots {
     bottom: 25px;
@@ -17,11 +18,10 @@ export const ItemWrapper = styled.div`
 `
 export const SlickSlider = styled(Slider)`
   width: 50%;
-  height: 34vw;
   display: inline-block;
   background: #fff;
   div {
-    height: 34vw;
+    height: 37.5vw;
   }
 `
 export const ImgBox = styled.div`
@@ -39,11 +39,10 @@ export const ImgBox = styled.div`
 
 export const ItemInformation = styled.div`
   width: 50%;
-  height: 34vw;
   display: inline-block;
-  padding: 20px 40px;
+  padding: 20px 40px 10px;
   display: grid;
-  grid-template-rows: 1fr 2fr 2.5fr 1.5fr 1.8fr;
+  grid-template-rows: 1fr 2fr 3fr 1.5fr 1fr;
   > div {
     width: 100%;
   }
@@ -61,22 +60,32 @@ export const ItemInformation = styled.div`
 `
 export const ItemBuy = styled.div`
   width: 100%;
-  padding: 0 20px;
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 1fr 1fr 3fr;
   grid-column-gap: 20px;
   button {
     width: 100%;
-    height: 100px;
+    height: 75px;
     margin: auto;
+    border-radius: 15px;
     font-size: 1.3rem;
     font-weight: 700;
+    color: #222;
     background: none;
-    color: #ff7300;
-    border: 2px solid #fad483;
+    border: 1px solid #ffb71b;
     cursor: pointer;
     :hover {
-      background: #ffcb5b;
+      background: #ffb71b;
+      color: #fff;
+    }
+  }
+  button:last-child {
+    background: #ffb71b;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    :hover {
+      background: #eca917;
     }
   }
 `
@@ -100,7 +109,7 @@ export const ItemButtonGroup = styled.div`
 
 export const Line = styled.div`
   width: 100%;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ffb71b;
   margin: 50px 0;
 `
 
@@ -109,4 +118,13 @@ export const IntroduceContent = styled.div`
   padding: 1.5rem;
   margin: 0 auto;
   margin-bottom: 4rem;
+`
+export const Address = styled.div`
+  height: 60px;
+  line-height: 60px;
+`
+export const Map = styled.div`
+  width: 80%;
+  height: 32vw;
+  margin: 0 auto;
 `

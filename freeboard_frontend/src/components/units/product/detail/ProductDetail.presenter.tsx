@@ -7,12 +7,18 @@ import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'
 import { Modal } from 'antd'
 import { useEffect } from 'react'
+import {
+  HeartOutlined,
+  HeartFilled,
+  ShoppingCartOutlined,
+} from '@ant-design/icons'
 
 declare const window: typeof globalThis & {
   kakao: any
 }
 
 export default function ProductDetailUI(props: IProductDetailUIProps) {
+  // const { accessToken } = useContext(GlobalContext)
   useEffect(() => {
     const script = document.createElement('script') // <script></script> 만들어짐
     script.src =
@@ -118,6 +124,13 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
     }
   }, [props.address])
 
+  const result = props.pickData?.fetchUseditemsIPicked
+    .map((el) => el._id)
+    .filter((filterEl) => filterEl === props.itemData?.fetchUseditem._id)
+    .join('')
+
+  useEffect(() => {}, [result])
+
   const settings = {
     dots: true,
     className: 'center',
@@ -145,17 +158,28 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
         <A.ItemInformation>
           <div>{props.itemData?.fetchUseditem?.seller.name}</div>
           <div>{props.itemData?.fetchUseditem?.name}</div>
-          <div>{getPrice(props.itemData?.fetchUseditem?.price)}원</div>
+          <div>{getPrice(props.itemData?.fetchUseditem?.price)} 원</div>
           <div></div>
           <A.ItemBuy>
-            <button>찜하기</button>
-            <button onClick={props.toggleButton}>구매하기</button>
+            <button onClick={props.onClickPick}>
+              {result === props.itemData?.fetchUseditem._id ? (
+                <HeartFilled />
+              ) : (
+                <HeartOutlined />
+              )}{' '}
+              {props.itemData?.fetchUseditem.pickedCount}
+            </button>
+            {console.log(result)}
+            <button>
+              <ShoppingCartOutlined />
+            </button>
+            <button onClick={props.toggleButton2}>구매하기</button>
           </A.ItemBuy>
-          {props.isModalVisible && (
+          {props.isModal && (
             <Modal
               visible={true}
               onOk={props.onClickUsePoint}
-              onCancel={props.toggleButton}
+              onCancel={props.toggleButton2}
             >
               구매하시겠습니까?
             </Modal>
@@ -174,12 +198,12 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
         <A.Line></A.Line>
         {props.itemData?.fetchUseditem?.useditemAddress && (
           <div>
-            <div>
+            <A.Map id="map"></A.Map>
+            <A.Address>
               {props.itemData?.fetchUseditem?.useditemAddress.zipcode}{' '}
               {props.itemData?.fetchUseditem?.useditemAddress.address}{' '}
               {props.itemData?.fetchUseditem?.useditemAddress.addressDetail}
-            </div>
-            <div id="map" style={{ width: '500px', height: '400px' }}></div>
+            </A.Address>
           </div>
         )}
       </A.ItemContents>
@@ -189,7 +213,18 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
       <A.ItemButtonGroup>
         {/* {props.userData?.fetchUserLoggedIn && ( */}
         <>
-          <button onClick={props.onClickDelete}>삭제</button>
+          <button onClick={props.toggleButton}>삭제</button>
+          {props.isModalVisible && (
+            <Modal
+              visible={true}
+              onOk={props.onClickDelete}
+              onCancel={props.toggleButton}
+              okText="삭제"
+              cancelText="취소"
+            >
+              삭제하시겠습니까?
+            </Modal>
+          )}
           <button onClick={props.onClickMoveToEdit}>수정</button>
         </>
         {/* )} */}

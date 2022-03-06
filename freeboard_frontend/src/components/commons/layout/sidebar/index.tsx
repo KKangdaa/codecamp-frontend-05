@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   width: 150px;
   padding: 20px 15px;
   position: fixed;
-  right: 30px;
+  right: 20px;
   /* left: 100vw; */
   top: 50%;
   transform: translate(0, -50%);

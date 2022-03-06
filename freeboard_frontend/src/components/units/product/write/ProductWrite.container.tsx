@@ -81,7 +81,6 @@ export default function ProductNew(props: IEditProps) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [zipcode, setZipcode] = useState('')
   const [address, setAddress] = useState('')
-  // const [addressDetail, setAddressDetail] = useState('')
   const onToggleModal = () => {
     setIsModalVisible((prev) => !prev)
   }
@@ -93,7 +92,7 @@ export default function ProductNew(props: IEditProps) {
   }
 
   const onClickSubmit = async (data: IData) => {
-    const { name, remarks, price, /* zipcode, address, */ addressDetail } = data
+    const { name, remarks, price, addressDetail } = data
     console.log(images)
     try {
       const result = await createUseditem({
@@ -113,7 +112,6 @@ export default function ProductNew(props: IEditProps) {
         },
       })
 
-      // console.log(result.data?.createUseditem._id)
       router.push(`/product/${result.data?.createUseditem._id}`)
     } catch (error) {
       alert(error.message)

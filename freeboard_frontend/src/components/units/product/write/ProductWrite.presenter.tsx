@@ -79,7 +79,6 @@ const ProductNewUI = (props: IProductNewUIProps) => {
                   />
                 ))}
           </div>
-          {console.log(props.data?.fetchUseditem?.images)}
         </A.InputWrapper>
 
         <A.InputWrapper>

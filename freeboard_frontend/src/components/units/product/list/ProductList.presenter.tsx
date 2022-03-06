@@ -12,7 +12,7 @@ export default function ProductListUI(props: IProductListUIProps) {
         hasMore={true}
         // useWindow={false}
         loadMore={props.onLoadMore}
-        loader={
+        /* loader={
           <div
             className="loader"
             key={0}
@@ -20,7 +20,7 @@ export default function ProductListUI(props: IProductListUIProps) {
           >
             더보기
           </div>
-        }
+        } */
       >
         <A.List>
           {props.data?.fetchUseditems.map((el) => (

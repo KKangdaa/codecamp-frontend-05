@@ -9,6 +9,7 @@ export const FETCH_USED_ITEM = gql`
       contents
       price
       images
+      pickedCount
       buyer {
         _id
         name
@@ -49,6 +50,24 @@ export const FETCH_USER_LOGGED_IN = gql`
     fetchUserLoggedIn {
       name
       picture
+    }
+  }
+`
+
+export const TOGGLE_USED_ITEM_PICK = gql`
+  mutation toggleUseditemPick($useditemId: ID!) {
+    toggleUseditemPick(useditemId: $useditemId)
+  }
+`
+
+export const FETCH_USED_ITEM_I_PICKED = gql`
+  query fetchUseditemsIPicked($search: String, $page: Int) {
+    fetchUseditemsIPicked(search: $search, page: $page) {
+      _id
+      name
+      remarks
+      contents
+      price
     }
   }
 `

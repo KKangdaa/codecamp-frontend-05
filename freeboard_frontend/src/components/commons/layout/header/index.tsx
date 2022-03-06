@@ -1,7 +1,11 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import styled from '@emotion/styled'
-import { LoginOutlined, LogoutOutlined } from '@ant-design/icons'
+import {
+  LoginOutlined,
+  LogoutOutlined,
+  ShoppingCartOutlined,
+} from '@ant-design/icons'
 import { gql, useQuery } from '@apollo/client'
 
 const FETCH_USER_LOGGED_IN = gql`
@@ -124,6 +128,7 @@ export default function LayoutHeader() {
           ) : (
             <LoginButton onClick={onClickLogin} />
           )}
+          <ShoppingCartOutlined />
           <Panda
             viewBox="0 0 1024 1024"
             fill="currentColor"
