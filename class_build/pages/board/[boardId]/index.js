@@ -20,7 +20,7 @@ export default function BoardDetailPage(props) {
           content="https://dullyshin.github.io/2018/08/30/HTML-imgLink/#lg=1&slide=0"
         /> */}
         <meta property="og:title" content={props.myboardData?.title} />
-        <meta property="og:description" content={props.myboardData?.content} />
+        <meta property="og:description" content={props.myboardData?.contents} />
         <meta property="og:image" content={props.myboardData?.images[0]} />
       </Head>
       <div>
@@ -56,7 +56,7 @@ export const getServerSideProps = async (context) => {
     props: {
       myboardData: {
         title: result.fetchBoard.title,
-        content: result.fetchBoard.content,
+        contents: result.fetchBoard.contents,
         images: result.fetchBoard.images,
       },
     },
