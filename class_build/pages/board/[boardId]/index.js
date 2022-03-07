@@ -46,7 +46,7 @@ export const getServerSideProps = async (context) => {
   // 데이터를 요청할 것
   // graphQL의 데이터를 여기서 요청하여 위쪽에서 props로 받아서 data를 사용하면 된다
   const result = await request(
-    "https://backend05.codebootcamp.co.kr/graghql",
+    "https://backend05.codebootcamp.co.kr/graphql",
     FETCH_BOARD,
     { boardId: context.query.boardId }
   );
