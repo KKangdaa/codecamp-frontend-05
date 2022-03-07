@@ -18,7 +18,6 @@ declare const window: typeof globalThis & {
 }
 
 export default function ProductDetailUI(props: IProductDetailUIProps) {
-  // const { accessToken } = useContext(GlobalContext)
   useEffect(() => {
     const script = document.createElement('script') // <script></script> 만들어짐
     script.src =
@@ -124,13 +123,6 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
     }
   }, [props.address])
 
-  const result = props.pickData?.fetchUseditemsIPicked
-    .map((el) => el._id)
-    .filter((filterEl) => filterEl === props.itemData?.fetchUseditem._id)
-    .join('')
-
-  useEffect(() => {}, [result])
-
   const settings = {
     dots: true,
     className: 'center',
@@ -162,15 +154,10 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
           <div></div>
           <A.ItemBuy>
             <button onClick={props.onClickPick}>
-              {result === props.itemData?.fetchUseditem._id ? (
-                <HeartFilled />
-              ) : (
-                <HeartOutlined />
-              )}{' '}
+              {props.heart === true ? <HeartFilled /> : <HeartOutlined />}{' '}
               {props.itemData?.fetchUseditem.pickedCount}
             </button>
-            {console.log(result)}
-            <button>
+            <button onClick={props.onClickBasket}>
               <ShoppingCartOutlined />
             </button>
             <button onClick={props.toggleButton2}>구매하기</button>
@@ -195,9 +182,9 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
             }}
           />
         )}
-        <A.Line></A.Line>
-        {props.itemData?.fetchUseditem?.useditemAddress && (
+        {props.itemData?.fetchUseditem?.useditemAddress === '' ? (
           <div>
+            <A.Line></A.Line>
             <A.Map id="map"></A.Map>
             <A.Address>
               {props.itemData?.fetchUseditem?.useditemAddress.zipcode}{' '}
@@ -205,6 +192,8 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
               {props.itemData?.fetchUseditem?.useditemAddress.addressDetail}
             </A.Address>
           </div>
+        ) : (
+          ''
         )}
       </A.ItemContents>
 

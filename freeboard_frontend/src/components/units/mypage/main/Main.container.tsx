@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { useState } from 'react'
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
 import Head from 'next/head'
 import {
   FETCH_USER_LOGGED_IN,
@@ -38,6 +38,8 @@ export default function Main() {
         if (rsp.success) {
           // console.log(rsp.imp_uid)
           point(rsp)
+
+          message.success('결제가 완료되었습니다')
         } else {
           alert('결제 실패하였습니다.')
         }
@@ -54,8 +56,6 @@ export default function Main() {
         },
       })
       window.location.reload()
-      /* refetch()
-      alert('성공') */
     } catch (error) {
       Modal.error({
         content: error.message,

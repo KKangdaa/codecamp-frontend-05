@@ -61,8 +61,8 @@ export const TOGGLE_USED_ITEM_PICK = gql`
 `
 
 export const FETCH_USED_ITEM_I_PICKED = gql`
-  query fetchUseditemsIPicked($search: String, $page: Int) {
-    fetchUseditemsIPicked(search: $search, page: $page) {
+  query fetchUseditemsIPicked($search: String) {
+    fetchUseditemsIPicked(search: $search) {
       _id
       name
       remarks

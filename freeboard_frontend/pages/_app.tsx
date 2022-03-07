@@ -28,6 +28,8 @@ interface IGlobalContext {
   setUserInfo?: Dispatch<SetStateAction<IUserInfo>>; */
   item?: any
   setItem?: any
+  baskets?: any
+  setBaskets?: any
 }
 
 export const GlobalContext = createContext<IGlobalContext>({})
@@ -35,6 +37,7 @@ export const GlobalContext = createContext<IGlobalContext>({})
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [item, setItem] = useState([])
+  const [baskets, setBaskets] = useState([])
 
   const [accessToken, setAccessToken] = useState('')
   const [userInfo, setUserInfo] = useState('')
@@ -46,6 +49,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     setUserInfo,
     item,
     setItem,
+    baskets,
+    setBaskets,
   }
 
   useEffect(() => {

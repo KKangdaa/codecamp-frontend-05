@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ProductDetailUI from './ProductDetail.presenter'
 import { Modal, message } from 'antd'
 import {
@@ -11,16 +11,18 @@ import {
   FETCH_USER_LOGGED_IN,
   TOGGLE_USED_ITEM_PICK,
 } from './ProductDetail.queries'
+import { GlobalContext } from '../../../../../pages/_app'
 
 export default function ProductDetail() {
   const router = useRouter()
+  const { setBaskets } = useContext(GlobalContext)
 
   const { data: itemData, refetch } = useQuery(FETCH_USED_ITEM, {
     variables: { useditemId: router.query.productid },
   })
   const { data: userData } = useQuery(FETCH_USER_LOGGED_IN)
   const { data: pickData } = useQuery(FETCH_USED_ITEM_I_PICKED, {
-    variables: { search: '', page: 1 },
+    variables: { search: '' },
   })
 
   const [toggleUseditemPick] = useMutation(TOGGLE_USED_ITEM_PICK)
@@ -34,7 +36,7 @@ export default function ProductDetail() {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const toggleButton = () => {
-    setIsModalOpen((prev) => !prev)
+    setIsModalVisible((prev) => !prev)
   }
   const toggleButton2 = () => {
     setIsModalOpen((prev) => !prev)
@@ -50,7 +52,7 @@ export default function ProductDetail() {
       router.push('/product')
       message.success({ content: '삭제되었습니다.' })
     } catch (error) {
-      console.log(error.message)
+      Modal.error({ content: error.message })
     }
   }
   const onClickPick = async () => {
@@ -58,18 +60,29 @@ export default function ProductDetail() {
       await toggleUseditemPick({
         variables: { useditemId: router.query.productid },
       })
+      if (heart === false) {
+        setHeart(true)
+      } else {
+        setHeart(false)
+      }
+
       refetch()
-      setHeart((prev) => !prev)
     } catch (error) {
       console.log(error.message)
     }
   }
 
-  const onClickMoveToEdit = () => {
-    router.push(`/product/${router.query.productid}/edit`)
-  }
-  const onClickMoveToList = () => {
-    router.push('/product')
+  const onClickBasket = () => {
+    const item = JSON.parse(localStorage.getItem('basket') || '[]')
+    const temp = item.filter(
+      (filterEl) => filterEl._id !== itemData?.fetchUseditem._id
+    )
+
+    const { __typename, ...plus } = itemData?.fetchUseditem
+    temp.push(plus)
+    localStorage.setItem('basket', JSON.stringify(temp))
+    setBaskets(temp)
+    // message.success('장바구니에 추가되었습니다.')
   }
 
   const onClickUsePoint = async () => {
@@ -83,6 +96,26 @@ export default function ProductDetail() {
       alert(error.message)
     }
   }
+
+  const onClickMoveToEdit = () => {
+    router.push(`/product/${router.query.productid}/edit`)
+  }
+  const onClickMoveToList = () => {
+    router.push('/product')
+  }
+
+  const result = pickData?.fetchUseditemsIPicked
+    .map((el) => el._id)
+    .filter((filterEl) => filterEl === itemData?.fetchUseditem._id)
+    .join('')
+
+  useEffect(() => {
+    if (result === itemData?.fetchUseditem._id) {
+      setHeart(true)
+    } else {
+      setHeart(false)
+    }
+  }, [pickData])
 
   return (
     <ProductDetailUI
@@ -100,6 +133,7 @@ export default function ProductDetail() {
       toggleButton={toggleButton}
       toggleButton2={toggleButton2}
       onClickUsePoint={onClickUsePoint}
+      onClickBasket={onClickBasket}
     />
   )
 }

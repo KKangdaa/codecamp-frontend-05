@@ -7,7 +7,11 @@ export interface IProductDetailUIProps {
   onClickMoveToEdit: () => void
   onClickMoveToList: () => void
   onClickPick: () => void
+  onClickBasket: () => void
   isModalVisible: boolean
+  isModal: boolean
+  heart: boolean
+  toggleButton2: () => void
   toggleButton: () => void
   onClickUsePoint: () => void
 }

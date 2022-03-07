@@ -6,7 +6,7 @@ import {
   LogoutOutlined,
   ShoppingCartOutlined,
 } from '@ant-design/icons'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 
 const FETCH_USER_LOGGED_IN = gql`
   query fetchUserLoggedIn {
@@ -14,6 +14,12 @@ const FETCH_USER_LOGGED_IN = gql`
       email
       name
     }
+  }
+`
+
+const LOGOUT_USER = gql`
+  mutation logoutUser {
+    logoutUser
   }
 `
 
@@ -72,6 +78,7 @@ const LoginButton = styled(LoginOutlined)`
 export default function LayoutHeader() {
   const router = useRouter()
   const { data } = useQuery(FETCH_USER_LOGGED_IN)
+  const [logoutUser] = useMutation(LOGOUT_USER)
 
   const onClickHome = () => {
     router.push('/')
@@ -82,8 +89,10 @@ export default function LayoutHeader() {
   const onClickBoard = () => {
     router.push('/boards')
   }
-  const onClickLogOut = () => {
-    localStorage.removeItem('accessToken')
+  const onClickLogOut = async () => {
+    await logoutUser({
+      variables: {},
+    })
     window.location.reload()
   }
   const onClickLogin = () => {
@@ -94,6 +103,9 @@ export default function LayoutHeader() {
   }
   const onClickMypage = () => {
     router.push('/login/mypage')
+  }
+  const onClickBasket = () => {
+    router.push('/login/basket')
   }
 
   return (
@@ -128,7 +140,7 @@ export default function LayoutHeader() {
           ) : (
             <LoginButton onClick={onClickLogin} />
           )}
-          <ShoppingCartOutlined />
+          <ShoppingCartOutlined onClick={onClickBasket} />
           <Panda
             viewBox="0 0 1024 1024"
             fill="currentColor"

@@ -8,7 +8,7 @@ const FETCH_USER_LOGGED_IN = gql`
     fetchUserLoggedIn {
       email
       name
-    }
+    } 
   }
 `
 
@@ -104,7 +104,7 @@ export default function HomePage() {
       </Head>
       <A.Wrapper>
         <div>
-          {data?.fetchUserLoggedIn.name ? data?.fetchUserLoggedIn.name : <></>}
+          {data?.fetchUserLoggedIn ? data?.fetchUserLoggedIn.name : <></>}
         </div>
         <A.SlickSlider {...settings}>
           <A.SliderGroup>
