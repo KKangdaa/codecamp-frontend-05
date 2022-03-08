@@ -20,6 +20,7 @@ declare const window: typeof globalThis & {
 export default function ProductDetailUI(props: IProductDetailUIProps) {
   useEffect(() => {
     const script = document.createElement('script') // <script></script> 만들어짐
+
     script.src =
       '//dapi.kakao.com/v2/maps/sdk.js?appkey=8b77aaeac9eee62232cd589f76eb677f&libraries=services&autoload=false' // ?&autoload=false 추가
     document.head.appendChild(script)
@@ -77,6 +78,7 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
           })
         })
       } */
+
     script.onload = () => {
       window.kakao.maps.load(function () {
         const mapContainer = document.getElementById('map') // 지도를 표시할 div
@@ -94,34 +96,37 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
 
         // 주소-좌표 변환 객체를 생성합니다
         const geocoder = new window.kakao.maps.services.Geocoder()
-        geocoder.addressSearch(props.address, function (result, status) {
-          // 정상적으로 검색이 완료됐으면
-          if (status === window.kakao.maps.services.Status.OK) {
-            const coords = new window.kakao.maps.LatLng(
-              result[0].y,
-              result[0].x
-            )
+        geocoder.addressSearch(
+          props.itemData?.fetchUseditem?.useditemAddress?.address,
+          function (result, status) {
+            // 정상적으로 검색이 완료됐으면
+            if (status === window.kakao.maps.services.Status.OK) {
+              const coords = new window.kakao.maps.LatLng(
+                result[0].y,
+                result[0].x
+              )
 
-            const mapOption = {
-              center: coords, // 지도의 중심좌표
-              level: 3,
+              const mapOption = {
+                center: coords, // 지도의 중심좌표
+                level: 3,
+              }
+              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+              const map = new window.kakao.maps.Map(mapContainer, mapOption)
+
+              // 결과값으로 받은 위치를 마커로 표시합니다
+              const marker = new window.kakao.maps.Marker({
+                map: map,
+                position: coords,
+                image: markerImage, // 마커이미지 설정
+              })
+              map.setCenter(coords)
+              marker.setMap(map)
             }
-            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-            const map = new window.kakao.maps.Map(mapContainer, mapOption)
-
-            // 결과값으로 받은 위치를 마커로 표시합니다
-            const marker = new window.kakao.maps.Marker({
-              map: map,
-              position: coords,
-              image: markerImage, // 마커이미지 설정
-            })
-            map.setCenter(coords)
-            marker.setMap(map)
           }
-        })
+        )
       })
     }
-  }, [props.address])
+  }, [props.itemData])
 
   const settings = {
     dots: true,
@@ -182,7 +187,7 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
             }}
           />
         )}
-        {props.itemData?.fetchUseditem?.useditemAddress === '' ? (
+        {props.itemData?.fetchUseditem?.useditemAddress ? (
           <div>
             <A.Line></A.Line>
             <A.Map id="map"></A.Map>

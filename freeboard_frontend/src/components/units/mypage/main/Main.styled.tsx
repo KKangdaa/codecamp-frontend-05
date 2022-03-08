@@ -9,9 +9,10 @@ export const MyPageWrapper = styled.div`
     src: url('/font/sb/sbm.ttf');
   }
 
-  width: 100%;
+  width: 100vw;
   text-align: center;
   padding: 50px 0;
+
   > p {
     font-family: 'SB agro M';
     margin-bottom: 30px;

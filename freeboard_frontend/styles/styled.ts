@@ -1,11 +1,22 @@
 import Slider from 'react-slick'
 import styled from '@emotion/styled'
+import { breakPoints } from '../src/commons/styles/media'
 
 export const Wrapper = styled.div`
   width: 100vw;
-  /* height: 100vmax; */
   margin: 0 auto;
   padding: 0px 10vw;
+  #map {
+    width: 80%;
+    height: 40vw;
+    margin: 0 auto;
+  }
+  @media ${breakPoints.mobile} {
+    #map {
+      width: 100%;
+      height: 50vw;
+    }
+  }
 `
 
 export const SlickSlider = styled(Slider)`
@@ -14,7 +25,6 @@ export const SlickSlider = styled(Slider)`
 
 export const SliderGroup = styled.div`
   width: 100%;
-  /* height: 50vw; */
   margin: 0 auto;
   display: flex !important;
   justify-content: center;
@@ -40,6 +50,17 @@ export const SliderGroup = styled.div`
     text-align: center;
     font-size: 1.2rem;
   }
+  @media ${breakPoints.mobile} {
+    & > img {
+      width: 90%;
+    }
+    & p:nth-of-type(1) {
+      font-size: 2.5rem;
+    }
+    & p:nth-of-type(2) {
+      font-size: 0.875rem;
+    }
+  }
 `
 
 export const GroupImg = styled.div`
@@ -49,6 +70,9 @@ export const GroupImg = styled.div`
   padding-bottom: 10vw;
   & > div:last-child {
     margin-right: 0px;
+  }
+  @media ${breakPoints.mobile} {
+    flex-direction: column;
   }
 `
 
@@ -82,6 +106,10 @@ export const ImgRow = styled.div`
   &:hover p:nth-of-type(2) {
     opacity: 1;
   }
+  @media ${breakPoints.mobile} {
+    height: 120vw;
+    margin-bottom: 10vw;
+  }
 `
 export const Overlay = styled.div`
   position: absolute;
@@ -102,6 +130,14 @@ export const ImgTitle = styled.p`
   color: white;
   text-transform: uppercase;
   transition: 0.5s ease;
+
+  @media ${breakPoints.tablet} {
+    font-size: 1.2rem;
+  }
+
+  @media ${breakPoints.mobile} {
+    font-size: 1.5rem;
+  }
 `
 export const Subtitle = styled.p`
   opacity: 0;

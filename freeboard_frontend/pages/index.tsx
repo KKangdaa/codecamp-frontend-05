@@ -8,7 +8,7 @@ const FETCH_USER_LOGGED_IN = gql`
     fetchUserLoggedIn {
       email
       name
-    } 
+    }
   }
 `
 
@@ -166,10 +166,7 @@ export default function HomePage() {
             <A.Subtitle>more →</A.Subtitle>
           </A.ImgRow>
         </A.GroupImg>
-        <div
-          id="map"
-          style={{ width: '80%', height: '40vw', margin: '0 auto' }}
-        ></div>
+        <div id="map"></div>
       </A.Wrapper>
     </div>
   )

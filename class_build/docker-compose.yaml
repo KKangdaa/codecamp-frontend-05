@@ -1,0 +1,9 @@
+version: "3.3"
+
+services:
+  my_frontend: # 내가 지정할 수 있음
+    build:
+      context: . # docker파일이 있는 위치
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
