@@ -1,4 +1,4 @@
-import * as A from './Login.styled'
+import * as A from './Login.styles'
 import { ILoginUIProps } from './Login.types'
 import { Switch } from 'antd'
 

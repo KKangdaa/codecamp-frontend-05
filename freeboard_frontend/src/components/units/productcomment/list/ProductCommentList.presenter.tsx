@@ -1,4 +1,4 @@
-import * as A from './ProductCommentList.styled'
+import * as A from './ProductCommentList.styles'
 import CommentAnswerListItem from '../../productcommentanswer/detail/ProductCommentAnswerDetail.presenter'
 
 export default function ProductCommentListUI(props) {

@@ -1,4 +1,4 @@
-import * as A from './BoardCommentList.styled'
+import * as A from './BoardCommentList.styles'
 import { IBoardCommentListUIProps } from './BoardCommentList.types'
 import InfiniteScroll from 'react-infinite-scroller'
 import { Modal } from 'antd'

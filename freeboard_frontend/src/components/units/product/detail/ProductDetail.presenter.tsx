@@ -2,7 +2,7 @@ import ProductCommentWrite from '../../productcomment/write/ProductCommentWrite.
 import ProductCommentList from '../../productcomment/list/ProductCommentList.container'
 import { IProductDetailUIProps } from './ProductDetail.types'
 import { getPrice } from '../../../../commons/libraries/utils'
-import * as A from './ProductDetail.styled'
+import * as A from './ProductDetail.styles'
 import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'
 import { Modal } from 'antd'

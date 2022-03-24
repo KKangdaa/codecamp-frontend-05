@@ -1,4 +1,4 @@
-import * as A from './ProductCommentAnswerList.styled'
+import * as A from './ProductCommentAnswerList.styles'
 
 import { useMutation, useQuery } from '@apollo/client'
 import { Modal } from 'antd'

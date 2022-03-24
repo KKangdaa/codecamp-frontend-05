@@ -1,4 +1,4 @@
-import * as A from './ProductCommentList.styled'
+import * as A from './ProductCommentList.styles'
 import { useMutation } from '@apollo/client'
 import { Modal } from 'antd'
 import { useRouter } from 'next/router'

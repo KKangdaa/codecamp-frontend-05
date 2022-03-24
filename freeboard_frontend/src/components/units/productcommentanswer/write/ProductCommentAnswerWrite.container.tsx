@@ -6,7 +6,7 @@ import {
   CREATE_USED_ITEM_QUESTION_ANSWER,
   FETCH_USED_ITEM_QUESTION_ANSWER,
 } from './ProductCommentAnswerWrite.queries'
-import * as A from './ProductCommentAnswerWrite.styled'
+import * as A from './ProductCommentAnswerWrite.styles'
 
 export default function ProductCommentAnswerWrite(props) {
   const router = useRouter()

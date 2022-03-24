@@ -1,5 +1,5 @@
 import { withAuth } from '../../../commons/hocs/withAuth'
-import * as A from './Main.styled'
+import * as A from './Main.styles'
 
 const MainUI = (props) => {
   return (

@@ -1,4 +1,4 @@
-import * as A from "./BoardList.styled";
+import * as A from "./BoardList.styles";
 import InfiniteScroll from "react-infinite-scroller";
 import { IBoardListUIProps } from "./BoardList.types";
 

@@ -1,6 +1,6 @@
 import Button01 from '../../../commons/buttons/01'
 import Input01 from '../../../commons/inputs/01'
-import * as A from './ProductWrite.styled'
+import * as A from './ProductWrite.styles'
 import { withAuth } from '../../../commons/hocs/withAuth'
 import { IProductNewUIProps } from './ProductWrite.types'
 import { EditorProps } from 'react-draft-wysiwyg'

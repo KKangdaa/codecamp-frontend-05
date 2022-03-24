@@ -1,5 +1,5 @@
 import { IBoardDetailUIProps } from './BoardDetail.types'
-import * as A from './BoardDetail.styled'
+import * as A from './BoardDetail.styles'
 import BoardCommentWrite from '../../boardcomment/write/BoardCommentWrite.container'
 import BoardCommentList from '../../boardcomment/list/BoardCommentList.container'
 import ReactPlayer from 'react-player'

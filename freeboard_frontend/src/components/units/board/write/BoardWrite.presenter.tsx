@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import DaumPostcode from 'react-daum-postcode'
 import { Modal } from 'antd'
-import * as A from './BoardWrite.styled'
+import * as A from './BoardWrite.styles'
 import { IBoardWriteUIProps } from './BoardWrite.types'
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {

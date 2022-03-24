@@ -1,4 +1,4 @@
-import * as A from './ProductList.styled'
+import * as A from './ProductList.styles'
 import { IProductListUIProps } from './ProductList.types'
 import InfiniteScroll from 'react-infinite-scroller'
 import { getPrice } from '../../../../commons/libraries/utils'

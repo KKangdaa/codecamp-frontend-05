@@ -1,4 +1,4 @@
-import * as A from './ProductCommentWrite.styled'
+import * as A from './ProductCommentWrite.styles'
 
 export default function ProductCommentWriteUI(props) {
   return (

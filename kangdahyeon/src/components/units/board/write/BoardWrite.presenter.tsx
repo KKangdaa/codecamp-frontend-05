@@ -1,4 +1,4 @@
-import * as A from "./BoardWrite.styled";
+import * as A from "./BoardWrite.styles";
 import { IBoardWriteUIProps } from "./BoardWrite.types";
 
 export default function BoardWritePresenter(props: IBoardWriteUIProps) {

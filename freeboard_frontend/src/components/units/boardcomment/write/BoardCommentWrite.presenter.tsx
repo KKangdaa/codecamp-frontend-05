@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import * as A from './BoardCommentWrite.styled'
+import * as A from './BoardCommentWrite.styles'
 import { IBoardCommentWriteUIProps } from './BoardCommentWrite.types'
 import { Rate } from 'antd'
 

@@ -1,4 +1,4 @@
-import * as A from './FirebaseList.styled'
+import * as A from './FirebaseList.styles'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 

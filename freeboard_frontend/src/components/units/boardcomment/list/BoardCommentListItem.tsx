@@ -1,6 +1,6 @@
 import { getMyDateTime } from '../../../../commons/libraries/utils'
-import * as A from './BoardCommentList.styled'
-import * as S from '../write/BoardCommentWrite.styled'
+import * as A from './BoardCommentList.styles'
+import * as S from '../write/BoardCommentWrite.styles'
 import { ICommentInput } from './BoardCommentList.types'
 import { Rate, Modal } from 'antd'
 import { MouseEvent, useState } from 'react'

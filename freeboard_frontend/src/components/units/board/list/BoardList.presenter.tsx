@@ -1,6 +1,6 @@
 import { getMyDateTime } from '../../../../commons/libraries/utils'
 import Pagination from '../../../commons/pagination/pagination'
-import * as A from './BoardList.styled'
+import * as A from './BoardList.styles'
 import { IBoardListUIProps } from './BoardList.types'
 import { v4 as uuidv4 } from 'uuid'
 

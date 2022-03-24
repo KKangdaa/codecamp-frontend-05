@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client'
-import * as A from './Pick.styled'
+import * as A from './Pick.styles'
 import { FETCH_USED_ITEM_I_PICK, TOGGLE_USED_ITEM_PICK } from './Pick.queries'
 import InfiniteScroll from 'react-infinite-scroller'
 import { useRouter } from 'next/router'
