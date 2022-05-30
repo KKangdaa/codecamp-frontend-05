@@ -41,7 +41,7 @@ const HeaderWrapper = styled.div`
   padding: 2em 5vw;
   display: grid;
   grid-template-columns: 1fr 10fr 1fr;
-  background: #fffaf1;
+  /* background: #fffaf1; */
 
   @media ${breakPoints.mobile} {
     display: flex;

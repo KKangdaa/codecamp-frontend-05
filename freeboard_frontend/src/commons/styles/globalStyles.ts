@@ -19,6 +19,6 @@ export const globalStyles = css`
   }
   body {
     overflow-x: hidden;
-    background: #fffaf1;
+    /* background: #fffaf1; */
   }
 `

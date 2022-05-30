@@ -72,7 +72,7 @@ export default function LayoutBanner() {
   }
 
   return (
-    <div style={{ width: '100%', background: '#fffaf1' }}>
+    <div style={{ width: '100%' }}>
       <Wrapper>
         <Slider {...settings}>
           <ImgBox>

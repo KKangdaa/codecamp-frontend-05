@@ -10,7 +10,7 @@ import LayoutSidebar from './sidebar'
 const LayoutBody = styled.div`
   width: 100%;
   height: 100%;
-  background: #fffaf1;
+  /* background: #fffaf1; */
 `
 
 interface IProps {

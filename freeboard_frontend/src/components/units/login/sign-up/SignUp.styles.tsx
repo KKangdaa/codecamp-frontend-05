@@ -7,7 +7,7 @@ export const LoginBackground = styled.form`
   /* background: url('/images/login-background.png') 50% 50%;
   background-repeat: no-repeat;
   background-size: cover; */
-  background-color: #fff9ec;
+  /* background-color: #fff9ec; */
 `
 export const LoginWrapper = styled.div`
   /* background-color: #e6decf; */

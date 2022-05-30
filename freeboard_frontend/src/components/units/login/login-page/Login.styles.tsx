@@ -4,7 +4,7 @@ export const LoginBackground = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-color: #fff9ec;
+  /* background-color: #fff9ec; */
 `
 export const LoginWrapper = styled.div`
   /* background-color: #e6decf; */
