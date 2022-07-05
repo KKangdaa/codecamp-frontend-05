@@ -58,7 +58,6 @@ export default function Pagination(props: IBoardPaginationProps) {
   const lastPage = Math.ceil(props.dataBoardCount?.fetchBoardsCount / 10)
 
   const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
-    // if (event.target instanceof Element)
     props.refetch({
       page: Number(event.currentTarget.id),
       search: props.keyword,
