@@ -1,23 +1,15 @@
 import Head from 'next/head'
 import * as A from '../styles/styles'
-import { gql, useQuery } from '@apollo/client'
-import { useEffect } from 'react'
-
-const FETCH_USER_LOGGED_IN = gql`
-  query fetchUserLoggedIn {
-    fetchUserLoggedIn {
-      email
-      name
-    }
-  }
-`
+import { useCallback, useContext, useEffect } from 'react'
+import { message } from 'antd'
+import { GlobalContext } from './_app'
 
 declare const window: typeof globalThis & {
   kakao: any
 }
 
 export default function HomePage() {
-  const { data } = useQuery(FETCH_USER_LOGGED_IN)
+  const { userInfo } = useContext(GlobalContext)
 
   useEffect(() => {
     const script = document.createElement('script') // <script></script> 만들어짐
@@ -80,6 +72,10 @@ export default function HomePage() {
     }
   }, [])
 
+  const info = useCallback(() => {
+    message.success(`${userInfo?.name}님 반갑습니다`)
+  }, [userInfo])
+
   const settings = {
     infinite: true,
     speed: 1000,
@@ -88,9 +84,8 @@ export default function HomePage() {
     fade: true,
     autoplay: true,
     arrows: false,
-    /* nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />, */
   }
+
   return (
     <div>
       <Head>
@@ -103,9 +98,7 @@ export default function HomePage() {
         <link rel="icon" href="/images/logo-icon.png" />
       </Head>
       <A.Wrapper>
-        <div>
-          {data?.fetchUserLoggedIn ? data?.fetchUserLoggedIn.name : <></>}
-        </div>
+        {userInfo ? info() : <></>}
         <A.SlickSlider {...settings}>
           <A.SliderGroup>
             <img src="/images/border-collie.png" alt="보더콜리" />
@@ -142,7 +135,7 @@ export default function HomePage() {
             <p>
               Mixed breed dogs have three or more different breeds in their
               lineage. They are sometimes called mongrels or mutts, especially
-              when it's not clear what breeds make up your dog.
+              when it{"'"}s not clear what breeds make up your dog.
             </p>
           </A.SliderGroup>
         </A.SlickSlider>
@@ -166,6 +159,10 @@ export default function HomePage() {
             <A.Subtitle>more →</A.Subtitle>
           </A.ImgRow>
         </A.GroupImg>
+        <div className="mapTitle">
+          <span>오시는 길</span>
+          <span>서울특별시 구로구 디지털로 300</span>
+        </div>
         <div id="map"></div>
       </A.Wrapper>
     </div>

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 export const ListWrapper = styled.div`
-  width: 75vw;
+  width: 80%;
   margin: 0 auto;
   padding-top: 50px;
   & > button {
@@ -43,7 +43,7 @@ export const ListItems = styled.div`
     }
   }
   > div:nth-of-type(2) {
-    padding: 20px 10px;
+    padding: 20px 5px;
   }
 `
 

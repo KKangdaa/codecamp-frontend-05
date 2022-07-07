@@ -28,7 +28,7 @@ const schema = yup.object().shape({
     .string()
     .matches(
       /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{1,8}$/,
-      '비밀번호는 영문, 숫자, 포함한 8자리 이내 입니다.'
+      '비밀번호는 영문과 숫자를 포함한 8자리 이내 입니다.'
     )
     .required('필수입력입니다.'),
   checkPassword: yup

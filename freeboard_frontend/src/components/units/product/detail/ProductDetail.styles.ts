@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import Slider from 'react-slick'
 
 export const DetailWrapper = styled.div`
-  width: 75vw;
+  width: 80%;
   margin: 0 auto;
   padding: 50px 0;
 `
@@ -40,7 +40,8 @@ export const ImgBox = styled.div`
 export const ItemInformation = styled.div`
   width: 50%;
   display: inline-block;
-  padding: 20px 40px 10px;
+  padding: 20px 0 10px;
+  margin-left: 40px;
   display: grid;
   grid-template-rows: 1fr 2fr 3fr 1.5fr 1fr;
   > div {
@@ -60,12 +61,13 @@ export const ItemInformation = styled.div`
 `
 export const ItemBuy = styled.div`
   width: 100%;
+  height: 60px;
   display: grid;
   grid-template-columns: 1fr 1fr 3fr;
-  grid-column-gap: 20px;
+  grid-column-gap: 10px;
   button {
     width: 100%;
-    height: 75px;
+    height: 60px;
     margin: auto;
     border-radius: 15px;
     font-size: 1.3rem;

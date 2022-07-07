@@ -1,7 +1,7 @@
 export interface IProductDetailUIProps {
   itemData?: any
   address?: string
-  userData?: any
+  userInfo?: any
   pickData?: any
   onClickDelete: () => void
   onClickMoveToEdit: () => void

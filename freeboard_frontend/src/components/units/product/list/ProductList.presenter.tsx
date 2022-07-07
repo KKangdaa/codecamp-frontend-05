@@ -6,22 +6,8 @@ import { getPrice } from '../../../../commons/libraries/utils'
 export default function ProductListUI(props: IProductListUIProps) {
   return (
     <A.ListWrapper>
-      <button onClick={props.onClickNew}>등록</button>
-      <InfiniteScroll
-        pageStart={0}
-        hasMore={true}
-        // useWindow={false}
-        loadMore={props.onLoadMore}
-        /* loader={
-          <div
-            className="loader"
-            key={0}
-            style={{ textAlign: 'center', padding: '20px 0' }}
-          >
-            더보기
-          </div>
-        } */
-      >
+      {props.userInfo && <button onClick={props.onClickNew}>등록</button>}
+      <InfiniteScroll pageStart={0} hasMore={true} loadMore={props.onLoadMore}>
         <A.List>
           {props.data?.fetchUseditems.map((el) => (
             <A.ListItems
@@ -39,7 +25,7 @@ export default function ProductListUI(props: IProductListUIProps) {
               </div>
               <div>
                 <A.ProductName>{el.name}</A.ProductName>
-                <A.ProductPrice>{getPrice(el.price)}</A.ProductPrice>
+                <A.ProductPrice>{getPrice(el.price)}원</A.ProductPrice>
               </div>
             </A.ListItems>
           ))}

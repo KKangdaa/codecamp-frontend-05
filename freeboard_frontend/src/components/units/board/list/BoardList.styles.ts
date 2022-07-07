@@ -1,28 +1,27 @@
 import styled from '@emotion/styled'
 
 export const Wrapper = styled.div`
-  width: 100%;
-  font-size: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-export const BoardWrapper = styled.div`
   position: relative;
-  width: 70%;
+  width: 80%;
   height: auto;
-  margin: 50px;
+  margin: 50px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+
+  input {
+    width: 150px;
+    border: 1px solid black;
+    padding: 0;
+    padding: 3px 8px 2px;
+    margin-bottom: 20px;
+  }
 `
 export const BoardListTitle = styled.span`
   width: 100%;
-  margin: 30px 0 50px 0;
-  padding-left: 20px;
-  font-size: 4rem;
-  letter-spacing: 1rem;
+  font-size: 2rem;
+  letter-spacing: 0.5rem;
 `
 export const Board = styled.div`
   width: 100%;

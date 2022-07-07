@@ -6,6 +6,7 @@ import { getAccessToken } from '../../../commons/libraries/getAccessToken'
 
 export const withAuth = (Component) => (props) => {
   const { accessToken } = useContext(GlobalContext)
+
   const router = useRouter()
   useEffect(() => {
     async function aaa() {

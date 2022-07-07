@@ -10,7 +10,6 @@ import LayoutSidebar from './sidebar'
 const LayoutBody = styled.div`
   width: 100%;
   height: 100%;
-  /* background: #fffaf1; */
 `
 
 interface IProps {
@@ -26,7 +25,7 @@ export default function Layout(props: IProps) {
     '/#',
     '/login',
     '/login/sign-up',
-    '/login/mypage',
+    '/mypage',
     '/login/basket',
     '/boards/new',
     `/boards/${router.query.boardid}/edit`,

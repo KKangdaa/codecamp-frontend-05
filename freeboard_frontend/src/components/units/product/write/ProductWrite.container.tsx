@@ -93,7 +93,7 @@ export default function ProductNew(props: IEditProps) {
 
   const onClickSubmit = async (data: IData) => {
     const { name, remarks, price, addressDetail } = data
-    console.log(images)
+    // console.log(images)
     try {
       const result = await createUseditem({
         variables: {

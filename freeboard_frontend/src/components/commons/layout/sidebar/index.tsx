@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import { getMyDate2, getPrice } from '../../../../commons/libraries/utils'
+import { getMyDate, getPrice } from '../../../../commons/libraries/utils'
 import { GlobalContext } from '../../../../../pages/_app'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
@@ -7,14 +7,15 @@ import { useRouter } from 'next/router'
 const Wrapper = styled.div`
   z-index: 2;
   width: 150px;
-  padding: 20px 15px;
+  padding: 15px 15px 20px;
   position: fixed;
   top: 50%;
   right: 20px;
   transform: translate(0, -50%);
   overflow: hidden;
   background: white;
-  border-radius: 20px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
   p {
     font-weight: 700;
   }
@@ -49,7 +50,7 @@ const Items = styled.div`
 export default function LayoutSidebar() {
   const router = useRouter()
   const { item, setItem } = useContext(GlobalContext)
-  const todayDate = getMyDate2(new Date())
+  const todayDate = getMyDate(new Date())
 
   useEffect(() => {
     const baskets = JSON.parse(localStorage.getItem(todayDate) || '[]')
@@ -64,38 +65,36 @@ export default function LayoutSidebar() {
 
   return (
     <>
-      {item ? (
-        <Wrapper>
-          <>
-            <p>오늘 본 상품</p>
-            {item
-              .map((el) => (
-                <Items
-                  key={el._id}
-                  onClick={onClickDetail(el)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <ImgContainer>
-                    <img
-                      src={`https://storage.googleapis.com/${el.images[0]}`}
-                      onError={(e) => {
-                        e.currentTarget.src = '/images/product-icon.png'
-                      }}
-                    />
-                  </ImgContainer>
-                  <div>
-                    <div>{el.name}</div>
-                    <div>{getPrice(el.price)}</div>
-                  </div>
-                </Items>
-              ))
-              .filter((el, index) => {
-                if (index < 5) return el
-              })}
-          </>
-        </Wrapper>
-      ) : (
+      {item.length === 0 ? (
         <></>
+      ) : (
+        <Wrapper>
+          <p>오늘 본 상품</p>
+          {item
+            .map((el) => (
+              <Items
+                key={el._id}
+                onClick={onClickDetail(el)}
+                style={{ cursor: 'pointer' }}
+              >
+                <ImgContainer>
+                  <img
+                    src={`https://storage.googleapis.com/${el.images[0]}`}
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/product-icon.png'
+                    }}
+                  />
+                </ImgContainer>
+                <div>
+                  <div>{el.name}</div>
+                  <div>{getPrice(el.price)}</div>
+                </div>
+              </Items>
+            ))
+            .filter((el, index) => {
+              if (index < 5) return el
+            })}
+        </Wrapper>
       )}
     </>
   )

@@ -5,12 +5,12 @@ export default function ProductCommentWriteUI(props) {
     <A.CommentWrapper>
       <A.UserInfo>
         <A.UserImg
-          src={`https://storage.googleapis.com/${props.data?.fetchUserLoggedIn.picture}`}
+          src={`https://storage.googleapis.com/${props.userInfo?.picture}`}
           onError={(e) => {
             e.currentTarget.src = '/images/product-icon.png'
           }}
         />
-        <A.UserName>{props.data?.fetchUserLoggedIn.name}</A.UserName>
+        <A.UserName>{props.userInfo?.name}</A.UserName>
       </A.UserInfo>
       <textarea onChange={props.onChangeContents} value={props.contents} />
       <A.CreateComment>

@@ -21,11 +21,21 @@ import {
 } from 'react'
 import { getAccessToken } from '../src/commons/libraries/getAccessToken'
 
+interface IUserInfo {
+  _id: string
+  email: string
+  name: string
+  picture: string
+  userPoint: {
+    _id: string
+    amount: number
+  }
+}
 interface IGlobalContext {
   accessToken?: String
   setAccessToken?: Dispatch<SetStateAction<string>>
-  /* userInfo?: IUserInfo;
-  setUserInfo?: Dispatch<SetStateAction<IUserInfo>>; */
+  userInfo?: IUserInfo
+  setUserInfo?: Dispatch<SetStateAction<IUserInfo>>
   item?: any
   setItem?: any
   baskets?: any
@@ -38,9 +48,9 @@ export const GlobalContext = createContext<IGlobalContext>({})
 function MyApp({ Component, pageProps }: AppProps) {
   const [item, setItem] = useState([])
   const [baskets, setBaskets] = useState([])
-
   const [accessToken, setAccessToken] = useState('')
-  const [userInfo, setUserInfo] = useState('')
+  const [userInfo, setUserInfo] = useState<IUserInfo>()
+
   const value = {
     // key와 value가 같기 때문에 shorthand property로 사용
     accessToken,
@@ -60,19 +70,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     getAccessToken().then((newAccessToken) => {
       setAccessToken(newAccessToken)
     })
-  }, [])
+  }, [userInfo])
 
-  /* const uploadLink = createUploadLink({
+  const uploadLink = createUploadLink({
     uri: 'http://backend05.codebootcamp.co.kr/graphql',
     // accessToken 사용시 HTTP HEADER에 작성해야 Mutation에서 생성이 가능함
     headers: { Authorization: `Bearer ${accessToken}` },
-    // Authorization = 인가, Bearer = 관례상 사용함
-  }) */
-
-  const uploadLink = createUploadLink({
-    uri: 'https://backend05.codebootcamp.co.kr/graphql',
-    headers: { Authorization: `Bearer ${accessToken}` },
     credentials: 'include',
+    // Authorization = 인가, Bearer = 관례상 사용함
   })
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
@@ -104,7 +109,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     link: ApolloLink.from([errorLink, uploadLink as unknown as ApolloLink]),
     cache: new InMemoryCache(),
   })
-
+  // render(){}
   return (
     <GlobalContext.Provider value={value}>
       <ApolloProvider client={client}>

@@ -8,19 +8,17 @@ import {
   DELETE_USED_ITEM,
   FETCH_USED_ITEM,
   FETCH_USED_ITEM_I_PICKED,
-  FETCH_USER_LOGGED_IN,
   TOGGLE_USED_ITEM_PICK,
 } from './ProductDetail.queries'
 import { GlobalContext } from '../../../../../pages/_app'
 
 export default function ProductDetail() {
   const router = useRouter()
-  const { setBaskets } = useContext(GlobalContext)
+  const { setBaskets, userInfo } = useContext(GlobalContext)
 
   const { data: itemData, refetch } = useQuery(FETCH_USED_ITEM, {
     variables: { useditemId: router.query.productid },
   })
-  const { data: userData } = useQuery(FETCH_USER_LOGGED_IN)
   const { data: pickData } = useQuery(FETCH_USED_ITEM_I_PICKED, {
     variables: { search: '' },
   })
@@ -121,7 +119,7 @@ export default function ProductDetail() {
     <ProductDetailUI
       address={itemData?.fetchUseditem?.useditemAddress?.address}
       itemData={itemData}
-      userData={userData}
+      userInfo={userInfo}
       pickData={pickData}
       isModal={isModal}
       heart={heart}

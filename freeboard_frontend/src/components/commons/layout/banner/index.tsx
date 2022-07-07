@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 const Wrapper = styled.div`
-  width: 90vw;
+  width: 90%;
   height: 35vw;
   /* overflow: hidden; */
   margin: 0 auto;

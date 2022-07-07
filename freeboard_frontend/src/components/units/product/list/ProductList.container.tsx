@@ -2,12 +2,12 @@ import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { GlobalContext } from '../../../../../pages/_app'
-import { getMyDate2 } from '../../../../commons/libraries/utils'
+import { getMyDate } from '../../../../commons/libraries/utils'
 import ProductListUI from './ProductList.presenter'
 import { FETCH_USED_ITEMS } from './ProductList.queries'
 
 export default function ProductList() {
-  const { setItem } = useContext(GlobalContext)
+  const { setItem, userInfo } = useContext(GlobalContext)
 
   const router = useRouter()
 
@@ -17,7 +17,7 @@ export default function ProductList() {
     },
   })
 
-  const todayDate = getMyDate2(new Date())
+  const todayDate = getMyDate(new Date())
 
   const onClickMoveToDetail = (el) => () => {
     const baskets = JSON.parse(localStorage.getItem(todayDate) || '[]')
@@ -56,6 +56,7 @@ export default function ProductList() {
   return (
     <ProductListUI
       data={data}
+      userInfo={userInfo}
       onClickMoveToDetail={onClickMoveToDetail}
       onClickNew={onClickNew}
       onLoadMore={onLoadMore}

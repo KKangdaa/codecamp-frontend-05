@@ -1,18 +1,17 @@
-import { useMutation, useQuery } from '@apollo/client'
-import { useState } from 'react'
+import { useMutation } from '@apollo/client'
+import { useContext, useState } from 'react'
 import { Modal, message } from 'antd'
 import Head from 'next/head'
-import {
-  FETCH_USER_LOGGED_IN,
-  CREATE_POINT_TRANSACTION_OF_LOADING,
-} from './Main.queries'
+import { CREATE_POINT_TRANSACTION_OF_LOADING } from './Main.queries'
 import MainUI from './Main.presenter'
+import { GlobalContext } from '../../../../../pages/_app'
 
 export default function Main() {
+  const { userInfo } = useContext(GlobalContext)
+
   const [amount, setAmount] = useState(0)
   const [visible, setVisible] = useState(false)
 
-  const { data } = useQuery(FETCH_USER_LOGGED_IN)
   const [createPoint] = useMutation(CREATE_POINT_TRANSACTION_OF_LOADING)
 
   const onChangeAmount = (e) => {
@@ -30,8 +29,8 @@ export default function Main() {
         pay_method: 'card',
         name: '(주)강낭콩',
         amount: amount,
-        buyer_email: data?.fetchUserLoggedIn.email,
-        buyer_name: data?.fetchUserLoggedIn.name,
+        buyer_email: userInfo?.email,
+        buyer_name: userInfo?.name,
       },
       (rsp) => {
         // callback
@@ -66,7 +65,7 @@ export default function Main() {
   return (
     <MainUI
       Head={Head}
-      data={data}
+      userInfo={userInfo}
       visible={visible}
       setVisible={setVisible}
       onClickPayment={onClickPayment}

@@ -1,23 +1,24 @@
 import * as A from './ProductCommentAnswerList.styles'
 
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { Modal } from 'antd'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import {
-  FETCH_USER_LOGGED_IN,
   FETCH_USED_ITEM_QUESTION_ANSWER,
   UPDATE_USED_ITEM_QUESTION_ANSWER,
 } from './ProductCommentAnswerList.queries'
 import { IAnswerInput } from './ProductCommentAnswerList.types'
+import { GlobalContext } from '../../../../../pages/_app'
 
 export default function ProductCommentAnswerListItem(props) {
+  const { userInfo } = useContext(GlobalContext)
+
   const router = useRouter()
 
   const [isEdits, setIsEdits] = useState(false)
   const [contents, setContents] = useState('')
 
-  const { data } = useQuery(FETCH_USER_LOGGED_IN)
   const [updateUseditemQuestionAnswer] = useMutation(
     UPDATE_USED_ITEM_QUESTION_ANSWER
   )
@@ -78,7 +79,7 @@ export default function ProductCommentAnswerListItem(props) {
             <div>└ {props.el.contents}</div>
           </div>
           <A.AnswerButton>
-            <span>{data?.fetchUserLoggedIn.name}</span>
+            <span>{userInfo?.name}</span>
             <button id={props.el._id} onClick={props.onClickDelete}>
               삭제
             </button>

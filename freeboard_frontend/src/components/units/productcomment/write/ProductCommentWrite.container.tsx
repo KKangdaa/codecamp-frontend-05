@@ -1,20 +1,21 @@
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { Modal } from 'antd'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { GlobalContext } from '../../../../../pages/_app'
 import ProductCommentWriteUI from './ProductCommentWrite.presenter'
 import {
   CREATE_USED_ITEM_QUESTION,
-  FETCH_USER_LOGGED_IN,
   FETCH_USED_ITEM_QUESTION,
 } from './ProductCommentWrite.queries'
 
 export default function ProductCommentWrite() {
+  const { userInfo } = useContext(GlobalContext)
+
   const router = useRouter()
   const [contents, setContents] = useState('')
 
   const [createUseditemQuestion] = useMutation(CREATE_USED_ITEM_QUESTION)
-  const { data } = useQuery(FETCH_USER_LOGGED_IN)
 
   const onChangeContents = (e) => {
     setContents(e.target.value)
@@ -51,7 +52,7 @@ export default function ProductCommentWrite() {
   return (
     <>
       <ProductCommentWriteUI
-        data={data}
+        userInfo={userInfo}
         onChangeContents={onChangeContents}
         contents={contents}
         onClickCreateComment={onClickCreateComment}

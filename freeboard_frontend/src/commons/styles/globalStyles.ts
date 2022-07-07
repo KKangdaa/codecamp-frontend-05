@@ -19,6 +19,8 @@ export const globalStyles = css`
   }
   body {
     overflow-x: hidden;
+    width: 1080px;
+    margin: 0 auto;
     /* background: #fffaf1; */
   }
 `

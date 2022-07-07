@@ -4,8 +4,18 @@ import { breakPoints } from '../src/commons/styles/media'
 
 export const Wrapper = styled.div`
   width: 100vw;
-  margin: 0 auto;
+  margin: 0 auto 80px;
   padding: 0px 10vw;
+  .mapTitle {
+    span {
+      display: block;
+      font-size: 1.2rem;
+      :last-of-type {
+        font-size: 0.875rem;
+        margin-bottom: 15px;
+      }
+    }
+  }
   #map {
     width: 80%;
     height: 40vw;
@@ -52,7 +62,7 @@ export const SliderGroup = styled.div`
   }
   @media ${breakPoints.mobile} {
     & > img {
-      width: 90%;
+      width: 60%;
     }
     & p:nth-of-type(1) {
       font-size: 2.5rem;
@@ -73,6 +83,9 @@ export const GroupImg = styled.div`
   }
   @media ${breakPoints.mobile} {
     flex-direction: column;
+    & > div:last-child {
+      margin-right: auto;
+    }
   }
 `
 
@@ -107,8 +120,9 @@ export const ImgRow = styled.div`
     opacity: 1;
   }
   @media ${breakPoints.mobile} {
-    height: 120vw;
-    margin-bottom: 10vw;
+    width: 50vw;
+    height: 75vw;
+    margin: 0 auto 10vw;
   }
 `
 export const Overlay = styled.div`
