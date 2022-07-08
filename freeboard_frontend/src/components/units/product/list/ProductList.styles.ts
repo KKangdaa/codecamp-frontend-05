@@ -13,7 +13,7 @@ export const ListWrapper = styled.div`
     height: 50px;
     border-radius: 10px;
     background: #fad483;
-    border: 1px solid gold;
+    border: 0;
     cursor: pointer;
     :hover {
       background: #ffcb5b;
@@ -27,15 +27,14 @@ export const List = styled.div`
 `
 export const ListItems = styled.div`
   width: 100%;
-  height: 30vw;
   overflow: hidden;
   > div:nth-of-type(1) {
-    height: 60%;
+    height: 18vw;
     text-align: center;
     vertical-align: middle;
     object-position: center;
     overflow: hidden;
-    border: 1px solid black;
+    border: 1px solid #ddd;
     img {
       width: 100%;
       height: 100%;
@@ -44,6 +43,11 @@ export const ListItems = styled.div`
   }
   > div:nth-of-type(2) {
     padding: 20px 5px;
+    small {
+      width: 100%;
+      display: block;
+      text-align: right;
+    }
   }
 `
 
@@ -54,4 +58,5 @@ export const ProductName = styled.div`
 export const ProductPrice = styled.div`
   font-size: 1.1rem;
   font-weight: 700;
+  text-align: right;
 `

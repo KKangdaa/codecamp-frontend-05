@@ -27,16 +27,16 @@ export interface IProductNewUIProps {
   isEdit: boolean
   data?: any
   images?: string[]
+  handleChange: () => void
+  contents: any
   handleSubmit: UseFormHandleSubmit<FieldValues>
   onClickEditSubmit: () => void
   onClickSubmit: () => void
-
   formState: FormState<FieldValues>
   register: UseFormRegister<FieldValues>
   editorState: any
   onEditorStateChange: () => void
   onChangeFileUrls: (event: ChangeEvent<HTMLInputElement>) => Promise<void>
-
   isModalVisible: boolean
   onToggleModal: () => void
   onCompleteDaumPostcode: () => void

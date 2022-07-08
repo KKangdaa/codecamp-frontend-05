@@ -4,7 +4,8 @@ export const Wrapper = styled.div`
   position: relative;
   width: 80%;
   height: auto;
-  margin: 50px auto;
+  margin: 0 auto;
+  padding: 50px 0 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -89,15 +90,18 @@ export const Like = styled.div`
   width: 10%;
 `
 
-export const EditButton = styled.button`
-  position: relative;
-  top: 0;
-  right: 0;
-  width: 110px;
-  height: 40px;
-  margin-top: 30px;
-  background: none;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  cursor: pointer;
+export const EditButton = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: end;
+
+  button {
+    width: 110px;
+    height: 40px;
+    margin-top: 30px;
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 `

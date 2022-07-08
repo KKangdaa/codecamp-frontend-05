@@ -40,9 +40,15 @@ export const InputWrapper = styled.div`
   }
   .editor {
     height: 600px !important;
-    border: 1px solid #f1f1f1 !important;
-    padding: 5px !important;
     border-radius: 2px !important;
+    > div {
+      :first-of-type {
+        height: 42px;
+      }
+      :last-of-type {
+        height: 558px;
+      }
+    }
   }
   .rdw-editor-main {
     height: 500px;

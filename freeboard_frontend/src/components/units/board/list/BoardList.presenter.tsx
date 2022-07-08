@@ -64,9 +64,11 @@ export default function BoardListUI(props: IBoardListUIProps) {
         setStartPage={props.setStartPage}
       />
 
-      <A.EditButton onClick={props.EditFreeboard}>
-        NEW
-        <A.Icon className="fas fa-edit" style={{ marginLeft: '10px' }} />
+      <A.EditButton>
+        <button onClick={props.EditFreeboard}>
+          NEW
+          <A.Icon className="fas fa-edit" style={{ marginLeft: '10px' }} />
+        </button>
       </A.EditButton>
       {/* </A.BoardWrapper> */}
     </A.Wrapper>

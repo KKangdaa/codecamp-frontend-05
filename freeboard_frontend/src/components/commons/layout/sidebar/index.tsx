@@ -91,9 +91,7 @@ export default function LayoutSidebar() {
                 </div>
               </Items>
             ))
-            .filter((el, index) => {
-              if (index < 5) return el
-            })}
+            .filter((el: any, index: number) => index < 5 && el)}
         </Wrapper>
       )}
     </>

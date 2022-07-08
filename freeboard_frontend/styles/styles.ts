@@ -3,9 +3,9 @@ import styled from '@emotion/styled'
 import { breakPoints } from '../src/commons/styles/media'
 
 export const Wrapper = styled.div`
-  width: 100vw;
-  margin: 0 auto 80px;
-  padding: 0px 10vw;
+  width: 80%;
+  margin: 0 auto;
+  padding: 0 0 80px;
   .mapTitle {
     span {
       display: block;

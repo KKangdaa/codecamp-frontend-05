@@ -14,7 +14,7 @@ export const MyPageWrapper = styled.div`
   font: 11px 'Lato', 'Malgun Gothic', 'Nanum Gothic', '돋움', Dotum, AppleGothic,
     sans-serif;
   position: relative;
-  width: 100%;
+  width: 1080px;
   height: 100%;
   margin: 0 auto;
   border-left: 0px solid #eee;

@@ -1,14 +1,12 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { LogoutOutlined, LoginOutlined, HomeOutlined } from '@ant-design/icons'
-import { gql, useMutation } from '@apollo/client'
-import { useContext, useState } from 'react'
-
+import { gql, useMutation, useQuery } from '@apollo/client'
+import { useContext, useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import Button from '@mui/material/Button'
 import List from '@mui/material/List'
-// import Divider from '@mui/material/Divider'
 import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
@@ -29,8 +27,24 @@ const LOGOUT_USER = gql`
   }
 `
 
+const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      _id
+      email
+      name
+      picture
+      userPoint {
+        _id
+        amount
+      }
+    }
+  }
+`
+
 export default function LayoutHeader() {
-  const { userInfo } = useContext(GlobalContext)
+  const { userInfo, setUserInfo } = useContext(GlobalContext)
+  const { data } = useQuery(FETCH_USER_LOGGED_IN)
 
   const router = useRouter()
   const [logoutUser] = useMutation(LOGOUT_USER)
@@ -42,8 +56,13 @@ export default function LayoutHeader() {
     router.push('/boards')
   }
   const onClickLogOut = async () => {
-    await logoutUser({})
-    window.location.reload()
+    try {
+      await logoutUser()
+      alert('로그아웃이 됐습니다.')
+      window.location.reload()
+    } catch (error) {
+      console.log(error)
+    }
   }
   const onClickLogin = () => {
     router.push('/login')
@@ -54,6 +73,10 @@ export default function LayoutHeader() {
   const onClickMypage = () => {
     router.push('/mypage')
   }
+
+  useEffect(() => {
+    if (!userInfo) setUserInfo(data?.fetchUserLoggedIn)
+  }, [data])
 
   // =============
 
@@ -138,11 +161,12 @@ export default function LayoutHeader() {
           </div>
         </Logo>
         <Menu>
-          <span onClick={onClickBoard}>BOARD</span>
+          <span onClick={onClickHome}>HOME</span>
+          <span onClick={onClickBoard}>COMMUNITY</span>
           <span onClick={onClickProduct}>SHOP</span>
         </Menu>
         <LoginIcon>
-          {userInfo ? (
+          {data?.fetchUserLoggedIn ? (
             <LogoutOutlined onClick={onClickLogOut} />
           ) : (
             <LoginOutlined onClick={onClickLogin} />

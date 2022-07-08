@@ -12,6 +12,7 @@ import {
   HeartFilled,
   ShoppingCartOutlined,
 } from '@ant-design/icons'
+import Dompurify from 'dompurify'
 
 declare const window: typeof globalThis & {
   kakao: any
@@ -100,14 +101,14 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
         </A.SlickSlider>
 
         <A.ItemInformation>
-          <div>{props.itemData?.fetchUseditem?.seller.name}</div>
+          <div>{props.itemData?.fetchUseditem?.seller?.name}</div>
           <div>{props.itemData?.fetchUseditem?.name}</div>
           <div>{getPrice(props.itemData?.fetchUseditem?.price)} 원</div>
           <div></div>
           <A.ItemBuy>
             <button onClick={props.onClickPick}>
               {props.heart === true ? <HeartFilled /> : <HeartOutlined />}{' '}
-              {props.itemData?.fetchUseditem.pickedCount}
+              {props.itemData?.fetchUseditem?.pickedCount}
             </button>
             <button onClick={props.onClickBasket}>
               <ShoppingCartOutlined />
@@ -129,21 +130,26 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
         <div>{props.itemData?.fetchUseditem?.remarks}</div>
         {props.itemData?.fetchUseditem?.contents && (
           <A.IntroduceContent
+            // dangerouslySetInnerHTML={{
+            //   __html: props.itemData?.fetchUseditem?.contents,
+            // }}
             dangerouslySetInnerHTML={{
-              __html: props.itemData?.fetchUseditem?.contents,
+              __html: Dompurify.sanitize(
+                String(props.itemData?.fetchUseditem?.contents)
+              ),
             }}
           />
         )}
-        {props.itemData?.fetchUseditem?.useditemAddress.address === '' ? (
+        {props.itemData?.fetchUseditem?.useditemAddress?.address === '' ? (
           ''
         ) : (
           <div>
             <A.Line></A.Line>
             <A.Map id="map"></A.Map>
             <A.Address>
-              {props.itemData?.fetchUseditem?.useditemAddress.zipcode}{' '}
-              {props.itemData?.fetchUseditem?.useditemAddress.address}{' '}
-              {props.itemData?.fetchUseditem?.useditemAddress.addressDetail}
+              {props.itemData?.fetchUseditem?.useditemAddress?.zipcode}{' '}
+              {props.itemData?.fetchUseditem?.useditemAddress?.address}{' '}
+              {props.itemData?.fetchUseditem?.useditemAddress?.addressDetail}
             </A.Address>
           </div>
         )}
@@ -152,7 +158,7 @@ export default function ProductDetailUI(props: IProductDetailUIProps) {
       <A.Line></A.Line>
 
       <A.ItemButtonGroup>
-        {props.userInfo?._id === props.itemData?.fetchUseditem?.seller._id && (
+        {props.userInfo?._id === props.itemData?.fetchUseditem?.seller?._id && (
           <>
             <button onClick={props.toggleButton}>삭제</button>
             {props.isModalVisible && (

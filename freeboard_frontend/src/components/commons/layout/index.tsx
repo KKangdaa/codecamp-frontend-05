@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 import { ReactChild } from 'react'
 import LayoutBanner from './banner'
-import LayoutFooter from './footer'
+// import LayoutFooter from './footer'
 import LayoutHeader from './header'
 import LayoutSidebar from './sidebar'
 // import LayoutNavigation from './navigation'
@@ -35,7 +35,7 @@ export default function Layout(props: IProps) {
     '/firebase-board',
   ]
   // const HIDDEN_NAVIGATION = ['/', '/login', '/login/sign-up', '/firebase-board']
-  const HIDDEN_FOOTER = ['/login', '/login/sign-up', '/login/mypage']
+  // const HIDDEN_FOOTER = ['/login', '/login/sign-up', '/login/mypage']
   const HIDDEN_SIDEBER = [
     '/',
     '/#',
@@ -55,7 +55,7 @@ export default function Layout(props: IProps) {
   const isHiddenBanner = HIDDEN_BANNER.includes(router.asPath)
   const isHiddenSidebar = HIDDEN_SIDEBER.includes(router.asPath)
   // const isHiddenNavigation = HIDDEN_NAVIGATION.includes(router.asPath)
-  const isHiddenFooter = HIDDEN_FOOTER.includes(router.asPath)
+  // const isHiddenFooter = HIDDEN_FOOTER.includes(router.asPath)
 
   return (
     <>
@@ -67,7 +67,7 @@ export default function Layout(props: IProps) {
         {!isHiddenSidebar && <LayoutSidebar />}
         {props.children}
       </LayoutBody>
-      {!isHiddenFooter && <LayoutFooter />}
+      {/* {!isHiddenFooter && <LayoutFooter />} */}
     </>
   )
 }

@@ -3,7 +3,9 @@ import * as A from './SignUp.styles'
 export default function SignUpUI(props) {
   return (
     <>
-      <A.LoginBackground>
+      <A.LoginBackground
+        onSubmit={props.handleSubmit(props.onClickCreateButton)}
+      >
         {/* <img src="/images/login.png" /> */}
         <A.LoginWrapper>
           {/* <img src="/images/logo2.png" /> */}
@@ -12,31 +14,32 @@ export default function SignUpUI(props) {
           <A.LoginId
             type="text"
             placeholder="이메일을 입력해주세요"
-            onChange={props.onChangeEmail}
+            {...props.register('email')}
           />
-          <p>{props.errorEmail}</p>
+          <p>{props.formState?.errors?.email?.message}</p>
           <span>이름</span>
           <A.LoginId
             type="text"
             placeholder="이름을 입력해주세요"
-            onChange={props.onChangeName}
+            {...props.register('name')}
           />
-          <p>{props.errorName}</p>
+          <p>{props.formState?.errors?.name?.message}</p>
+
           <span>비밀번호</span>
           <A.LoginPassword
             type="password"
             placeholder="비밀번호를 입력해주세요"
-            onChange={props.onChangePassword}
+            {...props.register('password')}
           />
-          <p>{props.errorPassword}</p>
+          <p>{props.formState?.errors?.password?.message}</p>
 
           <span>비밀번호 확인</span>
           <A.LoginPassword
             type="password"
             placeholder="비밀번호를 입력해주세요"
-            onChange={props.onChangeCheckPassword}
+            {...props.register('checkPassword')}
           />
-          <p>{props.errorCheckPassword}</p>
+          <p>{props.formState?.errors?.checkPassword?.message}</p>
 
           <A.LoginButton
             style={

@@ -10,8 +10,7 @@ export const getMyDate = (myDate) => {
 
   return `${yyyy}. ${mm}. ${dd}.`
 
-  /*
-  aaa.getDay()
+  /* aaa.getDay()
   // 요일
     */
 }

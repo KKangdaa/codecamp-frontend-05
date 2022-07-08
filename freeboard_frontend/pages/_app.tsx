@@ -70,15 +70,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     getAccessToken().then((newAccessToken) => {
       setAccessToken(newAccessToken)
     })
-  }, [userInfo])
-
-  const uploadLink = createUploadLink({
-    uri: 'http://backend05.codebootcamp.co.kr/graphql',
-    // accessToken 사용시 HTTP HEADER에 작성해야 Mutation에서 생성이 가능함
-    headers: { Authorization: `Bearer ${accessToken}` },
-    credentials: 'include',
-    // Authorization = 인가, Bearer = 관례상 사용함
-  })
+  }, [])
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     // 1. 에러를 캐치
@@ -105,11 +97,19 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   })
 
+  const uploadLink = createUploadLink({
+    uri: 'https://backend05.codebootcamp.co.kr/graphql',
+    // accessToken 사용시 HTTP HEADER에 작성해야 Mutation에서 생성이 가능함
+    headers: { Authorization: `Bearer ${accessToken}` },
+    credentials: 'include',
+    // Authorization = 인가, Bearer = 관례상 사용함
+  })
+
   const client = new ApolloClient({
     link: ApolloLink.from([errorLink, uploadLink as unknown as ApolloLink]),
     cache: new InMemoryCache(),
   })
-  // render(){}
+
   return (
     <GlobalContext.Provider value={value}>
       <ApolloProvider client={client}>

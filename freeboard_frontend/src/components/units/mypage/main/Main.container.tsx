@@ -6,6 +6,13 @@ import { CREATE_POINT_TRANSACTION_OF_LOADING } from './Main.queries'
 import MainUI from './Main.presenter'
 import { GlobalContext } from '../../../../../pages/_app'
 
+declare global {
+  // eslint-disable-next-line no-unused-vars
+  interface Window {
+    IMP: string
+  }
+}
+
 export default function Main() {
   const { userInfo } = useContext(GlobalContext)
 
@@ -19,7 +26,7 @@ export default function Main() {
   }
 
   const onClickPayment = async () => {
-    const IMP = window.IMP
+    const IMP: any = window.IMP
     IMP.init('imp49910675')
     setVisible(false)
     IMP.request_pay(

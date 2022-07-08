@@ -3,8 +3,9 @@ import { LoginOutlined } from '@mui/icons-material'
 import { breakPoints } from '../../../../commons/styles/media'
 
 export const HeaderWrapper = styled.div`
-  width: 100%;
-  padding: 2vw 5vw;
+  width: 80%;
+  margin: 0 auto;
+  padding: 2vw 0;
   display: grid;
   grid-template-columns: 1fr 10fr 1fr;
 

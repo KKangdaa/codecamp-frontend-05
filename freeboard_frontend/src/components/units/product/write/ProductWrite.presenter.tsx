@@ -3,18 +3,21 @@ import Input01 from '../../../commons/inputs/01'
 import * as A from './ProductWrite.styles'
 import { withAuth } from '../../../commons/hocs/withAuth'
 import { IProductNewUIProps } from './ProductWrite.types'
-import { EditorProps } from 'react-draft-wysiwyg'
+// import { EditorProps } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import dynamic from 'next/dynamic'
 import ImagesUploadForProduct from '../../../commons/image/images01'
 import { v4 as uuidv4 } from 'uuid'
 import { Modal } from 'antd'
+import 'react-quill/dist/quill.snow.css'
 import DaumPostcode from 'react-daum-postcode'
 
-const Editor = dynamic<EditorProps>(
-  () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
-  { ssr: false }
-)
+// const Editor = dynamic<EditorProps>(
+//   () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
+//   { ssr: false }
+// )
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 // export default function ProductNewUI(props: IProductNewUIProps) {
 const ProductNewUI = (props: IProductNewUIProps) => {
@@ -84,7 +87,15 @@ const ProductNewUI = (props: IProductNewUIProps) => {
         <A.InputWrapper>
           <div>상세설명</div>
           <div>
-            <Editor
+            <ReactQuill
+              placeholder="상품를 소개해주세요"
+              onChange={props.handleChange}
+              className="editor"
+              defaultValue={
+                props.contents || props.data?.fetchUseditem.contents || ''
+              }
+            />
+            {/* <Editor
               editorState={props.editorState}
               defaultEditorState={props.editorState}
               toolbarClassName="toolbar-class"
@@ -124,7 +135,7 @@ const ProductNewUI = (props: IProductNewUIProps) => {
                   alt: { present: false, mandatory: false },
                 },
               }}
-            />
+            /> */}
             {/* <A.ErrorMessage>
               {props.formState.errors.contents?.message}
             </A.ErrorMessage> */}

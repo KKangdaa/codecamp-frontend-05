@@ -7,8 +7,8 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { convertToRaw, EditorState } from 'draft-js'
-import draftToHtml from 'draftjs-to-html'
+// import { convertToRaw, EditorState } from 'draft-js'
+// import draftToHtml from 'draftjs-to-html'
 
 const schema = yup.object().shape({
   name: yup.string().max(100).required('필수입력'),
@@ -38,17 +38,18 @@ export default function ProductNew(props: IEditProps) {
   const [createUseditem] = useMutation(CREATE_USED_ITEM)
   const [updateUseditem] = useMutation(UPDATE_USED_ITEM)
 
-  const [editorState, setEditorState] = useState(EditorState.createEmpty())
+  // const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
-  const onEditorStateChange = (editorState) => {
-    setEditorState(editorState)
-  }
+  // const onEditorStateChange = (editorState) => {
+  //   setEditorState(editorState)
+  // }
 
-  const { register, handleSubmit, formState, setValue } = useForm<IFormValues>({
-    mode: 'onChange',
-    defaultValues: {},
-    resolver: yupResolver(schema),
-  })
+  const { register, handleSubmit, formState, setValue, trigger, getValues } =
+    useForm<IFormValues>({
+      mode: 'onChange',
+      defaultValues: {},
+      resolver: yupResolver(schema),
+    })
 
   const onChangeFileUrls = (fileUrl: string, index: number) => {
     const newFileUrls = [...images]
@@ -61,7 +62,7 @@ export default function ProductNew(props: IEditProps) {
       setImages(props.data?.fetchUseditem?.images)
       setValue('name', props.data?.fetchUseditem.name)
       setValue('remarks', props.data?.fetchUseditem.remarks)
-      // setValue('contents', props.data?.fetchUseditem.contents)
+      setValue('contents', props.data?.fetchUseditem.contents)
       setValue('price', props.data?.fetchUseditem.price)
       /* setValue('zipcode', props.data?.fetchUseditem?.useditemAddress?.zipcode)
       setValue('address', props.data?.fetchUseditem?.useditemAddress?.address) */
@@ -74,9 +75,13 @@ export default function ProductNew(props: IEditProps) {
     }
   }, [props.data])
 
-  const editorToHtml = draftToHtml(
-    convertToRaw(editorState.getCurrentContent())
-  )
+  // const editorToHtml = draftToHtml(
+  //   convertToRaw(editorState.getCurrentContent())
+  // )
+  const handleChange = (value: string) => {
+    setValue('contents', value === '<p><br></p>' ? '' : value)
+    trigger('contents')
+  }
 
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [zipcode, setZipcode] = useState('')
@@ -92,14 +97,14 @@ export default function ProductNew(props: IEditProps) {
   }
 
   const onClickSubmit = async (data: IData) => {
-    const { name, remarks, price, addressDetail } = data
+    const { name, remarks, price, addressDetail, contents } = data
     // console.log(images)
     try {
       const result = await createUseditem({
         variables: {
           createUseditemInput: {
             name,
-            contents: editorToHtml,
+            contents,
             remarks,
             price: Number(price),
             images,
@@ -119,7 +124,7 @@ export default function ProductNew(props: IEditProps) {
   }
 
   const onClickEditSubmit = async (data: IData) => {
-    const { name, remarks, price, addressDetail } = data
+    const { name, remarks, price, addressDetail, contents } = data
     try {
       await updateUseditem({
         variables: {
@@ -127,7 +132,7 @@ export default function ProductNew(props: IEditProps) {
           updateUseditemInput: {
             name,
             remarks,
-            contents: editorToHtml,
+            contents,
             price: Number(price),
             images,
             useditemAddress: {
@@ -155,13 +160,15 @@ export default function ProductNew(props: IEditProps) {
       onClickEditSubmit={onClickEditSubmit}
       images={images}
       onChangeFileUrls={onChangeFileUrls}
-      editorState={editorState}
-      onEditorStateChange={onEditorStateChange}
+      handleChange={handleChange}
+      // editorState={editorState}
+      // onEditorStateChange={onEditorStateChange}
       zipcode={zipcode}
       address={address}
       isModalVisible={isModalVisible}
       onToggleModal={onToggleModal}
       onCompleteDaumPostcode={onCompleteDaumPostcode}
+      contents={getValues('contents')}
     />
   )
 }

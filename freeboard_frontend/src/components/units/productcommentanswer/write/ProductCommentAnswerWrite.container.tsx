@@ -2,11 +2,11 @@ import { useMutation } from '@apollo/client'
 import { Modal } from 'antd'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import ProductCommentAnserWriteUI from './ProductCommentAnswerWrite.presenter'
 import {
   CREATE_USED_ITEM_QUESTION_ANSWER,
   FETCH_USED_ITEM_QUESTION_ANSWER,
 } from './ProductCommentAnswerWrite.queries'
-import * as A from './ProductCommentAnswerWrite.styles'
 
 export default function ProductCommentAnswerWrite(props) {
   const router = useRouter()
@@ -57,13 +57,10 @@ export default function ProductCommentAnswerWrite(props) {
   }
 
   return (
-    <A.CommentWrapper>
-      <textarea
-        onChange={onChangeContents}
-        value={contents}
-        placeholder={'답변'}
-      />
-      <button onClick={onClickCreateComment}>등록</button>
-    </A.CommentWrapper>
+    <ProductCommentAnserWriteUI
+      contents={contents}
+      onChangeContents={onChangeContents}
+      onClickCreateComment={onClickCreateComment}
+    />
   )
 }

@@ -47,11 +47,11 @@ export const CreateComment = styled.div`
   text-align: end;
   button {
     position: absolute;
-    top: 45%;
+    top: 40%;
     right: 0;
     transform: translate(0, -50%);
     width: 70px;
-    height: 42px;
+    height: 44px;
     border: 0;
     cursor: pointer;
     &:hover {

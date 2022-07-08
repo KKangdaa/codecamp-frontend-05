@@ -95,7 +95,7 @@ export default function BoardCommentListItemUI(props) {
                 style={{
                   cursor: 'pointer',
                 }}
-                // commentButtonActive={props.commentButtonAc}
+                commentButtonActive={props.commentButtonAc}
               >
                 등록
               </S.CommentEditButton>
@@ -106,6 +106,7 @@ export default function BoardCommentListItemUI(props) {
                   color: 'white',
                   cursor: 'pointer',
                 }}
+                commentButtonActive={props.commentButtonAc}
               >
                 취소
               </S.CommentEditButton>

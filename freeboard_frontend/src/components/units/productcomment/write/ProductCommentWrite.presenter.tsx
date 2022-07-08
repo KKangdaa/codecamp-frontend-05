@@ -1,6 +1,9 @@
 import * as A from './ProductCommentWrite.styles'
+import { IProductCommentWriteUIProps } from './ProductCommentWrite.types'
 
-export default function ProductCommentWriteUI(props) {
+export default function ProductCommentWriteUI(
+  props: IProductCommentWriteUIProps
+) {
   return (
     <A.CommentWrapper>
       <A.UserInfo>

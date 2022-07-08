@@ -1,129 +1,80 @@
+import SignUpUI from './SignUp.presenter'
+import { useMutation } from '@apollo/client'
+import { CREATE_USER } from './SignUp.queries'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import SignUpUI from './SignUp.presenter'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Modal } from 'antd'
+import { IFormValues } from './signUp.types'
+
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .matches(
+      /^\w[0-9a-zA-Z]+@\w[a-zA-Z]+\.[a-zA-Z]{2,3}$/,
+      '이메일 형식에 올바르지 않습니다'
+    )
+    .required('필수입력입니다.'),
+  name: yup.string().max(5).required('필수입력입니다.'),
+  password: yup
+    .string()
+    .matches(
+      /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{1,8}$/,
+      '비밀번호는 영문과 숫자를 포함한 8자리 이내 입니다.'
+    )
+    .required('필수입력입니다.'),
+  checkPassword: yup
+    .string()
+    .oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다')
+    .required('비밀번호가 일치하지 않습니다'),
+})
 
 export default function SignUp() {
   const router = useRouter()
 
-  const [createEmail, setCreateEmail] = useState('')
-  const [errorEmail, setErrorEmail] = useState('')
-  const [createName, setCreateName] = useState('')
-  const [errorName, setErrorName] = useState('')
-  const [createPassword, setCreatePassword] = useState('')
-  const [errorPassword, setErrorPassword] = useState('')
-  const [checkPassword, setCheckPassword] = useState('')
-  const [errorCheckPassword, setErrorCheckPassword] = useState('')
+  const [createUser] = useMutation(CREATE_USER)
 
   const [isActive, setIsActive] = useState(false)
 
-  const onChangeEmail = (event) => {
-    setCreateEmail(event.target.value)
+  const { register, handleSubmit, formState } = useForm<IFormValues>({
+    mode: 'onChange',
+    defaultValues: {},
+    resolver: yupResolver(schema),
+  })
 
-    if (event.target.value !== '') {
-      setErrorEmail('')
-    }
-    const CheckEmail = /^\w[0-9a-zA-Z]+@\w[a-zA-Z]+\.[a-zA-Z]{2,3}$/
-    if (!CheckEmail.test(event.target.value)) {
-      setErrorEmail('이메일 형식에 올바르지 않습니다')
-    }
+  const onClickCreateButton = async (data) => {
+    const { email, password, name } = data
+    console.log(data)
 
-    if (
-      CheckEmail.test(event.target.value) &&
-      createName &&
-      createPassword &&
-      checkPassword
-    ) {
+    if (email && password && name) {
       setIsActive(true)
-    } else {
-      setIsActive(false)
     }
-  }
+    try {
+      await createUser({
+        variables: {
+          createUserInput: {
+            email,
+            password,
+            name,
+          },
+        },
+      })
 
-  const onChangeName = (event) => {
-    setCreateName(event.target.value)
-
-    if (event.target.value !== '') {
-      setErrorName('')
+      Modal.success({ content: '회원가입이 완료되었습니다.' })
+      router.push('/login')
+    } catch (error) {
+      Modal.error({ content: error.message })
     }
-    const CheckName = /^[0-9a-zA-Z가-힇]{4,8}$/
-    if (!CheckName.test(event.target.value)) {
-      setErrorName('4~8자 사이로 입력하세요')
-    }
-
-    if (
-      createEmail &&
-      CheckName.test(event.target.value) &&
-      createPassword &&
-      checkPassword
-    ) {
-      setIsActive(true)
-    } else {
-      setIsActive(false)
-    }
-  }
-
-  const onChangePassword = (event) => {
-    setCreatePassword(event.target.value)
-
-    if (event.target.value !== '') {
-      setErrorPassword('')
-    }
-
-    const CheckPassword = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{6,10}$/
-    if (!CheckPassword.test(event.target.value)) {
-      setErrorPassword('6~10자 영문, 숫자로 입력하세요')
-    }
-
-    if (
-      createEmail &&
-      createName &&
-      CheckPassword.test(event.target.value) &&
-      checkPassword
-    ) {
-      setIsActive(true)
-    } else {
-      setIsActive(false)
-    }
-  }
-
-  const onChangeCheckPassword = (event) => {
-    setCheckPassword(event.target.value)
-
-    if (event.target.value !== '') {
-      setErrorCheckPassword('')
-    }
-
-    if (createPassword !== event.target.value) {
-      setErrorCheckPassword('비밀번호가 일치하지 않습니다.')
-    }
-
-    if (
-      createEmail &&
-      createName &&
-      createPassword &&
-      createPassword === event.target.value
-    ) {
-      setIsActive(true)
-    } else {
-      setIsActive(false)
-    }
-  }
-
-  const onClickCreateButton = () => {
-    router.push('/login')
   }
 
   return (
     <SignUpUI
       isActive={isActive}
-      errorEmail={errorEmail}
-      errorName={errorName}
-      errorPassword={errorPassword}
-      errorCheckPassword={errorCheckPassword}
-      onChangeEmail={onChangeEmail}
-      onChangeName={onChangeName}
-      onChangePassword={onChangePassword}
-      onChangeCheckPassword={onChangeCheckPassword}
+      register={register}
+      handleSubmit={handleSubmit}
+      formState={formState}
       onClickCreateButton={onClickCreateButton}
     />
   )

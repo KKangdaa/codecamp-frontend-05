@@ -2,8 +2,6 @@ import { withAuth } from '../../../commons/hocs/withAuth'
 import * as A from './Main.styles'
 
 const MainUI = (props) => {
-  console.log(props.userInfo)
-
   return (
     <>
       <props.Head>

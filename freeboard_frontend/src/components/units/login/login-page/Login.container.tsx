@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { Modal } from 'antd'
 import { useRouter } from 'next/router'
 import { ChangeEvent, useContext, useState } from 'react'
@@ -8,18 +8,17 @@ import {
   IMutationLoginUserArgs,
 } from '../../../../commons/types/generated/types'
 import LoginUI from './Login.presenter'
-import { FETCH_USER_LOGGED_IN, LOGIN_USER } from './Login.queries'
+import { LOGIN_USER } from './Login.queries'
 
 export default function Login() {
   const router = useRouter()
 
-  const { setAccessToken, setUserInfo } = useContext(GlobalContext)
+  const { setAccessToken } = useContext(GlobalContext)
 
   const [loginUser] = useMutation<
     Pick<IMutation, 'loginUser'>,
     IMutationLoginUserArgs
   >(LOGIN_USER)
-  const { data } = useQuery(FETCH_USER_LOGGED_IN)
 
   const [email, setEmail] = useState('')
   const [errorEmail, setErrorEmail] = useState('')
@@ -78,10 +77,7 @@ export default function Login() {
 
         const accessToken = result.data?.loginUser.accessToken || ''
         if (setAccessToken) setAccessToken(accessToken)
-        localStorage.setItem('accessToken', accessToken)
-
-        const userInfo = data?.fetchUserLoggedIn
-        if (setUserInfo) setUserInfo(userInfo)
+        // localStorage.setItem('accessToken', accessToken)
 
         router.push('/')
       } catch (error) {

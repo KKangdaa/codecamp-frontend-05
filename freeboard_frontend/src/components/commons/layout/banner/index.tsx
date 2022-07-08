@@ -5,11 +5,11 @@ import 'slick-carousel/slick/slick-theme.css'
 
 const Wrapper = styled.div`
   width: 90%;
-  height: 35vw;
+  height: 30vw;
   /* overflow: hidden; */
   margin: 0 auto;
   .slick-dots {
-    bottom: 025px;
+    bottom: 25px;
     li {
       width: 30px;
       height: 30px;
@@ -30,13 +30,13 @@ const Wrapper = styled.div`
 `
 const ImgBox = styled.div`
   width: 100%;
-  height: 35vw;
+  height: 30vw;
   & > div {
     background-size: cover;
     /* background-attachment: fixed; */
     background-repeat: no-repeat;
     width: 100%;
-    height: 35vw;
+    height: 30vw;
   }
 `
 const ImgOne = styled.div`
@@ -65,7 +65,7 @@ export default function LayoutBanner() {
     slidesToShow: 1,
     swipeToSlide: true,
     infinite: true,
-    // autoplay: true,
+    autoplay: true,
     speed: 2000,
     fade: true,
     arrows: false,
